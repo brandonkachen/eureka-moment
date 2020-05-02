@@ -137,7 +137,7 @@ function canvasApp() {
 		var lineColor;
 		var fillColor;
 		
-		var numRects = 3;
+		var numRects = 2;
 		var gap = 0;
 		var stripeHeight = (displayHeight - 20)/numRects - gap;
 		var startX = 5;
