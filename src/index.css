@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* body {background-color:#ffffff; color:#555555;}  */
+h4 {font-family: sans-serif; color:#555555; font-size:16px;}
+h1 {text-align: center;}
+h3 {font-family: sans-serif; color:#555555;}
+p {font-family: sans-serif; color:#888888; font-size:14px;}
+  #caption {position:absolute; width:1000px; text-align:center; top:500px; z-index:1}
+a {font-family: sans-serif; color:#d15423; text-decoration:none;}
+canvas {}
+  #canvasOne {position:absolute; top:10px; z-index:0}
+div {}
+  #container {width:1000px; height:500px; margin:auto;}
