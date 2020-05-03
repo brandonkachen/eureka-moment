@@ -1,0 +1,18 @@
+.container {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+p {
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+center {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}

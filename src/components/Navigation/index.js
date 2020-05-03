@@ -69,8 +69,9 @@ const NavigationAuth = () => (
 const NavigationNonAuth = () => (
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt=""></img>
+      <a class="navbar-item" href={ROUTES.LANDING}>
+        Eureka!
+        {/* <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt=""></img> */}
       </a>
 
       {/* eslint-disable-next-line */}
@@ -87,8 +88,8 @@ const NavigationNonAuth = () => (
           Landing
         </a>
 
-        <a class="navbar-item" href={ROUTES.HOME}>
-          Home
+        <a class="navbar-item" href={ROUTES.LESSON_SAMPLE}>
+          Sample Lesson
         </a>
       </div>
 
