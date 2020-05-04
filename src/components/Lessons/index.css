@@ -1,11 +1,29 @@
+canvas {
+  position: absolute; 
+  left: -25px;
+  top: -25px;
+}
+
 .container {
   margin-left: 150px;
   margin-right: 150px;
 }
 
+.container-2 {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
 p {
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+li {
+  margin-left: 200px;
+  margin-right: 200px;
+  list-style-type: circle;
 }
 
 center {
@@ -15,4 +33,11 @@ center {
   width: 100%;
   text-align: center;
   font-size: 18px;
+}
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
 }

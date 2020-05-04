@@ -67,41 +67,58 @@ const NavigationAuth = () => (
 );
  
 const NavigationNonAuth = () => (
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href={ROUTES.LANDING}>
-        Eureka!
-        {/* <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt=""></img> */}
-      </a>
-
-      {/* eslint-disable-next-line */}
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href={ROUTES.LANDING}>
-          Landing
-        </a>
-
-        <a class="navbar-item" href={ROUTES.LESSON_SAMPLE}>
-          Sample Lesson
-        </a>
+  <nav class="level">
+    <p class="level-item has-text-centered">
+        <a class="navbar-item" href={ROUTES.LANDING}>Landing</a>
+    </p>
+    <p class="level-item has-text-centered">
+      <div className="container">
+        <canvas id="canvasZero" height="90px" width="250px"></canvas>
+        <h1 class="title">
+          Eureka!
+        </h1>
       </div>
-
-      <div class="navbar-end">
-        <a class="navbar-item" href={ROUTES.SIGN_IN}>
-          <button className="button is-primary" type="button" >
-            Sign In
-          </button>
-        </a>
-      </div>
-    </div>
+    </p>
+    <p class="level-item has-text-centered">
+      <a class="navbar-item" href={ROUTES.ACCOUNT}>Account</a>
+    </p>
   </nav>
+
+  // <nav class="navbar" role="navigation" aria-label="main navigation">
+  //   <div class="navbar-brand">
+  //     <a class="navbar-item" href={ROUTES.LANDING}>
+  //       Eureka!
+  //       {/* <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt=""></img> */}
+  //     </a>
+
+  //     {/* eslint-disable-next-line */}
+  //     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+  //       <span aria-hidden="true"></span>
+  //       <span aria-hidden="true"></span>
+  //       <span aria-hidden="true"></span>
+  //     </a>
+  //   </div>
+
+  //   <div id="navbarBasicExample" class="navbar-menu">
+  //     <div class="navbar-start">
+  //       <a class="navbar-item" href={ROUTES.LANDING}>
+  //         Landing
+  //       </a>
+
+  //       <a class="navbar-item" href={ROUTES.LESSON_SAMPLE}>
+  //         Sample Lesson
+  //       </a>
+  //     </div>
+
+  //     <div class="navbar-end">
+  //       <a class="navbar-item" href={ROUTES.SIGN_IN}>
+  //         <button className="button is-primary" type="button" >
+  //           Sign In
+  //         </button>
+  //       </a>
+  //     </div>
+  //   </div>
+  // </nav>
 );
 
 

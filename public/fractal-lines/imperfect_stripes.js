@@ -24,7 +24,7 @@ function canvasApp() {
 		return;
 	}
 	
-	var theCanvas = document.getElementById("canvasOne");
+	var theCanvas = document.getElementById("canvasZero");
 	var context = theCanvas.getContext("2d");
 	var displayWidth = theCanvas.width;
 	var displayHeight = theCanvas.height;
@@ -40,13 +40,22 @@ function canvasApp() {
 		
 		generate();
 		
-		theCanvas.addEventListener("click", clickListener, false);
+		window.addEventListener("resize", debounce(clickListener), false);
 		
 		drawCount = 0;
 	}
+
+	function debounce(func){
+		var timer;
+		return function(event){
+		  if(timer) clearTimeout(timer);
+		  timer = setTimeout(func,100,event);
+		};
+	  }
 		
 	function clickListener(evt) {
-		context.clearRect(0,0,theCanvas.width,theCanvas.height);
+		context.clearRect(0,0,displayWidth,displayHeight);
+		
 		generate();
 		
 		//code below prevents the mouse down from having an effect on the main browser window:
@@ -137,7 +146,7 @@ function canvasApp() {
 		var lineColor;
 		var fillColor;
 		
-		var numRects = 2;
+		var numRects = 1;
 		var gap = 0;
 		var stripeHeight = (displayHeight - 20)/numRects - gap;
 		var startX = 5;
