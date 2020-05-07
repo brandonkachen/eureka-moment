@@ -69,11 +69,11 @@ const NavigationAuth = () => (
 const NavigationNonAuth = () => (
   <nav class="level">
     <p class="level-item has-text-centered">
-        <a class="navbar-item" href={ROUTES.LANDING}>Landing</a>
+        <a class="navbar-item" href={ROUTES.STUDENT_TESTS}>Tests</a>
     </p>
     <p class="level-item has-text-centered">
       <div className="container">
-        <canvas id="canvasZero" height="90px" width="250px"></canvas>
+        {/* <canvas id="canvasZero" height="90px" width="250px"></canvas> */}
         <h1 class="title">
           Eureka!
         </h1>

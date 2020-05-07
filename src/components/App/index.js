@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withAuthentication } from '../Session';
-import aComp from './AsyncComponent';
+import aComp from '../Utilities/AsyncComponent';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -14,6 +14,7 @@ const HomePage = aComp(() => import('../Home')) ;
 const AccountPage = aComp(() => import('../Account')) ;
 const AdminPage = aComp(() => import('../Admin')) ;
 const SampleLessonPage = aComp(() => import('../Lessons'));
+const StudentTestsPage = aComp(() => import('../StudentTests'));
 
 const App = () => (
   <Router>
@@ -33,6 +34,7 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.LESSON_SAMPLE} component={SampleLessonPage} />
+      <Route path={ROUTES.STUDENT_TESTS} component={StudentTestsPage} />
     </div>
   </Router>
 );

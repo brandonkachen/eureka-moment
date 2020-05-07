@@ -3,7 +3,7 @@ import hljs from 'highlight.js'
 import cpp from 'highlight.js/lib/languages/cpp'
 hljs.registerLanguage('c++', cpp)
 
-export class Highlighter extends React.PureComponent {
+export class CodeFormatter extends React.PureComponent {
 
   componentDidMount(){
     hljs.highlightBlock(this.node)
@@ -23,4 +23,4 @@ export class Highlighter extends React.PureComponent {
   }
 }
 
-export default Highlighter
+export default CodeFormatter

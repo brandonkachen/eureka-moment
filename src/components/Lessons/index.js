@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import rough from "roughjs/bin/rough";
-import Highlighter from './Highlighter.js'
+import CodeFormat from '../Utilities/CodeFormatter.js'
 
 class SampleLesson extends Component {
   test = React.createRef();
@@ -43,22 +43,6 @@ class SampleLesson extends Component {
   render() {
     return (
       <div>
-        {/* <section class="hero">
-      <div class="hero-body">
-        <div className="container">
-          <canvas id="canvasZero" height="150px" width="1000px"></canvas>
-          <h1 class="title">
-            Eureka!
-          </h1>
-          <h2 class="subtitle">
-            Your fun, <strong>discovery-based</strong>, interactive-ish online introductory computer science textbook
-          </h2>
-        </div>
-      </div>
-    </section> 
-
-    <hr /> */}
-
         <section class="section">
           <div class="container">
             <canvas ref={this.canvasOne}></canvas>
@@ -143,7 +127,7 @@ class SampleLesson extends Component {
                   1. Where should we divert the logic in the program, so we can
                   execute the user's action?
                 </p>
-                <Highlighter>{`
+                <CodeFormat>{`
                   #include <iostream>
 
                   int main(int argc, char *argv[]) {
@@ -157,7 +141,7 @@ class SampleLesson extends Component {
                     m["key"] = "\\\\"; // this is an error
                   
                     return -2e3 + 12l;
-                `}</Highlighter>
+                `}</CodeFormat>
                 <p>
                   2. When we divert the logic, we're making a decision, right?
                   Fill in the blank:
@@ -177,14 +161,14 @@ class SampleLesson extends Component {
                   3. This is what we call an if-statement. The C++ syntax for it
                   is:
                 </p>
-                <Highlighter>{`
+                <CodeFormat>{`
                   string user_action;
                   std::cout << "Type an attack: "; // Type an attack and press enter
                   std::cin >> user_action;
                   if (user_action == "Thunder_Shock") {
                     // code to handle "Thunder_Shock" attack.
                   } 
-                `}</Highlighter>
+                `}</CodeFormat>
 
                 <p>
                   <i>lesson continues on from here...</i>
@@ -232,14 +216,14 @@ class SampleLesson extends Component {
               interesting way.
             </h2>
             <p>What will this program do? Why?</p>
-            <Highlighter>{`
+            <CodeFormat>{`
               string user_action;
               std::cout << "Type an attack: "; // Type an attack and press enter
               std::cin >> user_action;
               while (true) {
                 std:cout << "what will I do?" << std:endl;
               }
-            `}</Highlighter>
+            `}</CodeFormat>
           </div>
         </section>
       </div>
