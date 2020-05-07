@@ -1,3 +1,3 @@
-import { STUDENT_TESTS } from '../../constants/routes.js'
+import { STUDENT_TESTS } from "../../constants/routes.js";
 
-export const PRE_TEST = STUDENT_TESTS + '/pre-test';
+export const PRE_TEST = STUDENT_TESTS + "/pre-test";

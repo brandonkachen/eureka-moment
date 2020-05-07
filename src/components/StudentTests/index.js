@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { withAuthentication } from '../Session';
-import aComp from '../Utilities/AsyncComponent';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { withAuthentication } from "../Session";
+import aComp from "../Utilities/AsyncComponent";
+import { Link } from "react-router-dom";
 
-import * as ROUTES from './routes';
+import * as ROUTES from "./routes";
 
-const PreTestPage = aComp(() => import('./pretest.js'));
+const PreTestPage = aComp(() => import("./pretest.js"));
 
 const StudentTests = () => (
   <div>
@@ -18,6 +18,5 @@ const StudentTests = () => (
     </ul>
   </div>
 );
-  
-export default StudentTests;
-  
+
+export default withAuthentication(StudentTests);

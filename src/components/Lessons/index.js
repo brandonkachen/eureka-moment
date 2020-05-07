@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import './index.css';
+import React, { Component } from "react";
+import "./index.css";
 import rough from "roughjs/bin/rough";
-import CodeFormat from '../Utilities/CodeFormatter.js'
+import CodeFormat from "../Utilities/CodeFormatter.js";
 
 class SampleLesson extends Component {
   test = React.createRef();
@@ -10,46 +10,47 @@ class SampleLesson extends Component {
   canvasThree = React.createRef();
 
   componentDidMount() {
+    var box = this.test.current;
+    var canvasOne = this.canvasOne.current;
+    canvasOne.width = box.offsetWidth + 100;
+    canvasOne.height = box.offsetHeight * 3 + 100;
 
-      var box = this.test.current;
-      var canvasOne = this.canvasOne.current;
-      canvasOne.width = box.offsetWidth + 100;
-      canvasOne.height = box.offsetHeight * 3 + 100;
-    
-      var rc = rough.canvas(canvasOne);
-      rc.rectangle(10, 10, canvasOne.width - 80, canvasOne.height - 100); // x, y, width, height
-      
-    
-      var canvasTwo = this.canvasTwo.current;
-      canvasTwo.width = box.offsetWidth + 100;
-      canvasTwo.height = box.offsetHeight * 3 + 100;
-    
-      var rc2 = rough.canvas(canvasTwo);
-      rc2.rectangle(
-        10, 10, canvasTwo.width - 80, canvasTwo.height - 100,
-        { bowing: 2, stroke: 'white', strokeWidth: 2 });
-      
-    
-      var canvasThree = this.canvasThree.current;
-      canvasThree.width = box.offsetWidth + 100;
-      canvasThree.height = box.offsetHeight * 3.5 + 100;
-    
-      var rc3 = rough.canvas(canvasThree);
-      rc3.rectangle(
-        10, 10, canvasThree.width - 80, canvasThree.height - 100,
-        { bowing: 2, stroke: 'green', strokeWidth: 2 });
+    var rc = rough.canvas(canvasOne);
+    rc.rectangle(10, 10, canvasOne.width - 80, canvasOne.height - 100); // x, y, width, height
+
+    var canvasTwo = this.canvasTwo.current;
+    canvasTwo.width = box.offsetWidth + 100;
+    canvasTwo.height = box.offsetHeight * 3 + 100;
+
+    var rc2 = rough.canvas(canvasTwo);
+    rc2.rectangle(10, 10, canvasTwo.width - 80, canvasTwo.height - 100, {
+      bowing: 2,
+      stroke: "white",
+      strokeWidth: 2,
+    });
+
+    var canvasThree = this.canvasThree.current;
+    canvasThree.width = box.offsetWidth + 100;
+    canvasThree.height = box.offsetHeight * 3.5 + 100;
+
+    var rc3 = rough.canvas(canvasThree);
+    rc3.rectangle(10, 10, canvasThree.width - 80, canvasThree.height - 100, {
+      bowing: 2,
+      stroke: "green",
+      strokeWidth: 2,
+    });
   }
 
   render() {
     return (
       <div>
-        <section class="section">
-          <div class="container">
+        <section className="section">
+          <div className="container">
             <canvas ref={this.canvasOne}></canvas>
-            <h1 class="title" ref={this.test}>
+            <h1 className="title" ref={this.test}>
               Anatomy of a Lesson: Control Flow (Part 1)
             </h1>
-            <h2 class="subtitle">
+            <h2 className="subtitle">
               estimated time of completion: <i>[time estimate]</i>. last
               updated: <i>[date uploaded]</i>
             </h2>
@@ -68,12 +69,12 @@ class SampleLesson extends Component {
           </div>
         </section>
 
-        <section class="hero is-dark">
-          <div class="hero-body">
-            <div class="container">
+        <section className="hero is-dark">
+          <div className="hero-body">
+            <div className="container">
               <canvas ref={this.canvasTwo}></canvas>
-              <h1 class="title">Recap</h1>
-              <h2 class="subtitle">
+              <h1 className="title">Recap</h1>
+              <h2 className="subtitle">
                 This section is focused on summarizing the previous lesson, but
                 at a very high level.
               </h2>
@@ -95,12 +96,12 @@ class SampleLesson extends Component {
           </div>
         </section>
 
-        <section class="hero is-light">
-          <div class="hero-body">
-            <div class="container">
+        <section className="hero is-light">
+          <div className="hero-body">
+            <div className="container">
               <canvas ref={this.canvasThree}></canvas>
-              <h1 class="title">Lesson</h1>
-              <h2 class="subtitle">
+              <h1 className="title">Lesson</h1>
+              <h2 className="subtitle">
                 This section will teach the lesson. At every step, we will guide
                 the student to learn through discovery, build upon their
                 knowledge through scaffolding, and test their understanding
@@ -108,9 +109,9 @@ class SampleLesson extends Component {
                 learned.
               </h2>
 
-              <div class="container-2">
+              <div className="container-2">
                 {/* <canvas id="canvasFour"></canvas> */}
-                <h2 class="title">
+                <h2 className="title">
                   New Feature: Allow the user to choose an attack mechanism.
                 </h2>
                 <p>
@@ -178,12 +179,12 @@ class SampleLesson extends Component {
           </div>
         </section>
 
-        <section class="hero is-dark">
-          <div class="hero-body">
-            <div class="container">
+        <section className="hero is-dark">
+          <div className="hero-body">
+            <div className="container">
               <canvas id="canvasTwo"></canvas>
-              <h1 class="title">Summary</h1>
-              <h2 class="subtitle">
+              <h1 className="title">Summary</h1>
+              <h2 className="subtitle">
                 This section is focused on summarizing the current lesson, but
                 at a high level.<br></br>
                 It will also serve double duty as the recap for the next lesson
@@ -204,13 +205,13 @@ class SampleLesson extends Component {
           </div>
         </section>
 
-        <section class="section">
-          <div class="container">
+        <section className="section">
+          <div className="container">
             <canvas id="canvasOne"></canvas>
-            <h1 class="title" id="test">
+            <h1 className="title" id="test">
               Challenge
             </h1>
-            <h2 class="subtitle">
+            <h2 className="subtitle">
               This section will contain a challenge to the student, to use the
               knowledge they just acquired to modify the program in an
               interesting way.
