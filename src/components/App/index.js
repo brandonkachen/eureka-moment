@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Navigation from '../Navigation';
-import LandingPage from '../Landing';
-import SignUpPage from '../SignUp';
-import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
-import AccountPage from '../Account';
-import AdminPage from '../Admin';
-import SampleLessonPage from '../Lessons'
+import { withAuthentication } from '../Session';
+import aComp from './AsyncComponent';
 
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
+
+const Navigation = aComp(() => import('../Navigation')) ;
+const LandingPage = aComp(() => import('../Landing')) ;
+const SignUpPage = aComp(() => import('../SignUp')) ;
+const SignInPage = aComp(() => import('../SignIn')) ;
+const PasswordForgetPage = aComp(() => import('../PasswordForget')) ;
+const HomePage = aComp(() => import('../Home')) ;
+const AccountPage = aComp(() => import('../Account')) ;
+const AdminPage = aComp(() => import('../Admin')) ;
+const SampleLessonPage = aComp(() => import('../Lessons'));
 
 const App = () => (
   <Router>
