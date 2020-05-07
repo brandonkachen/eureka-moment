@@ -6,6 +6,10 @@ class PreTest extends Component {
   test = React.createRef();
   canvasOne = React.createRef();
 
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     var box = this.test.current;
     var canvasOne = this.canvasOne.current;
