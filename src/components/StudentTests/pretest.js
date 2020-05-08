@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import rough from "roughjs/bin/rough";
 import CodeFormat from "../Utilities/CodeFormatter.js";
+import Iframe from "react-iframe";
 
 class PreTest extends Component {
   test = React.createRef();
@@ -27,25 +28,24 @@ class PreTest extends Component {
           <div className="container">
             <canvas ref={this.canvasOne}></canvas>
             <h1 className="title" ref={this.test}>
-              Anatomy of a Lesson: Control Flow (Part 1)
+              Pre-test
             </h1>
             <h2 className="subtitle">
-              estimated time of completion: <i>[time estimate]</i>. last
-              updated: <i>[date uploaded]</i>
+              This will help us get a sense for your current coding skills.
             </h2>
             <p>
-              We'll outline a sample lesson to give you a sense for what the
-              course is like. Please keep in mind that this will be quite rough
-              at the beginning. Subsequent lessons will look and feel much
-              better. This is typically where the introduction to the lesson
-              will go. In this case, we'll explain what you'll get out of this
-              lesson. Something like:
+              <strong>GOAL:</strong> Figure out how to tailor content to you so
+              we minimize the amount of time we spend repeating content you
+              already know. It will not count against you in any way.
             </p>
-            <p>
-              <strong>Lesson Goal:</strong> Modify behavior of a program through
-              if statements and while loops.
-            </p>
+            <p></p>
           </div>
+          <Iframe
+            frameborder="0"
+            width="100%"
+            height="500px"
+            src="https://repl.it/@amasad/PitifulLastingWhoopingcrane?lite=true"
+          />
         </section>
       </div>
     );
