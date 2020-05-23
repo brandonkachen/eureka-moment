@@ -1,0 +1,50 @@
+canvas {
+  position: absolute;
+  left: -25px;
+  top: -25px;
+}
+
+/* .container {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.container-2 {
+  width: 100%;
+  height: 90vh;
+  overflow: auto;
+}
+
+p {
+  margin-top: 50px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.p2 {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+li {
+  margin-left: 200px;
+  margin-right: 200px;
+  list-style-type: circle;
+}
+
+center {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+} */
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}

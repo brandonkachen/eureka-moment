@@ -7,27 +7,16 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 
 import * as DesignSystem from "./design-system"
 import Header from "./header"
-import "./layout.scss"
+import "./ide-layout.scss"
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle="test" />
       <MDXProvider
         components={{
           // Map HTML element tag to React component

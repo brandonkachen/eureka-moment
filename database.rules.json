@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "whitelist": {
+      ".read": false,
+      ".write": false
+    },
+    ".read": "auth != null && root.child('whitelist').child(auth.token.email.replace('.', '%2E')).exists()",
+    ".write": "auth != null && root.child('whitelist').child(auth.token.email.replace('.', '%2E')).exists()"
+  }
+}
