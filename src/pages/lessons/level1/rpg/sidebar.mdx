@@ -1,35 +1,229 @@
-We'll be exploring computer science concepts through a programming
-language called C++. As such, we'll use this lesson to get you up to speed on the basics,
-like C++ terminology and syntax.
+## Introduction
 
-Let's dive right in! 🌊🏄
+Let's get some syntax under our belt,
+and then we'll use it to build a mini-rpg.
 
-#### Lesson Goals
+## Syntax cheatsheet
 
-- Work: Learn the basic syntax of C++
-- Fun: Build an RPG
+Here's a little cheatsheet of common syntax you'll find in C++.
+There are a ton of similarities to C#, so this should be pretty familiar.
+You can see a sample program version that combines all these elements
+in the `syntax.cpp` file in your repl (IDE on the right).
 
-#### Test
+### Basics
 
-this is a test
+Single Line comments look like this:
 
-of the length
+```cpp
+// this is a comment
+```
 
-of this mdx file
+Multi-line comments look like this:
 
-to see if
+```cpp
+/*
+this is a comment
+that spans
+multiple lines
+*/
+```
 
-### we can get it to
+This is how you import libraries and modules:
 
-#### overflow
+```cpp
+#include <YOUR-LIBRARY-HERE>
+```
 
-##### this is a third row
+Your "main" function looks like this:
 
-whoaaa
-duuuude
+```cpp
+int main() {
+  return 0;
+}
+```
 
-noice
+By convention, returning 0 means success and 1 means failure.
+Programs running your code may change their behavior depending
+on this return code. You can change your main function to "void"
+if you don't want to return anything:
 
-ok then
+```cpp
+void main() {
+  // do stuff!
+  // don't return anything though!
+}
+```
 
-this is interesting
+C++ also has a few fundamental types.
+See [this guide](https://www.geeksforgeeks.org/c-data-types/)
+if you want a quick refresher.
+
+```cpp
+// integers
+int i = 0;
+
+// floating-point numbers
+float f = 0.0;
+
+// double floating point numbers
+// (more precise than floats)
+double d = 0.0;
+
+// boolean values
+bool b = true;
+
+// characters
+char c = "x";
+```
+
+### Control Flow
+
+This is how you write if/else statements:
+
+```cpp
+bool b = false;
+int i = 0
+int j = 1
+
+if (i == j) {
+  b = true;
+} else {
+  b = false;
+}
+```
+
+#TODO: loops
+
+### C++ strings
+
+C and C++
+Here's one more useful library, for dealing with strings:
+
+```cpp
+#include <string>
+```
+
+This will let you create and manage C++ strings. You can do operations
+like the following:
+
+```cpp
+
+// assign strings
+std::string x = "this is a C++ string";
+
+// get their lengths
+int length = x.length();
+
+// copy strings
+std::string y = x;
+
+// check for equality
+bool is_same = (y == x); // true
+```
+
+### iostream
+
+When you import the `iostream` library like this:
+
+```cpp
+#include <iostream>
+```
+
+You get access `std` (which stands for **standard library**).
+`std` is a _namespace_, which means it contains functions and classes within
+it that you can use. One such tool is the ability to write to the console
+or read from a user's input:
+
+```cpp
+int x;
+
+ // Write to the console
+std::cout << "Input a number.";
+
+// cin will cause the program
+// to pause and wait for user input.
+// By default, the program will continue
+// after the user inputs a new line.
+std::cin >> x;
+```
+
+The funny `<<` and `>>` are called left and right **shift operators**,
+respectively. They have their own meanings (that we'll get to later).
+
+If it helps, you can think of these operators as "moving" values
+to and from `cin` or `cout`. In other words, when we `cout`, we are
+"moving" the right-side values _into_ `cout`, or the console.
+So in the previous example:
+
+```cpp
+std::string output = "Input a number.";
+
+/*
+
+You can think of the << as a funnel
+moving the `output` variable
+from right to left to `std::cout`,
+because that's where the value will end up
+
+*/
+std::cout << output;
+```
+
+Similarly, we read from `cin` and "move" the value to a variable:
+
+```cpp
+std::string input;
+
+/*
+
+You can think of the >> as a funnel
+moving whatever the user inputs to `std::cin`
+from left to right, which is the variable `input`.
+
+*/
+std::cin >> input;
+```
+
+While you can manually input a newline, `std` can do it for you:
+
+```cpp
+std::cout << "test" << std::endl;
+std::cout << "this will be on the next line";
+```
+
+Writing `std::` everywhere may get tiring, so you
+can add the following to the top of your program:
+
+```cpp
+using namespace std;
+```
+
+After this, you can just write `cout` or `cin` without the `std::` prefix.
+
+Just FYI, many programmers actively discourage adding code like the above.
+The rationale is that in the future, someone may add another
+library that contains functions/classes with the same name as an existing one.
+In the case of `std`, someone might add their own `cout` or `cin`.
+It could get messy to fix this problem, hence the discouragement.
+
+However, in our lessons, we won't do anything that will mess up
+the standard library. You can feel free to use either approach.
+
+## Mini-RPG
+
+Switch to the `mini_rpg.cpp` file in repl.
+Read through it quickly to check if you missed anything in
+the cheatsheet above. Then try running it. You should
+get the following:
+
+```
+Welcome, please enter your name:
+```
+
+When you enter your name, it will output something like:
+
+```
+Welcome, player <YOUR INPUTTED NAME>
+```
+
+## Task 1

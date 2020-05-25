@@ -21,6 +21,7 @@ const Layout = ({ children }) => {
         components={{
           // Map HTML element tag to React component
           h1: DesignSystem.H1,
+          a: DesignSystem.ExternalLink,
         }}
       >
         <div

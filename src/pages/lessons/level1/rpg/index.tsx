@@ -21,8 +21,7 @@ class Level1 extends Component {
     return (
       <div>
         <div className="columns">
-          <div className="column is-one-third">
-            <h2>Instructions</h2>
+          <div className="column is-two-fifths">
             <div className="overflow">
               <LessonMD></LessonMD>
               <Link
@@ -35,7 +34,7 @@ class Level1 extends Component {
               </Link>
             </div>
           </div>
-          <div className="column is-two-thirds">
+          <div className="column">
             <iframe
               title="repl level1"
               width="100%"
