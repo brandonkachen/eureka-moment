@@ -24,6 +24,7 @@ class Level1 extends Component {
           <div className="column is-two-fifths">
             <div className="overflow">
               <LessonMD></LessonMD>
+              When you're finished, hit the following button: <br></br>
               <Link
                 to={`/lessons/level1`}
                 state={{

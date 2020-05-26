@@ -1,7 +1,6 @@
 ## Introduction
 
-Let's get some syntax under our belt,
-and then we'll use it to build a mini-rpg.
+Let's get some syntax under our belt, and then we'll use it to build a mini-rpg.
 
 ## Syntax cheatsheet
 
@@ -76,28 +75,45 @@ bool b = true;
 char c = "x";
 ```
 
-### Control Flow
+### Arithmetic
 
-This is how you write if/else statements:
+These are some basic arithmetic operations in C++:
 
 ```cpp
-bool b = false;
-int i = 0
-int j = 1
+int i = 0;
+int j = 2;
 
-if (i == j) {
-  b = true;
-} else {
-  b = false;
-}
+i = i + j; // addition
+i = i - j; // subtraction
+i = i * j; // multiplication
+i = i / j; // division
+i = i ** j; // exponent
 ```
 
-#TODO: loops
+We can simplify the above like this:
+
+```cpp
+i += j; // equivalent to i = i + j
+i -= j; // equivalent to i = i - j
+i *= j; // equivalent to i = i * j
+i /= j; // equivalent to i = i / j
+
+// Note: there isn't a simplification for exponents
+```
+
+One thing you'll find that's super common is adding/subtracting
+to to/from a variable. Because it's so common, we have another shorthand:
+
+```cpp
+i++; // equivalent to i += 1 or i = i + 1
+i--; // equivalent to i -= 1 or i = i - 1
+```
 
 ### C++ strings
 
-C and C++
-Here's one more useful library, for dealing with strings:
+C doesn't treat strings in the way you're probably used to working with.
+Fortunately, C++ introduced the "modern" way of handing strings
+in this library:
 
 ```cpp
 #include <string>
@@ -118,7 +134,11 @@ int length = x.length();
 std::string y = x;
 
 // check for equality
-bool is_same = (y == x); // true
+if (y == x) {
+  // this code should execute
+} else {
+  // this code should *not* execute
+}
 ```
 
 ### iostream
@@ -147,13 +167,11 @@ std::cout << "Input a number.";
 std::cin >> x;
 ```
 
-The funny `<<` and `>>` are called left and right **shift operators**,
-respectively. They have their own meanings (that we'll get to later).
-
-If it helps, you can think of these operators as "moving" values
-to and from `cin` or `cout`. In other words, when we `cout`, we are
-"moving" the right-side values _into_ `cout`, or the console.
-So in the previous example:
+The funny `<<` and `>>` symbols **left and right shift operators**,
+respectively. We'll explore them more later but for now you can think
+of these operators as "moving" values to and from `cin` or `cout`.
+In other words, when we `cout`, we are "moving" the right-side values
+_into_ `cout`, or the console:
 
 ```cpp
 std::string output = "Input a number.";
@@ -181,6 +199,7 @@ moving whatever the user inputs to `std::cin`
 from left to right, which is the variable `input`.
 
 */
+
 std::cin >> input;
 ```
 
@@ -188,7 +207,17 @@ While you can manually input a newline, `std` can do it for you:
 
 ```cpp
 std::cout << "test" << std::endl;
-std::cout << "this will be on the next line";
+std::cout << "this will shown on the next line\n";
+std::cout << "and this will shown on the line after";
+```
+
+You can also split your couts onto different lines, to keep things organized:
+
+```cpp
+std::cout << "this will all "
+          << "go " << "on " << "one "
+          << "line!" << std::endl;
+// outputs: "this will all go on one line!"
 ```
 
 Writing `std::` everywhere may get tiring, so you
@@ -209,12 +238,78 @@ It could get messy to fix this problem, hence the discouragement.
 However, in our lessons, we won't do anything that will mess up
 the standard library. You can feel free to use either approach.
 
+### Control Flow
+
+This is how you write if/else statements:
+
+```cpp
+bool b = false;
+int i = 0
+int j = 1
+
+if (i == j) {
+  b = true;
+} else {
+  b = false;
+}
+```
+
+For loops look like this:
+
+```cpp
+int final_value = 10;
+int current_value = 0;
+
+for (int i = 0; i < final_value; i++) {
+  // Note: the variable `i` exists in
+  // this loop, but not outside it
+  current_value = i;
+}
+```
+
+Mean-_while_, while loops like like this:
+
+```cpp
+int final_value = 10;
+int current_value = 0;
+
+while (current_value < final_value) {
+  // Do stuff!
+  std::cout << "current_value is: " << current_value << std::endl;
+  current_value++;
+}
+```
+
+Do-while loops are just like while loops,
+but execute at least once **before** the
+condition is checked. They are formatted like this:
+
+```cpp
+int final_value = 10;
+int current_value = 0;
+
+do {
+  current_value = final_value * 2;
+
+  /*
+
+  This will run once, regardless of
+  the condition (in this case, the
+  while condition is basically ignored)
+
+  */
+} while (current_value < final_value);
+
+std::cout << current_value; // output: 20
+```
+
 ## Mini-RPG
 
-Switch to the `mini_rpg.cpp` file in repl.
-Read through it quickly to check if you missed anything in
-the cheatsheet above. Then try running it. You should
-get the following:
+Switch to the mini-rpg skeleton code. (Hit the "Files" icon
+in the repl.it widget on the right and select `mini_rpg.cpp`.)
+Read through it quickly to make sure you understand what it will do.
+If any part doesn't make senes, review the cheatsheet above.
+Then try running it. You should get the following:
 
 ```
 Welcome, please enter your name:
@@ -226,4 +321,103 @@ When you enter your name, it will output something like:
 Welcome, player <YOUR INPUTTED NAME>
 ```
 
-## Task 1
+### Task 1
+
+Let's give our new player a health of 100. Now, let's spawn them
+in a specific location. We'll allow the user to choose, like this:
+
+```
+Choose a location to spawn. (Enter a number)
+1. dungeon
+2. cave
+3. village
+```
+
+When the player has chosen a location, output the following:
+
+```cpp
+Player <PLAYER-NAME> has spawned in a <LOCATION-CHOICE>.
+```
+
+(where `<PLAYER-NAME>` is the player's name and `<LOCATION-CHOICE>`
+is their choice of location).
+
+### Task #2
+
+Great! Let's give your player a few choices for things to do.
+Output the following:
+
+```
+What would you like to do? (Enter a number)
+1. Explore
+2. Take inventory.
+```
+
+Read the user's input into an _integer_ variable and use it
+to determine the next steps.
+
+If the player chose to take inventory, output the following:
+
+```
+<PLAYER-NAME> has no items.
+```
+
+Then, prompt them with the previous message again.
+
+When the player chooses to explore, perform the following logic:
+
+If the player is in a dungeon, output the following:
+
+```
+You encounter a giant spider.
+```
+
+If the player is in a village, output the following:
+
+```
+You encounter a soldier.
+```
+
+If the player is in a cave, output the following:
+
+```
+You encounter a bear.
+```
+
+On a new line, prompt the user for what they would like to do:
+
+```
+What would you like to do? (Enter a number)
+1. Talk
+2. Fight
+3. Cry
+```
+
+If the player chose to fight, output the following:
+
+```
+You try to fight but have no weapons or skills.
+The <spider/soldier/bear> deals you a single blow and you die.
+```
+
+If the player chose to talk, make their conversation partner say
+something interesting. Make sure to change it depending on the
+entity the user is speaking with.
+
+If the player chose to cry, output something funny!
+
+You can output as many lines as you want for either option.
+
+### Task #3
+
+Continue building this mini-rpg out. Some ideas to get you started:
+
+- What can you do with loops?
+- Is there functionality that repeats?
+  If so, try refactoring it into a function.
+- How can you incorporate random numbers?
+  See [this guide](http://www.cplusplus.com/reference/cstdlib/rand/)
+  for help on syntax.
+
+Feel free to be as creative as you like, but note that
+you will only be graded on Tasks 1 and 2.
