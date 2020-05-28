@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import Layout from "components/ide-layout"
+import Layout from "components/layout"
 import SEO from "components/seo"
 import { Link } from "gatsby"
 

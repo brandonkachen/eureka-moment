@@ -6,8 +6,9 @@
   overflow: auto;
   width: 100%;
   height: 90vh;
+  margin-right: 2.5%;
+  padding-right: 2.5%;
 }
-
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -233,7 +234,7 @@ img {
   margin-bottom: 1.45rem;
 }
 h1 {
-  text-align: center;
+  text-align: left;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -390,13 +391,14 @@ dd {
   margin-bottom: 1.45rem;
 }
 p {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 0;
+  margin-right: 0;
   margin-top: 0;
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
+  margin-top: 1.45rem;
   margin-bottom: 1.45rem;
 }
 figure {

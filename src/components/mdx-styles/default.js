@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "./layout.scss"
 import rough from "roughjs/bin/rough"
 
 class H1 extends Component {
@@ -13,7 +12,7 @@ class H1 extends Component {
     canvas.height = box.offsetHeight
 
     var rc = rough.canvas(canvas)
-    rc.rectangle(10, 10, canvas.width - 20, canvas.height * 0.7) // x, y, width, height
+    rc.rectangle(10, 10, canvas.width - 20, canvas.height - 20) // x, y, width, height
   }
 
   render() {
@@ -22,7 +21,9 @@ class H1 extends Component {
         <canvas ref={this.canvas}> </canvas>
         <div className="hero-body" ref={this.box}>
           <div className="container">
-            <h1 {...this.props}>{this.props.children}</h1>
+            <h1 style={{ textAlign: "center", margin: 0 }} {...this.props}>
+              {this.props.children}
+            </h1>
           </div>
         </div>
       </section>
@@ -38,4 +39,10 @@ const ExternalLink = props => {
   )
 }
 
-export { H1, ExternalLink }
+const p = props => {
+  return (
+    <p style={{ marginLeft: `10%`, marginRight: `10%` }}>{props.children}</p>
+  )
+}
+
+export default { h1: H1, a: ExternalLink, p: p }

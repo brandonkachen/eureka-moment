@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 
-import Layout from "components/ide-layout"
+import Layout from "components/layout"
 import SEO from "components/seo"
+import IDEStyle from "components/mdx-styles/ide"
 
 import { Link } from "gatsby"
 
@@ -10,7 +11,7 @@ import LessonMD from "./sidebar.mdx"
 class Level1 extends Component {
   render() {
     return (
-      <Layout>
+      <Layout styleOverride={{ maxWidth: 1400 }} mdxStyle={IDEStyle}>
         <SEO title="Level 1" />
         {this.lesson()}
       </Layout>
