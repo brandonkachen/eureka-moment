@@ -5,29 +5,39 @@ import React from "react"
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      borderBottom: "MintCream solid 3px",
+      height: "60px",
+      backgroundColor: "MediumAquamarine",
+      position: "relative",
       marginBottom: `1.45rem`,
     }}
   >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0, textAlign: "center" }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
+    <nav className="level">
+      <div className="level-item has-text-centered navbar-item has-dropdown is-hoverable">
+        <h1
+          className="title"
+          style={{ margin: 10, textAlign: "center", color: "Ivory" }}
         >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+          Eureka!
+          <div className="container">
+            <div className="navbar-dropdown">
+              <a className="navbar-item" href={"/"}>
+                Home
+              </a>
+              <a className="navbar-item" href={"ACCOUNT"}>
+                Account
+              </a>
+              <a className="navbar-item" href={"ADMIN"}>
+                Tests
+              </a>
+              <a className="navbar-item" href={"ADMIN"}>
+                Lessons
+              </a>
+            </div>
+          </div>
+        </h1>
+      </div>
+    </nav>
   </header>
 )
 
