@@ -4,7 +4,7 @@ import Layout from "components/layout"
 import SEO from "components/seo"
 import IDEStyle from "components/mdx-styles/ide"
 
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 
 import LessonMD from "./sidebar.mdx"
 
@@ -20,20 +20,23 @@ class Level1 extends Component {
 
   lesson() {
     return (
-      <div>
+      <div className="box">
         <div className="columns">
           <div className="column is-two-fifths">
             <div className="overflow">
               <LessonMD></LessonMD>
-              When you're finished, hit the following button: <br></br>
-              <Link
-                to={`/lessons/level1`}
-                state={{
-                  completed: true,
-                }}
-              >
-                Finish
-              </Link>
+              <div className="has-text-centered">
+                <button
+                  className="button is-success is-light"
+                  onClick={() =>
+                    navigate("/lessons/level1", {
+                      state: { completed: true },
+                    })
+                  }
+                >
+                  Finish
+                </button>
+              </div>
             </div>
           </div>
           <div className="column">

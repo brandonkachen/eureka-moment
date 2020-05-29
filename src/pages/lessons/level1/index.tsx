@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import Layout from "components/layout"
 import SEO from "components/seo"
 import { Link } from "gatsby"
+import { navigate } from "gatsby"
 
 import IntroMD from "./intro.mdx"
 import OutroMD from "./outro.mdx"
@@ -31,7 +32,14 @@ class Level1 extends Component<IProps, IState> {
       <Layout>
         <SEO title="Level 1" />
         {mdxToShow}
-        <Link to="/lessons/level1/rpg">Start Lesson</Link>
+        <div className="has-text-centered">
+          <button
+            className="button is-info is-light"
+            onClick={() => navigate("/lessons/level1/rpg")}
+          >
+            Start Lesson
+          </button>
+        </div>
       </Layout>
     )
   }
