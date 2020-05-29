@@ -39,10 +39,11 @@ const ExternalLink = props => {
   )
 }
 
-const p = props => {
-  return (
-    <p style={{ marginLeft: `10%`, marginRight: `10%` }}>{props.children}</p>
-  )
-}
+// const p = props => {
+//   return (
+//     <p style={{ marginLeft: `10%`, marginRight: `10%` }}>{props.children}</p>
+//   )
+// }
 
-export default { h1: H1, a: ExternalLink, p: p }
+export default { h1: H1, a: ExternalLink }
+// export default { h1: H1, a: ExternalLink, p: p }
