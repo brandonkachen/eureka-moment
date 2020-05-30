@@ -37,12 +37,11 @@
     "build": "sh -ac '. .env.${REACT_APP_ENV}; gatsby build'",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "deploy:dev": "REACT_APP_ENV=development npm run build && firebase deploy --project dev",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy:prod": "REACT_APP_ENV=production npm run build && firebase deploy --project prod"
+    "deploy:prod": "npm run build && firebase deploy --project prod"
   },
   "repository": {
     "type": "git",
