@@ -2,7 +2,7 @@
 
 Let's get some syntax under our belt, and then we'll use it to build a mini-rpg.
 
-## Syntax cheatsheet
+## Syntax
 
 Here's a little cheatsheet of common syntax you'll find in C++.
 There are a ton of similarities to C#, so this should be pretty familiar.
@@ -53,9 +53,10 @@ void main() {
 }
 ```
 
-C++ also has a few fundamental types.
+C++ also has a few fundamental types, or _primitives_.
 See [this guide](https://www.geeksforgeeks.org/c-data-types/)
-if you want a quick refresher.
+if you want a quick refresher. Here are some of the most
+common ones, _initialized_ to some value:
 
 ```cpp
 // integers
@@ -74,6 +75,51 @@ bool b = true;
 // characters
 char c = "x";
 ```
+
+In C++, these primitives may be _uninitialized_, or they may
+not have some well-known value at compile time. Instead,
+they may have a value we don't care about, or a _garbage_ value,
+that we can't rely upon.
+
+Sometimes, you may need to convert one type to another.
+This is called _type casting_, and you can do it like this:
+
+```cpp
+int i = 100;
+double j = double(i); // j = 100.0
+```
+
+This isn't a perfect process, though. For example, this won't by typecasted cleanly:
+
+```cpp
+double k = 1/10;
+int l = int(k); // l = 0
+```
+
+`l` becomes 0 because when C++ converts `k` to an int,
+it applies _integer_ division, which is just regular division but dropping any
+remainders to preserve just the integer component.
+Thus, 1/10 has 0 whole numbers (and a remainder of 10 that we drop).
+
+If you don't do this conversion explicitly, the C++ compiler will try to do it for you.
+This is called _automatic_ type conversion, and it follows a similar logic:
+
+```cpp
+int i = 0;
+double j = i; // j = 0.0
+
+double k = 0.1;
+int l = k; // l = 0
+```
+
+When you can convert a type without losing any meaning, it is called "upgrading"
+because you've gained precision rather than losing it.
+
+There are many ways you can slice and dice this
+(for example, what does type casting an `int` to a `char` mean?).
+However, we won't get into it in depth here. You can see
+[this guide](https://www.geeksforgeeks.org/type-conversion-in-c/)
+for a full breakdown.
 
 ### Arithmetic
 
@@ -139,6 +185,15 @@ if (y == x) {
 } else {
   // this code should *not* execute
 }
+```
+
+Unlike all the other fundamental types mentioned earlier,
+C++ strings are initialized even when you don't explicitly do so.
+
+```cpp
+std::string x = "something"; // set to "something"
+
+std::string x; // set to "" (empty string)
 ```
 
 ### iostream
