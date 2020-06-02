@@ -7,13 +7,16 @@ import IDEStyle from "components/mdx-styles/ide"
 import { Link, navigate } from "gatsby"
 
 import LessonMD from "./sidebar.mdx"
+import Protected from "components/protected"
 
 class Level1 extends Component {
   render() {
     return (
       <Layout styleOverride={{ maxWidth: 1400 }} mdxStyle={IDEStyle}>
-        <SEO title="Level 1" />
-        {this.lesson()}
+        <Protected>
+          <SEO title="Level 1" />
+          {this.lesson()}
+        </Protected>
       </Layout>
     )
   }

@@ -2,6 +2,8 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
+import * as ROUTES from "constants/routes"
+
 const Header = ({ siteTitle }) => (
   <header
     style={{
@@ -21,18 +23,18 @@ const Header = ({ siteTitle }) => (
           Eureka!
           <div className="container">
             <div className="navbar-dropdown">
-              <a className="navbar-item" href={"/"}>
+              <Link className="navbar-item" to={ROUTES.ROOT}>
                 Home
-              </a>
-              <a className="navbar-item" href={"ACCOUNT"}>
+              </Link>
+              <Link className="navbar-item" to={ROUTES.ACCOUNT}>
                 Account
-              </a>
-              <a className="navbar-item" href={"ADMIN"}>
+              </Link>
+              <Link className="navbar-item" to={ROUTES.TESTS}>
                 Tests
-              </a>
-              <a className="navbar-item" href={"ADMIN"}>
+              </Link>
+              <Link className="navbar-item" to={ROUTES.LESSONS}>
                 Lessons
-              </a>
+              </Link>
             </div>
           </div>
         </h1>

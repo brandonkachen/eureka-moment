@@ -7,6 +7,7 @@ import { navigate } from "gatsby"
 
 import IntroMD from "./intro.mdx"
 import OutroMD from "./outro.mdx"
+import Protected from "components/protected"
 
 interface IProps {
   location: {
@@ -30,16 +31,18 @@ class Level1 extends Component<IProps, IState> {
       )
     return (
       <Layout>
-        <SEO title="Level 1" />
-        {mdxToShow}
-        <div className="has-text-centered">
-          <button
-            className="button is-info is-light"
-            onClick={() => navigate("/lessons/level1/rpg")}
-          >
-            Start Lesson
-          </button>
-        </div>
+        <Protected>
+          <SEO title="Level 1" />
+          {mdxToShow}
+          <div className="has-text-centered">
+            <button
+              className="button is-info is-light"
+              onClick={() => navigate("/lessons/level1/rpg")}
+            >
+              Start Lesson
+            </button>
+          </div>
+        </Protected>
       </Layout>
     )
   }

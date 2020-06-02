@@ -7,7 +7,6 @@ import SEO from "../../components/seo"
 
 import CodeFormat from "../../utilities/code-formatter"
 import rough from "roughjs/bin/rough"
-// import "./index.css"
 
 class SampleLesson extends Component {
   test = React.createRef()
