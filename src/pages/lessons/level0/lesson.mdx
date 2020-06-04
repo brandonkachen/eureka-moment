@@ -1,0 +1,150 @@
+# Language Philosophy
+
+Let's talk about some fundamental questions around coding. Sorry
+in advance if this gets too philosphical.
+
+## What is a program?
+
+A: Information that is formatted in a way that allows computers
+to draw meaning and execute tasks.
+
+## What is a programming language?
+
+A: A set of characters, words, and grammar to communicate
+meaning to a computer, so it can execute commands for you.
+
+## Why do programmers call them "languages"?
+
+(Hint: What makes them similar to real, _cultural_ languages like English?)
+
+A: They express ideas and methods for accomplishing tasks. If
+you're fluent in a language, you can use it to properly
+communicate with someone else who is also fluent.
+
+## What makes a language useful?
+
+(Hint: what makes any kind of language useful?)
+
+A: Being able to express your ideas so someone else understands
+them. Talking and thinking more concretely about abstract ideas.
+
+## Interesting story about language...
+
+Let me tell you an interesting story about cultural languages:
+
+For centuries, people had assumed that all humans thought of
+"stuff" in the same way regardless of their cultural background
+or language. That is, humans perceive the same things, just
+under different labels depending where you lived. That makes
+sense, right? After all, the sun is
+the-giant-bright-round-thing-in-the-sky, whether you spoke
+Spanish or Korean. While this is a sensible assumption, it's not
+exactly true. It turns out that over time, different cultures
+have evolved to highlight certain phenomena over others.
+
+For example, the Greek has different words for light blue ("ghalazio") and dark
+blue ("ble"). In English, we don't have this distinction, simply calling both
+hues "blue". Researchers have conducted neuroscientific studies on Greek and
+English native speakers, and have found that Greek speakers' brains tended to
+behave differently from English speakers' brains when seeing light blue and dark
+blue. They often didn't even notice this distinction, leading the researchers to
+conclude the distinction was made unconsciously. This means that by virtue of
+their language, Greek speakers (at least subconsciously) tend to perceive color
+in slightly different ways from English speakers.
+
+In summary, language emphasizes and demphasizes certain aspects of reality,
+which influences us to be more or less sensitive to them. A quick note: this
+does not mean that some humans are unable to perceive some aspects of reality,
+just that they are influenced to notice them more or less often depending on
+their culture and language. (By the way, this kind of language analysis is
+covered by a field called _linguistics_. Super cool stuff, feel free to
+learn more about it.)
+
+## How might the idea above apply to _programming_ languages?
+
+A: Some languages are good for some kinds of tasks, others for
+other tasks.
+
+## So... what does all this mean?
+
+Knowing a bit about the background and culture of a programming language
+can help us better understand why it works the way it does! In turn, this
+can make it easier to pick up on C++'s quirks and better avoid its pitfalls.
+
+# C++ Historical Context
+
+The first thing to know about C++ is that it's actually an
+offshoot of another language, called C. Specifically, C++ is a _superset_ of C.
+
+## What does that mean?
+
+A: C++ does everything C can do and more. That means any program written in C is also
+compatible with C++ (but not necessarily vice versa).
+
+## Well, what's C then?
+
+C is a programming language designed to be **portable**
+without sacrificing speed or low-level functionality.
+
+## What does "portable" mean in this context?
+
+A: Portable means it could run in any computer environment,
+regardless of the underlying hardware like computer chips or
+RAM. This was not true of many languages at the time, so it was
+a very important feature for people who wanted to develop
+software on their own computers but share them with people using
+other kinds of computers.
+
+## What is "low-level functionality"?
+
+A: Low-level functionality means you had very strong programatic control
+over the computer chip and RAM, which operate at the lowest, most concrete level.
+It gave you a lot of flexibility in your code, because you could manipulate
+the actual hardware directly but came at the tradeoff of requiring a
+lot more technical knowledge to operate.
+
+## Why was it important to be fast? Aren't computers fast enough?
+
+A: At the time, computers were super slow. We've all heard about
+how our modern cell phones have more power than NASA's super
+computers. And something called Moore's law, which I won't
+repeat here but you can find excellent resources explaining it.
+
+## C++ brought the idea of _classes_ to the mix. What are classes?
+
+A: Pieces of code that can easily be configured and
+reconfigured, depending on what they're needed for. Programmers
+have given this idea a fancy name, "object-oriented
+programming". Fun fact C++ was initially called "C with Classes" for this reason.
+
+## What's so special about classes?
+
+A: It let them find patterns in their programs, so they could
+re-use pieces of code to describe them. It also allowed them to
+hide implementation details in parts of their program, so they
+didn't have to deal with every detail of a piece of code just to
+use it. This idea is called _abstraction_.
+
+(Sidenote: remember when we were talking about how language can affect
+thinking? Well this was one programmers really liked to use for
+their thinking!)
+
+## OK, this is cool and all, but the software world moves super fast. Nowadays, there are hundreds of different computer languages. Is C++ still relevant?
+
+A: Speed and flexibility are always valuable. C++ has also had a
+lot of time to mature and for people to build communities around
+it. And some of its ideas, like classes, are still fundamental
+to modern day programming. C and C++ are still in the top 10 most
+popular languages list in 2020
+([source](https://www.cleveroad.com/blog/programming-languages-ranking)).
+
+## OK, but why should I use C++ to learn fundamental programming skills?
+
+A: In your author's humble opinion, C++ is uniquely equipped to
+give you enough high-level programming patterns and abstractions
+while being low-level enough that you get a feel for what is
+really happening when you run a program. You'll gain a useful
+jumping-off point for tackling other languages in the future
+because most of them will still use the idea of classes, but
+you'll still be able to trace through the logic of what's really
+going on in a computer.
