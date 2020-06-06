@@ -37,7 +37,7 @@ class Level1 extends Component<IProps, IState> {
           <div className="has-text-centered">
             <button
               className="button is-info is-light"
-              onClick={() => navigate("/lessons/level1/rpg")}
+              onClick={() => navigate("/lessons/level1/ide")}
             >
               Start Lesson
             </button>
