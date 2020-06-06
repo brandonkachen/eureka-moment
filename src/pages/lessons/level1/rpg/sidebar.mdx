@@ -376,6 +376,34 @@ When you enter your name, it will output something like:
 Welcome, player <YOUR INPUTTED NAME>
 ```
 
+## Task 0: Taking a looksee
+
+Let's take a quick peek underneath the hood of how our C++ programs are actually run.
+Read through the `main.sh` script. This is a **bash** script, which runs commands
+directly in a **command line interface** (CLI). This is how you can quickly build
+a program to do stuff for you. Think of it as an automated entrypoint into your program.
+
+In this case, our `main.sh` script will do the following:
+
+- **compile** a C++ file (`mini_rpg.cpp`) into a file simply called `mini_rpg`.
+- run the `mini_rpg` **binary executable** (note: _not_ `mini_rpg.cpp`)
+
+Let's see this in action! Hit the "run" button at the top of the screen.
+You should see a `mini_rpg` file created in the repl file browser
+(click the "Files" icon if it's hidden). Now, click on the `mini_rpg` file
+to open it. You should see what appears to be gibberish. This isn't gibberish,
+but rather the same program in `mini_rpg.cpp` that has just been _converted_
+into instructions that are more easily interpreted by the computer. These instructions
+are written in **machine language**, which is not very easy for us humans to understand.
+
+This course won't get heavily into the intricate and complex process of _compiling_, or
+turning our human-readable code into a list of simple machine instruction for the computer
+to execute. If you're curious, check
+[this](http://courses.cms.caltech.edu/cs11/material/cpp/mike/misc/compiling_c++.html) resource out.
+
+Every time you hit the "run" button, a new `mini_rpg` file gets created from (`mini_rpg.cpp`)
+that overwrites the existing one.
+
 ## Task 1
 
 Let's give our new player a health of 100. Now, let's spawn them
