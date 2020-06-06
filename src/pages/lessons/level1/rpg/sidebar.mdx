@@ -76,13 +76,13 @@ bool b = true;
 char c = "x";
 ```
 
-In C++, these primitives may be _uninitialized_, or they may
+In C++, these primitives may be **uninitialized**, or they may
 not have some well-known value at compile time. Instead,
-they may have a value we don't care about, or a _garbage_ value,
+they may have a value we don't care about/want, or a **garbage** value,
 that we can't rely upon.
 
 Sometimes, you may need to convert one type to another.
-This is called _type casting_, and you can do it like this:
+This is called **type casting**, and you can do it like this:
 
 ```cpp
 int i = 100;
@@ -102,7 +102,7 @@ remainders to preserve just the integer component.
 Thus, 1/10 has 0 whole numbers (and a remainder of 10 that we drop).
 
 If you don't do this conversion explicitly, the C++ compiler will try to do it for you.
-This is called _automatic_ type conversion, and it follows a similar logic:
+This is called **automatic** type conversion, and it follows a similar logic:
 
 ```cpp
 int i = 0;
@@ -205,7 +205,7 @@ When you import the `iostream` library like this:
 ```
 
 You get access `std` (which stands for **standard library**).
-`std` is a _namespace_, which means it contains functions and classes within
+`std` is a **namespace**, which means it contains functions and classes within
 it that you can use. One such tool is the ability to write to the console
 or read from a user's input:
 
@@ -322,7 +322,7 @@ for (int i = 0; i < final_value; i++) {
 }
 ```
 
-Mean-_while_, while loops like like this:
+Meanwhile, while loops like like this:
 
 ```cpp
 int final_value = 10;
@@ -336,7 +336,7 @@ while (current_value < final_value) {
 ```
 
 Do-while loops are just like while loops,
-but execute at least once **before** the
+but execute at least once _before_ the
 condition is checked. They are formatted like this:
 
 ```cpp
@@ -375,34 +375,6 @@ When you enter your name, it will output something like:
 ```
 Welcome, player <YOUR INPUTTED NAME>
 ```
-
-## Task 0: Taking a looksee
-
-Let's take a quick peek underneath the hood of how our C++ programs are actually run.
-Read through the `main.sh` script. This is a **bash** script, which runs commands
-directly in a **command line interface** (CLI). This is how you can quickly build
-a program to do stuff for you. Think of it as an automated entrypoint into your program.
-
-In this case, our `main.sh` script will do the following:
-
-- **compile** a C++ file (`mini_rpg.cpp`) into a file simply called `mini_rpg`.
-- run the `mini_rpg` **binary executable** (note: _not_ `mini_rpg.cpp`)
-
-Let's see this in action! Hit the "run" button at the top of the screen.
-You should see a `mini_rpg` file created in the repl file browser
-(click the "Files" icon if it's hidden). Now, click on the `mini_rpg` file
-to open it. You should see what appears to be gibberish. This isn't gibberish,
-but rather the same program in `mini_rpg.cpp` that has just been _converted_
-into instructions that are more easily interpreted by the computer. These instructions
-are written in **machine language**, which is not very easy for us humans to understand.
-
-This course won't get heavily into the intricate and complex process of _compiling_, or
-turning our human-readable code into a list of simple machine instruction for the computer
-to execute. If you're curious, check
-[this](http://courses.cms.caltech.edu/cs11/material/cpp/mike/misc/compiling_c++.html) resource out.
-
-Every time you hit the "run" button, a new `mini_rpg` file gets created from (`mini_rpg.cpp`)
-that overwrites the existing one.
 
 ## Task 1
 
