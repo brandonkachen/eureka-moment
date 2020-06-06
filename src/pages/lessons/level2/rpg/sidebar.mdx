@@ -52,11 +52,13 @@ Struct NameOfStruct {
 };
 ```
 
-The above code defined a struct called `NameOfStruct`. It has three _members_:
+The above code defined a struct called `NameOfStruct`. It has three **members**:
 
 1. attribute1 of type `int`
 2. attribute2 of type `string`
 3. attribute3 of type `string`
+
+Members are variables and functions that {belong} to a class.
 
 Create a `struct` of type `HealthPotion`. Add the attributes described in Task 1 as members.
 
@@ -104,7 +106,7 @@ potions should heal you more while others heal you less. Why can't we just chang
 the value in the struct itself? (answer_req)
 
 At first glance, this looks impossible. Fortunately, the designers of C++ have a solution:
-_constructors_. This is a special function (or "method") that lives in structes and is responsible
+**constructors**. This is a special function (or "method") that lives in structes and is responsible
 for setting it up. Here's the syntax:
 
 ```cpp
@@ -120,7 +122,7 @@ struct NameOfStruct {
 };
 ```
 
-Notice that its name is equivalent to the _struct_ name. This is our telltale sign that
+Notice that its name is equivalent to the _struct_'s name. This is our telltale sign that
 the method is a constructor. It also takes in an argument, like any function.
 Then, it will set the `attribute1` member to the argument it was passed, `att1`.
 Also notice that the constructor was declared last. Why is it done that way? (answer_req)
@@ -149,14 +151,14 @@ Add some code to decrement `hp`'s timer. When it hits 0, output "Health Potion h
 
 Unfortunately, our `HealthPotion` object is still alive and kicking, even after
 it was expired. We need to delete it from the program's memory. C++ gives us this ability
-through an _operator_. Operators are keywords that are built into C++ that give us specific
+through an **operator**. Operators are keywords that are built into C++ that give us specific
 functionality. In this case, we can use the "delete" operator like this:
 
 ```cpp
 delete obj;
 ```
 
-When C++ runs this line of code, it actually calls `obj`'s _destructor_. This is another
+When C++ runs this line of code, it actually calls `obj`'s **destructor**. This is another
 special method that exists in every class, like the constructor. It is responsible
 for handling deletion events you want your object to perform when it is deleted.
 Here's the syntax for the destructor:
@@ -197,11 +199,11 @@ need to see how many turns are left and check that after it reaches 0, the timer
 Wouldn't it be great to not worry about that? Is there a way to set up our `HealthPotion` struct
 so that when the player picks one up, it'll just automatically disappear after 3 turns?
 
-Fortunately, _private_ members can help us accomplish this! By default, struct members are
-_public_. This means they can be accessed outside of the struct. In other words, they're
+Fortunately, **private** members can help us accomplish this! By default, struct members are
+**public**. This means they can be accessed outside of the struct. In other words, they're
 publicly available to the rest of the program. This is why the `main()` function was able to get
 and set members in the previous tasks, like the timer value or the "effect" attribute.
-Private members are the opposite; they can **only** be accessed by members in
+Private members are the opposite; they can _only_ be accessed by members in
 their own struct.
 
 How can this help us hide implementation details? (answer_req)
