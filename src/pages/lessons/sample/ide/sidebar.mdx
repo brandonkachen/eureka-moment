@@ -1,0 +1,62 @@
+# Plan
+
+This section will explain the high-level plan for this lesson.
+At every step, we will guide the student to learn through discovery,
+build upon their knowledge through scaffolding, and test their understanding
+through complex scenarios that grow from the basics they have learned.
+
+## New Feature: Allow the user to choose an attack mechanism.
+
+Let's add a new feature that allows the user to choose from
+these three attacks:
+
+- Thunder Shock
+- Wild Charge
+- Discharge
+
+(Side Quest: build these attacks out yourself!)
+
+## Where should we divert the logic in the program, so we can execute the user's action?
+
+```cpp
+#include <iostream>
+
+int main(int argc, char *argv[]) {
+
+  /* An annoying "Hello World" example */
+  for (auto i = 0; i < 0xFFFF; i++)
+    cout << "Hello, World!" << endl;
+
+  char c = '\\n';
+  unordered_map <string, vector<string> > m;
+  m["key"] = "\\\\"; // this is an error
+
+  return -2e3 + 12l;
+}
+```
+
+Put a comment indicating where you'd make this change in the code editor on the right.
+
+## Fill in the blank:
+
+{If} the user chooses 'Thunder Shock', we'll execute 'Thunder Shock'.
+
+{Otherwise}, if the user chooses 'Wild Charge', we'll execute 'Wild Charge'.
+
+{Else}, we'll execute 'Discharge'.
+
+## This is what we call an if-else statement. The C++ syntax for it is:
+
+```cpp
+string user_action;
+
+// Type an attack and press enter
+std::cout << "Type an attack: ";
+std::cin >> user_action;
+if (user_action == "Thunder_Shock") {
+  // code to handle "Thunder_Shock"
+  // attack goes here
+}
+```
+
+lesson continues on from here...

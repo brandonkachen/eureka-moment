@@ -2,14 +2,14 @@
 
 Let's get some syntax under our belt, and then we'll use it to build a mini-rpg.
 
-## Syntax
+## Basics
 
-Here's a little cheatsheet of common syntax you'll find in C++.
+Here's a little cheatsheet of basic syntax in C++.
 There are a ton of similarities to C#, so this should be pretty familiar.
 You can see a sample program version that combines all these elements
 in the `syntax.cpp` file in your repl (IDE on the right).
 
-### Basics
+### Comments, Import, main()
 
 Single Line comments look like this:
 
@@ -53,6 +53,8 @@ void main() {
 }
 ```
 
+### Primatives
+
 C++ also has a few **fundamental types**, or **primitives**.
 See [this guide](https://www.geeksforgeeks.org/c-data-types/)
 if you want a quick refresher. Here are some of the most
@@ -76,13 +78,13 @@ bool b = true;
 char c = "x";
 ```
 
-In C++, these primitives may be _uninitialized_, or they may
+In C++, these primitives may be **uninitialized**, or they may
 not have some well-known value at compile time. Instead,
-they may have a value we don't care about, or a _garbage_ value,
+they may have a value we don't care about/want, or a **garbage** value,
 that we can't rely upon.
 
 Sometimes, you may need to convert one type to another.
-This is called _type casting_, and you can do it like this:
+This is called **type casting**, and you can do it like this:
 
 ```cpp
 int i = 100;
@@ -102,7 +104,7 @@ remainders to preserve just the integer component.
 Thus, 1/10 has 0 whole numbers (and a remainder of 10 that we drop).
 
 If you don't do this conversion explicitly, the C++ compiler will try to do it for you.
-This is called _automatic_ type conversion, and it follows a similar logic:
+This is called **automatic** type conversion, and it follows a similar logic:
 
 ```cpp
 int i = 0;
@@ -120,6 +122,37 @@ There are many ways you can slice and dice this
 However, we won't get into it in depth here. You can see
 [this guide](https://www.geeksforgeeks.org/type-conversion-in-c/)
 for a full breakdown.
+
+### Global Variables
+
+**Global Variables** are located outside the main function:
+
+```
+#include <iostream>
+
+// Global variable declaration:
+int G_VAR;
+int main () {
+   // Local variable declaration:
+   int local_a, local_b;
+   local_a = 10;
+   local_b = 10;
+
+   G_VAR = a + b  // declared before main()
+
+   return 0
+}
+```
+
+You can use global variable anywhere in the program, _after_ it's been
+declared. In all other ways, global variables work in exactly the same
+way as any other variable. As a convention, programmers typically
+use upper case to denote them, as a way to separate them from local variables.
+
+Global variables are powerful, and should really only be used when:
+
+- you want other programmers to easily be able to modify some program settings
+- it's too complex to pass variables between functions.
 
 ### Arithmetic
 
@@ -205,7 +238,7 @@ When you import the `iostream` library like this:
 ```
 
 You get access `std` (which stands for **standard library**).
-`std` is a _namespace_, which means it contains functions and classes within
+`std` is a **namespace**, which means it contains functions and classes within
 it that you can use. One such tool is the ability to write to the console
 or read from a user's input:
 
@@ -295,7 +328,7 @@ the standard library. You can feel free to use either approach.
 
 ### Control Flow
 
-This is how you write if/else statements:
+This is how you write if-else statements:
 
 ```cpp
 bool b = false;
@@ -309,7 +342,59 @@ if (i == j) {
 }
 ```
 
-For loops look like this:
+**If-else** statements like the above are very common, so programmers have added
+a short-hand called a **ternary** operator. The same example above looks like this
+when expressed with a ternary operator:
+
+```cpp
+bool b = false;
+int i = 0
+int j = 1
+
+b = (i == j) ? true : false;
+```
+
+As you can see, the code is simplified. the variable `b`
+is set to either `true` or `false` depending on the result of the
+expression in the parentheses. Note: ternary expressions get
+very messy when they have a lot of logic embedded in them.
+If you find the logic you want to express is getting messy,
+it's best to use an if-else statement instead. Don't get too fancy!
+
+**Switch case** statements look like this:
+
+```cpp
+int expression = 0;
+std::cin >> expression;
+
+switch(expression) {
+  case 0:
+    std::cout << "user wrote '0'" << std::endl;
+    break;
+
+  case 1:
+    std::cout << "user wrote '1'" << std::endl;
+    // no `break` statement!
+
+  // you can have any number of case statements.
+  default: //Optional
+    std::cout << "default case" << std::endl;
+}
+```
+
+C++'s switch cases can only be integers. As a reminder, in switch cases,
+the program will continue to execute until it reaches the end of the statement
+_or_ it hits a `break`.
+
+In the example above, if `expression` was set to `1`,
+the program would output the following:
+
+```
+user wrote '1'
+default case
+```
+
+**For loops** look like this:
 
 ```cpp
 int final_value = 10;
@@ -322,7 +407,7 @@ for (int i = 0; i < final_value; i++) {
 }
 ```
 
-Mean-_while_, while loops like like this:
+**While loops** like like this:
 
 ```cpp
 int final_value = 10;
@@ -335,8 +420,8 @@ while (current_value < final_value) {
 }
 ```
 
-Do-while loops are just like while loops,
-but execute at least once **before** the
+**Do-while loops** are just like while loops,
+but execute at least once _before_ the
 condition is checked. They are formatted like this:
 
 ```cpp
@@ -358,6 +443,63 @@ do {
 std::cout << current_value; // output: 20
 ```
 
+### Functions
+
+Did you notice that `main()` is a function?
+C++ functions look just like it:
+
+```cpp
+bool isLessThan(int param1, int param2, std::string param3) {
+  if (param1 < param2) {
+    return true;
+  }
+
+  std::cout << param3;
+  return false;
+}
+```
+
+Now, the function `isLessThan` has been declared.
+It takes in 3 parameters as shown above and retrns a boolean value.
+
+Later in the program, you can use it like this:
+
+```cpp
+// isLessThan has already been declared
+
+int main() {
+  int i = 0;
+  int j = 1;
+
+  bool result = isLessThan(0, 1, "printmeee");
+  std::cout << result; // outputs: true
+
+  return 0;
+}
+```
+
+If your function doesn't return anything, you can return `void` instead:
+
+```cpp
+void func(int i) {
+  // do stuff
+}
+```
+
+If your function doesn't take any parameters, you can do this:
+
+```cpp
+int returnsOne() {
+  return 1;
+}
+
+// or, if you want to be explicit
+
+int returnsTwo(void) {
+  return 2;
+}
+```
+
 # Mini-RPG
 
 Switch to the mini-rpg skeleton code. (Hit the "Files" icon
@@ -375,34 +517,6 @@ When you enter your name, it will output something like:
 ```
 Welcome, player <YOUR INPUTTED NAME>
 ```
-
-## Task 0: Taking a looksee
-
-Let's take a quick peek underneath the hood of how our C++ programs are actually run.
-Read through the `main.sh` script. This is a **bash** script, which runs commands
-directly in a **command line interface** (CLI). This is how you can quickly build
-a program to do stuff for you. Think of it as an automated entrypoint into your program.
-
-In this case, our `main.sh` script will do the following:
-
-- **compile** a C++ file (`mini_rpg.cpp`) into a file simply called `mini_rpg`.
-- run the `mini_rpg` **binary executable** (note: _not_ `mini_rpg.cpp`)
-
-Let's see this in action! Hit the "run" button at the top of the screen.
-You should see a `mini_rpg` file created in the repl file browser
-(click the "Files" icon if it's hidden). Now, click on the `mini_rpg` file
-to open it. You should see what appears to be gibberish. This isn't gibberish,
-but rather the same program in `mini_rpg.cpp` that has just been _converted_
-into instructions that are more easily interpreted by the computer. These instructions
-are written in **machine language**, which is not very easy for us humans to understand.
-
-This course won't get heavily into the intricate and complex process of _compiling_, or
-turning our human-readable code into a list of simple machine instruction for the computer
-to execute. If you're curious, check
-[this](http://courses.cms.caltech.edu/cs11/material/cpp/mike/misc/compiling_c++.html) resource out.
-
-Every time you hit the "run" button, a new `mini_rpg` file gets created from (`mini_rpg.cpp`)
-that overwrites the existing one.
 
 ## Task 1
 

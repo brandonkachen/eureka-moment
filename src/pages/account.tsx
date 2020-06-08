@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { PageProps, Link } from "gatsby"
 
 import firebase from "gatsby-plugin-firebase"
@@ -7,25 +7,40 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import Layout from "components/layout"
 import SEO from "components/seo"
 
-const login = () => {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword("brandonchenjiacheng@gmail.com", "testing123")
+const login = ({ email, password }) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
 }
 const logout = () => {
   firebase.auth().signOut()
 }
-
 const CurrentUser = () => {
   const [user, loading, error] = useAuthState(firebase.auth())
 
+  const handleSubmit = event => {
+    event.preventDefault()
+    const email = event.target.elements.email.value
+    const password = event.target.elements.password.value
+
+    if (password === "" || email === "") {
+      alert("Invalid username/password")
+    } else {
+      login({
+        email: email,
+        password: password,
+      })
+    }
+  }
+
+  // loading user
   if (loading) {
     return (
       <div>
-        <p>Initialising User...</p>
+        <p>Loading...</p>
       </div>
     )
   }
+
+  // error authenticating user
   if (error) {
     return (
       <div>
@@ -33,6 +48,8 @@ const CurrentUser = () => {
       </div>
     )
   }
+
+  // user is logged in
   if (user) {
     return (
       <div>
@@ -41,7 +58,15 @@ const CurrentUser = () => {
       </div>
     )
   }
-  return <button onClick={login}>Log in</button>
+
+  // user is not logged in
+  return (
+    <form onSubmit={handleSubmit}>
+      <input name="email" type="text" placeholder="Email Address" />
+      <input name="password" type="password" placeholder="Password" />
+      <button type="submit">Sign In</button>
+    </form>
+  )
 }
 
 const AccountPage = (props: PageProps) => (
@@ -54,4 +79,3 @@ const AccountPage = (props: PageProps) => (
 )
 
 export default AccountPage
-// export default CurrentUser

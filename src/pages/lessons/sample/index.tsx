@@ -19,7 +19,7 @@ interface IProps {
 
 interface IState {}
 
-class Level1 extends Component<IProps, IState> {
+class Sample extends Component<IProps, IState> {
   render() {
     var { location } = this.props
 
@@ -32,12 +32,12 @@ class Level1 extends Component<IProps, IState> {
     return (
       <Layout>
         <Protected>
-          <SEO title="Level 2" />
+          <SEO title="Level 1" />
           {mdxToShow}
           <div className="has-text-centered">
             <button
               className="button is-info is-light"
-              onClick={() => navigate("/lessons/level2/ide")}
+              onClick={() => navigate("/lessons/sample/ide")}
             >
               Start Lesson
             </button>
@@ -48,4 +48,4 @@ class Level1 extends Component<IProps, IState> {
   }
 }
 
-export default Level1
+export default Sample
