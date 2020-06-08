@@ -295,7 +295,7 @@ the standard library. You can feel free to use either approach.
 
 ### Control Flow
 
-This is how you write if/else statements:
+This is how you write if-else statements:
 
 ```cpp
 bool b = false;
@@ -309,7 +309,59 @@ if (i == j) {
 }
 ```
 
-For loops look like this:
+**If-else** statements like the above are very common, so programmers have added
+a short-hand called a **ternary** operator. The same example above looks like this
+when expressed with a ternary operator:
+
+```cpp
+bool b = false;
+int i = 0
+int j = 1
+
+b = (i == j) ? true : false;
+```
+
+As you can see, the code is simplified. the variable `b`
+is set to either `true` or `false` depending on the result of the
+expression in the parentheses. Note: ternary expressions get
+very messy when they have a lot of logic embedded in them.
+If you find the logic you want to express is getting messy,
+it's best to use an if-else statement instead. Don't get too fancy!
+
+**Switch case** statements look like this:
+
+```cpp
+int expression = 0;
+std::cin >> expression;
+
+switch(expression) {
+  case 0:
+    std::cout << "user wrote '0'" << std::endl;
+    break;
+
+  case 1:
+    std::cout << "user wrote '1'" << std::endl;
+    // no `break` statement!
+
+  // you can have any number of case statements.
+  default: //Optional
+    std::cout << "default case" << std::endl;
+}
+```
+
+C++'s switch cases can only be integers. As a reminder, in switch cases,
+the program will continue to execute until it reaches the end of the statement
+_or_ it hits a `break`.
+
+In the example above, if `expression` was set to `1`,
+the program would output the following:
+
+```
+user wrote '1'
+default case
+```
+
+**For loops** look like this:
 
 ```cpp
 int final_value = 10;
@@ -322,7 +374,7 @@ for (int i = 0; i < final_value; i++) {
 }
 ```
 
-Meanwhile, while loops like like this:
+**While loops** like like this:
 
 ```cpp
 int final_value = 10;
@@ -335,7 +387,7 @@ while (current_value < final_value) {
 }
 ```
 
-Do-while loops are just like while loops,
+**Do-while loops** are just like while loops,
 but execute at least once _before_ the
 condition is checked. They are formatted like this:
 
