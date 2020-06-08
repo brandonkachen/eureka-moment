@@ -443,6 +443,63 @@ do {
 std::cout << current_value; // output: 20
 ```
 
+### Functions
+
+Did you notice that `main()` is a function?
+C++ functions look just like it:
+
+```cpp
+bool isLessThan(int param1, int param2, std::string param3) {
+  if (param1 < param2) {
+    return true;
+  }
+
+  std::cout << param3;
+  return false;
+}
+```
+
+Now, the function `isLessThan` has been declared.
+It takes in 3 parameters as shown above and retrns a boolean value.
+
+Later in the program, you can use it like this:
+
+```cpp
+// isLessThan has already been declared
+
+int main() {
+  int i = 0;
+  int j = 1;
+
+  bool result = isLessThan(0, 1, "printmeee");
+  std::cout << result; // outputs: true
+
+  return 0;
+}
+```
+
+If your function doesn't return anything, you can return `void` instead:
+
+```cpp
+void func(int i) {
+  // do stuff
+}
+```
+
+If your function doesn't take any parameters, you can do this:
+
+```cpp
+int returnsOne() {
+  return 1;
+}
+
+// or, if you want to be explicit
+
+int returnsTwo(void) {
+  return 2;
+}
+```
+
 # Mini-RPG
 
 Switch to the mini-rpg skeleton code. (Hit the "Files" icon
