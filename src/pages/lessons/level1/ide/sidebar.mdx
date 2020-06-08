@@ -2,14 +2,14 @@
 
 Let's get some syntax under our belt, and then we'll use it to build a mini-rpg.
 
-## Syntax
+## Basics
 
-Here's a little cheatsheet of common syntax you'll find in C++.
+Here's a little cheatsheet of basic syntax in C++.
 There are a ton of similarities to C#, so this should be pretty familiar.
 You can see a sample program version that combines all these elements
 in the `syntax.cpp` file in your repl (IDE on the right).
 
-### Basics
+### Comments, Import, main()
 
 Single Line comments look like this:
 
@@ -52,6 +52,8 @@ void main() {
   // don't return anything though!
 }
 ```
+
+### Primatives
 
 C++ also has a few **fundamental types**, or **primitives**.
 See [this guide](https://www.geeksforgeeks.org/c-data-types/)
@@ -120,6 +122,37 @@ There are many ways you can slice and dice this
 However, we won't get into it in depth here. You can see
 [this guide](https://www.geeksforgeeks.org/type-conversion-in-c/)
 for a full breakdown.
+
+### Global Variables
+
+**Global Variables** are located outside the main function:
+
+```
+#include <iostream>
+
+// Global variable declaration:
+int G_VAR;
+int main () {
+   // Local variable declaration:
+   int local_a, local_b;
+   local_a = 10;
+   local_b = 10;
+
+   G_VAR = a + b  // declared before main()
+
+   return 0
+}
+```
+
+You can use global variable anywhere in the program, _after_ it's been
+declared. In all other ways, global variables work in exactly the same
+way as any other variable. As a convention, programmers typically
+use upper case to denote them, as a way to separate them from local variables.
+
+Global variables are powerful, and should really only be used when:
+
+- you want other programmers to easily be able to modify some program settings
+- it's too complex to pass variables between functions.
 
 ### Arithmetic
 
