@@ -1,17 +1,19 @@
-## Task 1: Create an item
+# Concentration Card Game
 
-Items have a few attributes:
+We're going to implement a simple, popular card game called "Concentration".
+It has other names, like "Match Match" or "Memory". See
+[here](<https://en.wikipedia.org/wiki/Concentration_(card_game)>)
+for a quick explanation/refresher on how the game works.
 
-- name (string)
-- description (string)
-- effect (string)
-- rarity (int)
+## Task 1: Creating our deck
 
-Let's go ahead and create these attributes to describe one item.
-Its name will be "health_potion", description will be "heals the player 10 points",
-effect will be "+ 10 hp", and rarity will be "2".
+We're going to simulate a standard deck of cards (4 suits, Ace to King, no Jokers).
+There are many ways to represent the different cards.
 
-Fill out the blanks for Task 1 in `main.cpp`. We now have a health potion item!
+Because the most complex operation we're going to make with these cards is comparing
+them for equality, we will keep things simple and just use strings. If we later wanted
+to add rank/ordering for a variation of the game, we'd probably switch to something else
+like ints or doubles (challenge q: how might that look?).
 
 ## Task 2: Create some more items
 
