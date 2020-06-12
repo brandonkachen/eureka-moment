@@ -19,7 +19,7 @@ interface IProps {
 
 interface IState {}
 
-class Level1 extends Component<IProps, IState> {
+class Level2 extends Component<IProps, IState> {
   render() {
     var { location } = this.props
 
@@ -48,4 +48,4 @@ class Level1 extends Component<IProps, IState> {
   }
 }
 
-export default Level1
+export default Level2
