@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { useObject } from "react-firebase-hooks/database"
 import { Link } from "gatsby"
 
+import { UserProvider } from "components/user-context"
 import * as ROUTES from "constants/routes"
 
 const errorPage = error => {
@@ -54,17 +55,13 @@ const Protected = ({ children }) => {
 
   // User Authorized
   if (whitelist) {
-    const childrenWithEmail = React.Children.map(children, child => {
-      return React.cloneElement(child, {
-        email: email,
-      })
-    })
-
-    return (
-      <>
-        <main>{childrenWithEmail}</main>
-      </>
-    )
+    // const childrenWithEmail = React.Children.map(children, child => {
+    //   return React.cloneElement(child, {
+    //     email: email,
+    //   })
+    // })
+    // console.log(user)
+    return <UserProvider value={user}>{children}</UserProvider>
   }
 
   // None of the above cases; user must be logged out
