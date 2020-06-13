@@ -54,9 +54,15 @@ const Protected = ({ children }) => {
 
   // User Authorized
   if (whitelist) {
+    const childrenWithEmail = React.Children.map(children, child => {
+      return React.cloneElement(child, {
+        email: email,
+      })
+    })
+
     return (
       <>
-        <main>{children}</main>
+        <main>{childrenWithEmail}</main>
       </>
     )
   }

@@ -37,6 +37,7 @@ const BlankComp = props => {
   const handleSubmit = event => {
     event.preventDefault()
     const userResp = getUserInput(event)
+    console.log(props)
 
     for (const [i, value] of props.answers.entries()) {
       if (compareAnswers(value, userResp[i])) {

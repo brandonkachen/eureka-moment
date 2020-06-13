@@ -17,7 +17,7 @@ class Level1 extends Component {
         <Protected>
           <SEO title="Level 0" />
           <IntroMD></IntroMD>
-          <LessonMD></LessonMD>
+          <LessonMD level="/level0"></LessonMD>
           <OutroMD></OutroMD>
         </Protected>
       </Layout>
