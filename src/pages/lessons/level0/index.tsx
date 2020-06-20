@@ -11,41 +11,17 @@ import OutroMD from "./outro.mdx"
 import Protected from "components/protected"
 import UserContext from "components/user-context"
 
-// class Level1 extends Component {
-//   static contextType = UserContext
-
-//   componentDidMount() {
-//     const user = this.context
-
-//     console.log("user")
-//     console.log(user)
-//   }
-
-//   render() {
-//     return (
-//       <Layout>
-//         {/* <Protected> */}
-//         <SEO title="Level 0" />
-//         <IntroMD></IntroMD>
-//         <LessonMD email={user.email} level="/level0"></LessonMD>
-//         <OutroMD></OutroMD>
-//         {/* </Protected> */}
-//       </Layout>
-//     )
-//   }
-// }
-
-export const Level1 = () => {
+export const Level0 = () => {
   const user = useContext(UserContext)
+
+  const baseRef = "lessons/" + user.uid + "/level0"
 
   return (
     <Layout>
-      {/* <Protected> */}
       <SEO title="Level 0" />
       <IntroMD></IntroMD>
-      <LessonMD email={user.email} level="/level0"></LessonMD>
+      <LessonMD baseRef={baseRef}></LessonMD>
       <OutroMD></OutroMD>
-      {/* </Protected> */}
     </Layout>
   )
 }
@@ -53,7 +29,7 @@ export const Level1 = () => {
 function ProtectedComp() {
   return (
     <Protected>
-      <Level1 />
+      <Level0 />
     </Protected>
   )
 }

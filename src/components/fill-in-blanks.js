@@ -1,7 +1,6 @@
 import React from "react"
 import reactStringReplace from "react-string-replace"
 import firebase from "gatsby-plugin-firebase"
-import { useObject } from "react-firebase-hooks/database"
 
 // const handleInput = event => {
 //   console.log(event.key)
@@ -37,17 +36,20 @@ const BlankComp = props => {
   const handleSubmit = event => {
     event.preventDefault()
     const userResp = getUserInput(event)
-    console.log(props)
+    const qRef = firebase.database().ref(props.baseRef + "/" + props.qid)
 
     for (const [i, value] of props.answers.entries()) {
-      if (compareAnswers(value, userResp[i])) {
-        console.log("correct")
-        // mark as correct in firebase
-      } else {
-        console.log("wrong")
-        // mark as incorrect
-        //TODO: store in a history of guessed answers?
-      }
+      // get sub-problem ref
+      var ref = qRef.child(i)
+
+      // log attempt in a new entry
+      const newhistRef = ref.child("history").push()
+      newhistRef.set(userResp[i])
+
+      // set correctness
+      ref.update({
+        is_correct: compareAnswers(value, userResp[i]),
+      })
     }
   }
 
