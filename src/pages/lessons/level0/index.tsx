@@ -16,16 +16,11 @@ export const Level0 = () => {
 
   const basePath = "lessons/" + user.uid + "/level0"
 
-  const [snapshots, loading, error] = useList(
-    firebase.database().ref(basePath + "/answers")
-  )
-
   return (
     <Layout>
       <SEO title="Level 0" />
       <IntroMD></IntroMD>
       <LessonMD baseRef={basePath}></LessonMD>
-      {/* <LessonMD baseRef={basePath} snapshots={snapshots}></LessonMD> */}
       <OutroMD></OutroMD>
     </Layout>
   )
