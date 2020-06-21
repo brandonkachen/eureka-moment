@@ -61,7 +61,7 @@ const CurrentUser = () => {
 
   // user is not logged in
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} method="post">
       <input name="email" type="text" placeholder="Email Address" />
       <input name="password" type="password" placeholder="Password" />
       <button type="submit">Sign In</button>
@@ -74,7 +74,9 @@ const AccountPage = (props: PageProps) => (
     <SEO title="Account" />
     <h1>Log into your account</h1>
     <CurrentUser></CurrentUser>
-    <Link to="/">Go back to the homepage</Link>
+    <p>
+      Go back to the <Link to="/">homepage</Link>.
+    </p>
   </Layout>
 )
 

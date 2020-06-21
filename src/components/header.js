@@ -20,7 +20,7 @@ const Header = ({ siteTitle }) => (
           className="title"
           style={{ margin: 10, textAlign: "center", color: "Ivory" }}
         >
-          Eureka!
+          Eureka Moment
           <div className="container">
             <div className="navbar-dropdown">
               <Link className="navbar-item" to={ROUTES.ROOT}>
