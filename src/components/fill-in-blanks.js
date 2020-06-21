@@ -84,7 +84,7 @@ const BlankComp = props => {
 
   return (
     <div className="box">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="post">
         {children}
         <div className="has-text-centered">
           <button type="submit">Submit</button>
