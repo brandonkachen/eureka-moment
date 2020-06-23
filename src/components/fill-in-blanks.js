@@ -46,9 +46,9 @@ const compareAnswers = (userAns, correctAns) => {
 }
 
 const BlankComp = props => {
-  // if (!firebase) {
-  //   return props.children
-  // }
+  if (!firebase) {
+    return props.children
+  }
 
   const baseRef = firebase.database().ref(props.baseRef)
   const ansRef = baseRef.child("answers/" + props.qid) // tracks correctness
