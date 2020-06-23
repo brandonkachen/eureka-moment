@@ -18,9 +18,9 @@ const errorPage = error => {
 }
 
 const Protected = ({ children }) => {
-  if (!firebase) {
-    return children
-  }
+  // if (!firebase) {
+  //   return children
+  // }
 
   const [user, loading, authError] = useAuthState(firebase.auth())
   var email = user ? user.email.replace(".", "%2E") : ""

@@ -8,8 +8,8 @@ in advance if this gets too philosphical.
 ## What is a program?
 
 <BlankComp answers={{ e: "Information", k: "perform" }} qid="aes7" {...props}>
-  `____`[e] that is formatted in a way that allows computers to draw meaning and
-  `____`[k] tasks for us.
+  A: `____`[e] that is formatted in a way that allows computers to draw meaning
+  and `____`[k] tasks for us.
 </BlankComp>
 
 ## What is a programming language?
@@ -33,8 +33,10 @@ in advance if this gets too philosphical.
 
 (Hint: what makes any kind of language useful?)
 
-A: Being able to express your ideas so someone else understands
-them. Talking and {thinking} more {concretely} about abstract ideas.
+<BlankComp answers={{ c: "thinking", j: "concretely" }} qid="dwk3" {...props}>
+  A: Being able to express your ideas so someone else understands them. Talking
+  and `____`[c] more `____`[j] about abstract ideas.
+</BlankComp>
 
 ## Interesting story about language...
 
@@ -67,16 +69,24 @@ just that they are influenced to notice them more or less often depending on
 their culture and language. (By the way, this kind of language analysis is
 covered by a field called _linguistics_.)
 
-## How might the idea above apply to _programming_ languages?
+## How might the ideas above apply to _programming_ languages?
 
-A: Some languages are {good} for some kinds of tasks, others for
-other tasks.
+<BlankComp answers={{ d: "good" }} qid="dzi8" {...props}>
+  A: Some languages are `____`[d] for some kinds of tasks, others for other
+  tasks.
+</BlankComp>
 
 ## So... what does all this mean?
 
-Knowing a bit about the {background} and culture of a programming {language}
-can help us better understand why it {works} the way it does! In turn, this
-can make it easier to pick up on C++'s quirks and better avoid its pitfalls.
+<BlankComp
+  answers={{ c: "background", k: "language", o: "works" }}
+  qid="ene5"
+  {...props}
+>
+  A: Knowing a bit about the `____`[c] and culture of a programming `____`[k]
+  can help us better understand why it `____`[o] the way it does! In turn, this
+  can make it easier to pick up on C++'s quirks and better avoid its pitfalls.
+</BlankComp>
 
 # C++ Historical Context
 
@@ -85,8 +95,10 @@ offshoot of another language, called **C**. Specifically, C++ is a _superset_ of
 
 ## What does that mean?
 
-A: C++ does {everything} C can do and more. That means any program written in C is also
-compatible with C++ (but not necessarily vice versa).
+<BlankComp answers={{ d: "everything" }} qid="fii1" {...props}>
+  A: C++ does `____`[d] C can do and more. That means any program written in C
+  is also compatible with C++ (but not necessarily vice versa).
+</BlankComp>
 
 ## Well, what's C then?
 
@@ -95,76 +107,111 @@ without sacrificing speed or **low-level** functionality.
 
 ## What does "portable" mean in this context?
 
-A: Portable means it could run in {any} computer environment,
-regardless of the underlying {hardware} like computer chips or
-RAM. This was not true of many languages at the time, so it was
-a very important feature for people who wanted to develop
-software on their own computers but {share} it with people using
-other kinds computers.
+<BlankComp
+  answers={{ b: "any", f: "hardware", l: "share" }}
+  qid="fjw3"
+  {...props}
+>
+  A: Portable means it could run in `____`[b] computer environment, regardless
+  of the underlying `____`[f] like computer chips or RAM. This was not true of
+  many languages at the time, so it was a very important feature for people who
+  wanted to develop software on their own computers but `____`[l] it with people
+  using other kinds computers.
+</BlankComp>
 
 ## What is "low-level functionality"?
 
-A: Low-level functionality means you had very strong programatic control
-over the computer chip and RAM, which operate at the lowest, most concrete level.
-It gave you a lot of {flexibility} in your code, because you could manipulate
-the actual hardware {directly} but came at the tradeoff of requiring a
-lot more technical {knowledge} to operate.
+<BlankComp
+  answers={{ c: "flexibility", j: "directly", v: "knowledge" }}
+  qid="gan8"
+  {...props}
+>
+  A: Low-level functionality means you had very strong programatic control over
+  the computer chip and RAM, which operate at the lowest, most concrete level.
+  It gave you a lot of `____`[c] in your code, because you could manipulate the
+  actual hardware `____`[j] but came at the tradeoff of requiring a lot more
+  technical `____`[v] to operate.
+</BlankComp>
 
 ## Why was it important to be fast?
 
-A: At the time, computers were super {slow}. Any software optimization you could
-perform to reduce the number of operations required to run programs would be highly valuable.
-C/C++'s speed became a huge driver of its popularity in this time period.
+<BlankComp answers={{ d: "slow" }} qid="ghj4" {...props}>
+  A: At the time, computers were super `____`[d]. Any software optimization you
+  could perform to reduce the number of operations required to run programs
+  would be highly valuable. C/C++'s speed became a huge driver of its popularity
+  in this time period.
+</BlankComp>
 
-Sidenote: Did you know that our modern cell phones have more computational power
-than NASA's supercomputers had when we sent astronauts to the moon in 1969?
-If you were curious about _why_, here's a great
+(Sidenote: Did you know that our modern cell phones have more computational power
+than NASA's supercomputers had when we sent astronauts to the moon in 1969? If you
+were curious about _why_, here's a great
 [resource](https://www.extremetech.com/extreme/210872-extremetech-explains-what-is-moores-law))
-explaining one of the primary reasons for this drastic change, Moore's law.
+explaining one of the primary reasons for this drastic change, Moore's law.)
 
 ## Aren't computers fast enough _nowadays_?
 
-If your software can perform faster, then you can get away
-with a slower processor in order to accomplish a task.
-This means you can take advantage of {cheaper} hardware.
-At the very least, it means your program will continue to be usable for
-longer without major changes, leading to better {future}-proofing.
+<BlankComp answers={{ c: "cheaper", j: "future" }} qid="hsr6" {...props}>
+  A: If your software can perform faster, then you can get away with a slower
+  processor in order to accomplish a task. This means you can take advantage of
+  `____`[c] hardware. At the very least, it means your program will continue to
+  be usable for longer without major changes, leading to better
+  `____`[j]-proofing.
+</BlankComp>
 
 ## C++ brought the idea of **classes** to the mix. What are classes?
 
-A: Pieces of code that can {easily} be configured and
-{reconfigured}, depending on what they're needed for. Programmers
-have given this idea a fancy name: "object-oriented
-programming". Fun fact: C++ was initially called "C with Classes" for this reason.
+<BlankComp answers={{ e: "easily", l: "reconfigured" }} qid="ibr7" {...props}>
+  A: Pieces of code that can `____`[e] be configured and `____`[l], depending on
+  what they're needed for. Programmers have given this idea a fancy name:
+  "object-oriented programming". Fun fact: C++ was initially called "C with
+  Classes" for this reason.
+</BlankComp>
 
 ## What's so special about classes?
 
-A: It let them find {patterns} in their programs, so they could
-re-use pieces of code to describe them. It also allowed them to
-hide implementation {details} in parts of their program, so they
-didn't have to deal with every detail of a piece of {code} just to
-use it. This idea is called **abstraction**.
+<BlankComp
+  answers={{ c: "patterns", i: "details", m: "code" }}
+  qid="jvh2"
+  {...props}
+>
+  A: It let them find `____`[c] in their programs, so they could re-use pieces
+  of code to describe them. It also allowed them to hide implementation
+  `____`[i] in parts of their program, so they didn't have to deal with every
+  detail of a piece of `____`[m] just to use it. This idea is called
+  **abstraction**.
+</BlankComp>
 
-(Sidenote: remember when we were talking about how language can affect
-thinking? Well this was one programmers really liked to use for
+(Sidenote: remember when we were talking about how language
+can affect thinking? Well this was one programmers really liked to use for
 their thinking!)
 
 ## Today, there are hundreds of different computer languages. Is C++ still relevant?
 
-A: Speed and flexibility are always valuable. C++ has also had a
-lot of time to {mature} and for people to build {communities} around
-it to improve and learn how to use it. And some of its ideas, like classes,
-are still {fundamental} to modern day programming. Proof in the pudding:
-C and C++ are still in the top 10 most popular languages list in 2020
-([source](https://www.cleveroad.com/blog/programming-languages-ranking)).
+<BlankComp
+  answers={{ e: "mature", j: "communities", p: "fundamental" }}
+  qid="keb4"
+  {...props}
+>
+  A: Speed and flexibility are always valuable. C++ has also had a lot of time
+  to `____`[e] and for people to build `____`[j] around it to improve and learn
+  how to use it. And some of its ideas, like classes, are still `____`[p] to
+  modern day programming. Proof in the pudding: C and C++ are still in the top
+  10 most popular languages list in 2020
+  ([source](https://www.cleveroad.com/blog/programming-languages-ranking)).
+</BlankComp>
 
 ## OK, but why should I use C++ to learn fundamental programming skills?
 
-A: In your author's humble opinion, C++ is uniquely equipped to
-give you enough {high}-level programming {patterns} and {abstractions}
-while being {low}-level enough that you get a feel for what is
-really happening when you run a program. You'll gain a useful
-jumping-off point for tackling other languages in the future
-because most of them will still use the idea of classes, but
-you'll still be able to trace through the logic of what's really
-going on in a computer.
+<BlankComp
+  answers={{ b: "high", g: "patterns", k: "abstractions", n: "low" }}
+  qid="lvd6"
+  {...props}
+>
+  A: In your author's humble opinion, C++ is uniquely equipped to give you
+  enough `____`[b]-level programming `____`[g] and `____`[k] while being
+  `____`[n]-level enough that you get a feel for what is really happening when
+  you run a program. You'll gain a useful jumping-off point for tackling other
+  languages in the future because most of them will still use the idea of
+  classes, but you'll still be able to trace through the logic of what's really
+  going on in a computer.
+</BlankComp>

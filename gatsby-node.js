@@ -10,6 +10,9 @@ const path = require("path")
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
+    node: {
+      fs: "empty",
+    },
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
       // alias: {

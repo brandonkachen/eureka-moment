@@ -2,8 +2,7 @@ import React from "react"
 import reactStringReplace from "react-string-replace"
 import firebase from "components/firebase-wrapper"
 import { useObjectVal } from "react-firebase-hooks/database"
-// import thesaurus from "powerthesaurus-api"
-// import tcom from "thesaurus-com"
+import thesaurus from "thesaurus"
 
 // const handleInput = event => {
 //   console.log(event.key)
@@ -30,21 +29,26 @@ const getUserInput = event => {
 
 const compareAnswers = (userAns, correctAns) => {
   console.log(userAns, correctAns)
-  // check against dictionary for spelling & synonym
-  // thesaurus(userAns, function (err, res) {
-  //   if (err) throw err
-  //   console.log(res)
-  // })
+  const sanUserAns = userAns.toLowerCase()
+  const sanCorrectAns = correctAns.toLowerCase()
 
-  // console.log(tcom.search(userAns))
+  // check against dictionary for synonym (TODO: spelling too)
+  const synonyms = thesaurus.find(sanCorrectAns)
+  for (const syn of synonyms) {
+    if (sanUserAns === syn) {
+      // console.log("synonym match!")
+      return true
+    }
+  }
 
-  return userAns.toLowerCase() === correctAns.toLowerCase()
+  // console.log("no synonym match")
+  return sanUserAns === sanCorrectAns
 }
 
 const BlankComp = props => {
-  if (!firebase) {
-    return props.children
-  }
+  // if (!firebase) {
+  //   return props.children
+  // }
 
   const baseRef = firebase.database().ref(props.baseRef)
   const ansRef = baseRef.child("answers/" + props.qid) // tracks correctness

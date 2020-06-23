@@ -31,7 +31,8 @@
     "react-firebase-hooks": "^2.2.0",
     "react-helmet": "^6.0.0",
     "react-string-replace": "^0.4.4",
-    "roughjs": "^4.3.1"
+    "roughjs": "^4.3.1",
+    "thesaurus": "0.0.1"
   },
   "devDependencies": {
     "prettier": "2.0.5"
@@ -43,7 +44,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "deploy:dev": "GATSBY_ACTIVE_ENV=development gatsby build && firebase deploy --project dev",
+    "build:dev": "GATSBY_ACTIVE_ENV=development gatsby build",
+    "deploy:dev": "npm run build:dev && firebase deploy --project dev",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
