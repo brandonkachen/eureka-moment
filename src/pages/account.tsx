@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { PageProps, Link } from "gatsby"
 
-import firebase from "gatsby-plugin-firebase"
+import firebase from "components/firebase-wrapper"
 import { useAuthState } from "react-firebase-hooks/auth"
 
 import Layout from "components/layout"
@@ -14,6 +14,10 @@ const logout = () => {
   firebase.auth().signOut()
 }
 const CurrentUser = () => {
+  if (!firebase) {
+    return null
+  }
+
   const [user, loading, error] = useAuthState(firebase.auth())
 
   const handleSubmit = event => {

@@ -1,28 +1,37 @@
-import React, { Component } from "react"
+import React, { useContext } from "react"
 
 import Layout from "components/layout"
 import SEO from "components/seo"
-import { Link } from "gatsby"
-import { navigate } from "gatsby"
 
 import IntroMD from "./intro.mdx"
 import LessonMD from "./lesson.mdx"
 import OutroMD from "./outro.mdx"
 import Protected from "components/protected"
+import UserContext from "components/user-context"
 
-class Level1 extends Component {
-  render() {
-    return (
-      <Layout>
-        <Protected>
-          <SEO title="Level 0" />
-          <IntroMD></IntroMD>
-          <LessonMD></LessonMD>
-          <OutroMD></OutroMD>
-        </Protected>
-      </Layout>
-    )
+export const Level0 = () => {
+  const user = useContext(UserContext)
+
+  if (!user) {
+    return null
   }
+
+  const basePath = "lessons/" + user.uid + "/level0"
+
+  return (
+    <Layout>
+      <SEO title="Level 0" />
+      <IntroMD></IntroMD>
+      <LessonMD baseRef={basePath}></LessonMD>
+      <OutroMD></OutroMD>
+    </Layout>
+  )
 }
 
-export default Level1
+export default function ProtectedComp() {
+  return (
+    <Protected>
+      <Level0 />
+    </Protected>
+  )
+}
