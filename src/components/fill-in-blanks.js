@@ -1,7 +1,9 @@
 import React from "react"
 import reactStringReplace from "react-string-replace"
-import firebase from "gatsby-plugin-firebase"
+import firebase from "components/firebase-wrapper"
 import { useObjectVal } from "react-firebase-hooks/database"
+// import thesaurus from "powerthesaurus-api"
+// import tcom from "thesaurus-com"
 
 // const handleInput = event => {
 //   console.log(event.key)
@@ -26,14 +28,24 @@ const getUserInput = event => {
   return formData
 }
 
-const compareAnswers = (k, v) => {
-  console.log(k, v)
+const compareAnswers = (userAns, correctAns) => {
+  console.log(userAns, correctAns)
   // check against dictionary for spelling & synonym
+  // thesaurus(userAns, function (err, res) {
+  //   if (err) throw err
+  //   console.log(res)
+  // })
 
-  return k.toLowerCase() === v.toLowerCase()
+  // console.log(tcom.search(userAns))
+
+  return userAns.toLowerCase() === correctAns.toLowerCase()
 }
 
 const BlankComp = props => {
+  if (!firebase) {
+    return props.children
+  }
+
   const baseRef = firebase.database().ref(props.baseRef)
   const ansRef = baseRef.child("answers/" + props.qid) // tracks correctness
   const handleSubmit = event => {

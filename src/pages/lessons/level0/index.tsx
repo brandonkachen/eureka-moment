@@ -2,8 +2,6 @@ import React, { useContext } from "react"
 
 import Layout from "components/layout"
 import SEO from "components/seo"
-import { useList } from "react-firebase-hooks/database"
-import firebase from "gatsby-plugin-firebase"
 
 import IntroMD from "./intro.mdx"
 import LessonMD from "./lesson.mdx"
@@ -13,6 +11,10 @@ import UserContext from "components/user-context"
 
 export const Level0 = () => {
   const user = useContext(UserContext)
+
+  if (!user) {
+    return null
+  }
 
   const basePath = "lessons/" + user.uid + "/level0"
 

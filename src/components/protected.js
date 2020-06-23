@@ -1,11 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import firebase from "gatsby-plugin-firebase"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useObject } from "react-firebase-hooks/database"
 import { Link } from "gatsby"
 
+import firebase from "components/firebase-wrapper"
 import { UserProvider } from "components/user-context"
 import * as ROUTES from "constants/routes"
 
@@ -18,6 +18,10 @@ const errorPage = error => {
 }
 
 const Protected = ({ children }) => {
+  if (!firebase) {
+    return children
+  }
+
   const [user, loading, authError] = useAuthState(firebase.auth())
   var email = user ? user.email.replace(".", "%2E") : ""
   const [whitelist, whitelistLoading, whitelistError] = useObject(
