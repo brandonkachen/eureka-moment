@@ -16,7 +16,8 @@ export const Level0 = () => {
     return null
   }
 
-  const basePath = "lessons/" + user.uid + "/level0"
+  var email = user ? user.email.replace(".", "%2E") : ""
+  const basePath = "lessons/" + email + "/level0"
 
   return (
     <Layout>
