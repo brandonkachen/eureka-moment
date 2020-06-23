@@ -16,17 +16,23 @@ import Img from "gatsby-image"
 const Image = () => {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
+      placeholderImage: file(relativePath: { eq: "welcome.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 300) {
+          fluid(maxWidth: 1000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
     }
   `)
-
-  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+  return (
+    <>
+      <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+      <a href="https://www.freepik.com/free-photos-vectors/business">
+        Business vector created by freepik - www.freepik.com
+      </a>
+    </>
+  )
 }
 
 export default Image

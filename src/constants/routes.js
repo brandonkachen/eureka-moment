@@ -7,5 +7,8 @@ export const PASSWORD_FORGET = "/pw-forget"
 export const ADMIN = "/admin"
 export const ADMIN_DETAILS = "/admin/:id"
 
-export const LESSONS = "/lessons"
 export const TESTS = "/tests"
+
+export const LESSONS = "/lessons"
+export const LESSONS_SAMPLE = LESSONS + "/sample"
+export const LESSONS_LEVEL0 = LESSONS + "/level0"
