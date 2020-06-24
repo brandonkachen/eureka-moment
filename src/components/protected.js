@@ -19,7 +19,7 @@ const errorPage = error => {
 
 const Protected = ({ children }) => {
   if (!firebase) {
-    return children
+    return <p>building for gatsby</p>
   }
 
   const [user, loading, authError] = useAuthState(firebase.auth())
