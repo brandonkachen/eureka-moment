@@ -66,7 +66,8 @@ const BlankComp = props => {
       newhistRef.set(value)
 
       // set correctness, no history saved
-      ansRef.child(key).set(compareAnswers(value, props.answers[key]))
+      const isCorrect = compareAnswers(value, props.answers[key])
+      ansRef.child(key).set(isCorrect)
     })
   }
 
@@ -88,12 +89,31 @@ const BlankComp = props => {
         // key matches the index of the answers
         var key = blankField.match(/[a-zA-Z]+/g)
 
-        // only show answer if the user has already gotten it correct
-        return snapshot && snapshot[key] ? (
-          <mark key={i}>{props.answers[key]}</mark>
-        ) : (
-          <input type="text" name={key} key={i} />
-        )
+        var inputBoxStyle = {}
+        if (snapshot) {
+          if (snapshot[key]) {
+            // user has already gotten answer correct, show it
+            return (
+              <mark
+                key={i}
+                style={{
+                  padding: 3,
+                  backgroundColor: "MediumAquamarine",
+                  color: "Ivory",
+                }}
+              >
+                {props.answers[key]}
+              </mark>
+            )
+          }
+          // user guessed the wrong answer before
+          inputBoxStyle = {
+            border: "2px solid red",
+            borderRadius: `4px`,
+          }
+        }
+        // user hasn't guessed the right answer
+        return <input type="text" style={inputBoxStyle} name={key} key={i} />
       }
     )
   }
@@ -102,8 +122,10 @@ const BlankComp = props => {
     <div className="box">
       <form onSubmit={handleSubmit} method="post">
         {children}
-        <div className="has-text-centered">
-          <button type="submit">Submit</button>
+        <div style={{ paddingTop: `1.75rem` }} className="has-text-centered">
+          <button class="button" type="submit">
+            check
+          </button>
         </div>
       </form>
     </div>
