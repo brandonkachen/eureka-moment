@@ -24,7 +24,7 @@ export const Level0 = () => {
       <SEO title="Level 0" />
       <IntroMD></IntroMD>
       <LessonMD baseRef={basePath}></LessonMD>
-      <OutroMD></OutroMD>
+      <OutroMD baseRef={basePath}></OutroMD>
     </Layout>
   )
 }

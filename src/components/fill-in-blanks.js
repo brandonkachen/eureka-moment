@@ -28,7 +28,7 @@ const getUserInput = event => {
 }
 
 const compareAnswers = (userAns, correctAns) => {
-  console.log(userAns, correctAns)
+  // console.log(userAns, correctAns)
   const sanUserAns = userAns.toLowerCase()
   const sanCorrectAns = correctAns.toLowerCase()
 
@@ -47,7 +47,7 @@ const compareAnswers = (userAns, correctAns) => {
 
 const BlankComp = props => {
   if (!firebase) {
-    return props.children
+    return <p>building for gatsby</p>
   }
 
   const baseRef = firebase.database().ref(props.baseRef)
@@ -74,14 +74,9 @@ const BlankComp = props => {
   var children = props.children
   const [snapshot, loading, error] = useObjectVal(ansRef)
 
-  // console.log(snapshot)
-  if (loading) {
-    console.log("loading")
-  } else if (error) {
+  if (error) {
     console.log("error", error)
   } else {
-    console.log(snapshot)
-
     children = reactStringReplace(
       props.children,
       /`____`\[(.*?)\]/g,
@@ -123,7 +118,7 @@ const BlankComp = props => {
       <form onSubmit={handleSubmit} method="post">
         {children}
         <div style={{ paddingTop: `1.75rem` }} className="has-text-centered">
-          <button class="button" type="submit">
+          <button className="button" type="submit">
             check
           </button>
         </div>
