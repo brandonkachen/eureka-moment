@@ -1,276 +1,448 @@
-# Concentration Card Game
+import BlankComp from "components/fill-in-blanks"
+
+# Game Infrastructure
 
 We're going to implement a simple, popular card game called "Concentration".
 It has other names, like "Match Match" or "Memory". See
 [here](<https://en.wikipedia.org/wiki/Concentration_(card_game)>)
-for a quick explanation/refresher on how the game works.
+for a quick explanation/refresher on how the game works, and
+[here](https://www.youtube.com/watch?v=492bM_dhdR4) for a video
+describing the same game. Note: for simplicity, our version will be
+single-player, where the player will try to beat a top score.
 
 ## Task 1: Creating our deck
 
 We're going to simulate a standard deck of cards (4 suits, Ace to King, no Jokers).
-There are many ways to represent the different cards.
+There are many ways to represent the different cards. Because the most complex operation
+we're going to make with these cards is comparing them for equality, we will keep things
+simple and use strings to represent them.
 
-Because the most complex operation we're going to make with these cards is comparing
-them for equality, we will keep things simple and just use strings. If we later wanted
-to add rank/ordering for a variation of the game, we'd probably switch to something else
-like ints or doubles (challenge q: how might that look?).
+<BlankComp qid="auv3" answers={{ e: "order", j: "array" }} {...props}>
+  We now need to decide how the deck should work. Decks allow us to `____`[e]
+  the cards, so one follows another. This allows us to flip through so we can
+  shuffle or deal out the cards. We'll use an `____`[j] to represent the deck in
+  our program.
+</BlankComp>
 
-## Task 2: Create some more items
+To represent our cards, we will append the card value with the suit.
+For the card values, we'll use A, J, Q, and K for ace, jack, queen, and king respectively;
+1-10 for the rest. For the suit, we'll use D, C, H, S to represent
+diamond, club, heart, and spade respectively. Here are some example values:
 
-Ok, great. Let's create 3 more health items. We'll prefix them with `item2` and `item3`.
+- `2C`: 1 of Clubs
+- `QH`: Queen of Hearts
+- `AS`: Ace of Spades.
 
-## Task 3: Adding a new attribute
+**Task:** Create a deck that contains all 52 cards.
 
-Ok, sorry you had to go through that. Kind of painful, isn't it?
-Well I've got some more bad news for you, the bossman wants us to
-add a new attribute to each item: "timer". This is an `int` that determines
-how many turns the player can hold this item for.
-Once elapsed, it will destroy the object.
+## Task 2: Set up the gameboard
 
-Go back to each item you've created in the previous tasks and
-add a "timer" attribute with a value of 3.
+This game requires spreading out all the cards in a grid, so the player can see
+all of them at once. Our array that represents the deck isn't a great choice,
+becuase arrays are only good at storing **contiguous** data, or data that is ordered
+from beginning to end with no missing pieces anywhere.
 
-## Task 4: A better way
+This isn't ideal because we need multiple rows to represent the cards. We could keep
+track of the index and which row this would correspond with, but that is a bit complicated.
+Instead, can't we just have multiple arrays of cards?
+Kind of like mini-decks that are all laid out one after another?
 
-This... isn't a very scalable solution, is it? We've barely created 3 health potions
-and yet we've written nearly the same code 3 times! What's worse, adding a new
-attribute to them means we need to add a new line of code for each item.
+Definitely! Let's go ahead and create a few arrays to store the cards, then
+loop through each of them to display each row. Let's start small, so we
+can more easily catch any bugs in our code before we have too many arrays.
 
-The worst part is that in this program, the number of lines of code
-will grow _linearly_ to the number of items we create. That will be a nightmare
-to maintain, and typos galore!
+**Task:** Create 4 arrays that hold 3 random cards each, then output them face-up
+to the console in order so they represent a game board. Your output should look
+like this (but your card values may differ):
 
-No, there has to be a better way... introducing C++ structs! (Betcha didn't see that coming.)
-
-Structs allow us to repackage functionality that should belong to some objects (in this case,
-our items) and easily create multiple copies of them. Here's the basic syntax:
-
-```cpp
-Struct NameOfStruct {
-  public:
-    int attribute1 = 1;
-    std::string attribute2 = "test";
-    std::string attribute3 = "related to attribute 3";
-};
+```
+JC KH 2C
+AD 3S QH
+7C 10H QS
+3H 9S 6D
 ```
 
-The above code defined a struct called `NameOfStruct`. It has three **members**:
+## Task 3: Simplify the gameboard representation
 
-1. attribute1 of type `int`
-2. attribute2 of type `string`
-3. attribute3 of type `string`
+Our arrays are nice, but they can be a bit difficult to manage, especially
+if we want to allow the number of cards to be determined by the user at run-time.
+Wouldn't it be better if we just had one entity to interact with, like a "super"
+array that manages all these arrays?
 
-Members are variables and functions that {belong} to a class.
+Well fortuantely, we do have such a tool and it's called a **two-dimensional** array.
+It is an array of arrays. That probably sounds a bit confusing, but
+you can think of them as a more elegant form of what we did in the previous task:
+set up a bunch of arrays and access them. The only difference here is that we store our
+arrays inside of a single array, rather than as separate variables. This implies
+that our result is a grid, which is exactly what we want in this game.
 
-Create a `struct` of type `HealthPotion`. Add the attributes described in Task 1 as members.
+The syntax for a 2D (integer) array is:
 
-## Task 5: Creating an instance
-
-Now, let's use this struct. We can call it with the same syntax as any of our fundamental types.
-Using the sample above, I can write:
-
-```cpp
-NameOfStruct obj;
+```
+int two_d[10][20]; // 10 individual arrays, each size 20 ints.
 ```
 
-Simple, nice! I can access its members like this:
+Printing this is a little more challenging than in the previous task, as the
+arrays are not just stored in a variable you can directly call. What might
+you have to do instead?
 
-```cpp
-obj.attribute1; // calls this member, but does nothing with it
+**Task**: Re-create the gameboard using a 2D array of type string called `gameBoard`
+and print its values. Your output should remain identical to that of the previous task.
 
-std::cout << obj.attribute2 << std::endl; // prints: "test"
+## Task 4: Cleanup
+
+### Global variables
+
+In the future, we may allow the user to set the size of the game board when they
+start the game. We won't do that task right now because it'll be a fair amount
+of work and doesn't advance us forward. For now, we're happy to manually set it
+and re-compile the program.
+
+But we make our lives easier by setting the game board size in global variables
+that we can reference anywhere in our program. You can find more information
+and syntax in `level1`. We should add a global variable that stores the size
+our rows, and another for the size of each column.
+
+### Invalid game boards
+
+We should note that not all 2D arrays will result in valid game configurations
+for us. For example, a 3x3 grid would result in a card with no pair. In this case,
+our program should terminate immediately with the following message:
+
+```
+Game was not configured in a valid state.
 ```
 
-Note that we were only able to do this by
+How can we check the array to ensure the `gameBoard` configuration is valid?
 
-Create a `HealthPotion` object, called hp1 and print out its "name" member.
+### Sidenote
 
-## Task 6: Creating 100 HealthPotions _easily_
+While we're here talking about 2D arrays, we should note that we aren't limited to just
+two dimensions. Three dimensional arrays are common as well, which are represented as cubes
+or rectangular cuboids. There aren't many practical uses to more than 2 or 3 dimensions,
+and the computer memory required increases exponentially as you add more dimensions. We
+use the term **multi-dimensional arrays** to encapsulate all these types of arrays.
 
-This is great! Now we can create a bunch of HealhPotion objects and store them
-in an array, just like we'd do for other objects. Now, if we wanted to
-create 1,000 health potions instead, it's as simple as changing one variable.
-Just like our fundamental types, we can simply declare an array of our struct type:
+**Task**: Add two global variables, `GAME_ROWS` and `GAME_COLS`, to set the gameBoard's
+rows and columns, respectively. Additionally, add the check described above to ensure
+the `gameBoard` configuration is valid at runtime.
 
-```cpp
-NameOfStruct struct_array[10];
+# Gameplay
 
-// Notice the how similar this looks to the following:
-int int_array[10];
+Now let's let the user play! We need to implement:
+
+- card state (so the user doesn't see what the card is)
+- user input (so the user can match the cards)
+- game loop (to advance to the next round)
+- player turn counter (to show how many turns the user has taken thus far)
+- number of pairs left to match and number of pairs matched (to show player progress)
+
+We'll tackle these in the order presented, because each feature that we implement
+will help with the subsequent one.
+
+## Task 5: Card state
+
+Each card can be in 3 different states at any given time:
+
+1. showing (faced up so the user can see the card value and suit)
+2. hiding (faced upside down)
+3. removed from gameplay
+
+#1 is pretty self-explanatory. It looks like this, for Jack of hearts:
+
+```
+JH
 ```
 
-Create an array of 100 health potions. Then, change your code to create and hold 1000 health potions.
+#2 will look like this:
 
-## Task 7: Constructors
-
-What if some attributes are different between health potions? For example, some health
-potions should heal you more while others heal you less. Why can't we just change
-the value in the struct itself? (answer_req)
-
-At first glance, this looks impossible. Fortunately, the designers of C++ have a solution:
-**constructors**. This is a special function (or "method") that lives in structes and is responsible
-for setting it up. Here's the syntax:
-
-```cpp
-struct NameOfStruct {
-  int attribute1 = 1;
-  std::string attribute2 = "test";
-  std::string attribute3 = "related to attribute 3";
-
-  // Constructor
-  NameOfStruct(int att1) {
-    attribute1 = att1;
-  }
-};
+```
+(0,0)
 ```
 
-Notice that its name is equivalent to the _struct_'s name. This is our telltale sign that
-the method is a constructor. It also takes in an argument, like any function.
-Then, it will set the `attribute1` member to the argument it was passed, `att1`.
-Also notice that the constructor was declared last. Why is it done that way? (answer_req)
+where the numbers inside represent the location on the board, like a coordinate plane.
+Since the gameboard can be quite large (infinitely large, since it's all virtual!),
+we need to make it super easy for the user to point out one card from another
+Initially, a 3x3 game will look like this:
 
-Now, when we create this object, we'll have to pass in an argument:
-
-```cpp
-NameOfStruct obj(10); // 10 is sent to `att1` argument
-std::cout << obj.attribute1 << std::endl; // prints: 10
+```
+(0,0) (0,1) (0,2)
+(1,0) (1,1) (1,2)
+(2,0) (2,1) (2,2)
+(3,0) (3,1) (3,2)
 ```
 
-Let's add a constructor for `HealthPotion` that lets you set the `effect`.
-Don't forget to update all your `HealthPotion` objects so they
-pass in an argument for the `effect` member.
+The easiest way to imagine this is to think of the x-y plane, where x grows to the right
+and y grows downward.
 
-## Task 8: Initial timer functionality
+#3 will look like this:
 
-Let's implement the timer's functionality. To do so, we'll need to know how many
-turns have elapsed since the player has acquired the timer. In the repl, you'll
-see some unfinished code with a `turn` variable simulating turns passing by. This will
-tell us how many turns have passed.
-
-Add some code to decrement `hp`'s timer. When it hits 0, output "Health Potion has expired."
-
-## Task 9: Destructors
-
-Unfortunately, our `HealthPotion` object is still alive and kicking, even after
-it was expired. We need to delete it from the program's memory. C++ gives us this ability
-through an **operator**. Operators are keywords that are built into C++ that give us specific
-functionality. In this case, we can use the "delete" operator like this:
-
-```cpp
-delete obj;
+```
+()
 ```
 
-When C++ runs this line of code, it actually calls `obj`'s **destructor**. This is another
-special method that exists in every class, like the constructor. It is responsible
-for handling deletion events you want your object to perform when it is deleted.
-Here's the syntax for the destructor:
+This occurs when the user selects a matching pair. At that point, we want to remove
+the card from gameplay but show the user that it was removed. At the end of a successful
+3x3 game, the result will be:
 
-```cpp
-struct NameOfStruct {
-  int attribute1 = 1;
-  std::string attribute2 = "test";
-  std::string attribute3 = "related to attribute 3";
-
-  // Constructor
-  NameOfStruct(int att1) {
-    attribute1 = att1;
-  }
-
-  // Destructor
-  ~NameOfStruct() {
-    std::cout << "nooo i'm going awayyy" << std::endl;
-    std::cout << "i can still access my attributes; "
-              << "attribute1: " << attribute1;
-  }
-};
+```
+() () ()
+() () ()
+() () ()
+() () ()
 ```
 
-How is the destructor similar and different from the constructor? (answer_req)
-Notice that the destructor doesn't take in any arguments, as it only handles the
-object itself. It can still access all the members within itself.
+How do we control when a card goes into each state? To make our lives easier, let's create
+a separate 2D array that shows the state of the current _game_. In other words, this new
+array won't hold any information on the card values themselves, but rather keep track of
+what to display to the user at any given time based on the game staet.
 
-This is a great place for us to output the expired health potion's message
-that you printed in the previous task. Let's move it to the destructor and add
-a call to `delete` the object when the timer ends.
+**Task**: Implement a 2D array of type int called `gameState` that assigns a state to each card.
+The valid values are 1, 2, or 3, depending on the corresponding state explained above.
+Then to test your array, loop through `gameState` and print out what the user should see.
 
-## Task 10: Public and Private Members
+## Task 6: User Input
 
-You know, using the `HealthPotion` struct still requires a lot of knowledge about how it works.
-For example, as a programmer, you have to manually decrement the timer every single turn. You also
-need to see how many turns are left and check that after it reaches 0, the timer is deleted.
-Wouldn't it be great to not worry about that? Is there a way to set up our `HealthPotion` struct
-so that when the player picks one up, it'll just automatically disappear after 3 turns?
+Unfortunately, allowing the user to click on the card itself is beyond
+the scope of this course so our solution will need to be a little clunkier.
 
-Fortunately, **private** members can help us accomplish this! By default, struct members are
-**public**. This means they can be accessed outside of the struct. In other words, they're
-publicly available to the rest of the program. This is why the `main()` function was able to get
-and set members in the previous tasks, like the timer value or the "effect" attribute.
-Private members are the opposite; they can _only_ be accessed by members in
-their own struct.
+Since we know how to read in the user input via `std::cin`, let's have them
+pass in pairs of coordinates that inform us of the cards they want to flip over.
 
-How can this help us hide implementation details? (answer_req)
+For example, in a 3x3 game, we output the following at the beginning:
 
----
+```
+(0,0) (0,1) (0,2)
+(1,0) (1,1) (1,2)
+(2,0) (2,1) (2,2)
+(3,0) (3,1) (3,2)
 
-Let's add a new member, this time a function called "cleanup". Its job is to decrement
-the timer and see if 3 turns have elapsed. If so, it will destroy the object.
-Note: since we're now deleting the object _from within_ the struct code,
-we need to use the syntax `delete this;` instead of the object name.
-`this` is a C++ keyword that represents the object itself.
-
-Now, when we loop through the turns, the programmer can simply call the `cleanup` function
-every turn. The programmer doesn't need to know what `cleanup` does, just that in order
-to properly use this class, they must follow our rule. In fact, they don't need to know
-there's a timer at all. We can now make the timer a _private_ member, so other parts of the
-program don't see it at all. Here's an example of the syntax:
-
-```cpp
-struct NameOfStruct {
-  int attribute1 = 1;
-  std::string attribute2 = "test";
-  std::string attribute3 = "related to attribute 3";
-  std::string cleanup() {
-    return priv_att; // can still access private members.
-  }
-
-  private:
-    std::string priv_att = "this string is private";
+Enter a coordinate for the first card:
 ```
 
-In fact, just to be explicit, we can add the "public" keyword for the other members:
+The user must then respond with a coordinate like this (with parentheses):
 
-```cpp
-struct NameOfStruct {
-  public:
-    int attribute1 = 1;
-    std::string attribute2 = "test";
-    std::string attribute3 = "related to attribute 3";
-    std::string cleanup() {
-      return priv_att; // can still access private members.
-    }
-
-  private:
-    std::string priv_att = "this string is private";
+```
+(0,2)
 ```
 
-As your programs get more complex, private struct members may be useful to
-"hide" some of the functionality from the rest of your code.
-This will help simplify what other programmers need to know
-in order to use your structs.
+Next, we'll output:
 
-## Task 11: Putting it all Together
+```
+(0,0) (0,1) 4S
+(1,0) (1,1) (1,2)
+(2,0) (2,1) (2,2)
+(3,0) (3,1) (3,2)
 
-Implement the following:
+Enter a coordinate for the second card:
+```
 
-1. Create a new `HealthPotion` array that can hold up to 10 at a time.
-2. Add 2 potions to it.
-3. Take one turn.
-4. Add another potion.
-5. Take another turn.
-6. Add 5 potions.
-7. Take another turn. The first two potions should have expired.
-8. Take another turn. The third potion should have expired.
-9. Take another turn. All the other potions should have expired.
+When the user enters this second coordinate, we need to edit the `gameState`
+board. First, check the `gameBoard` array for a match between these coordinates.
+If there is a match, edit your `gameState` array to set _both_ cards to state #3.
+Otherwise, set both cards back to state #2.
 
-See how easy it is to keep track of all these objects and their attributes?
-That's the power of structs!
+**Task**: Implement the above example. Make sure to change the state of your
+`gameState` array so it displays the proper view to the user at any given time.
+
+## Task 7: Game loop
+
+Now, let's put in the basics for the full gameplay. This may sound daunting,
+but it's actually quite simple.
+
+Let's step back for a second. If we've already got one turn down, what do we
+need to do to ensure we continue to the next turn? Well, we've already got our
+`gameBoard` and `gameState` arrays set up for the next turn so those don't need
+to change. Neither does the view we present to the player, because that is only
+dependent on the previous two arrays.
+
+<BlankComp qid="bri9" answers={{ e: "run", k: "forever" }} {...props}>
+  Seems like we just need to `____`[e] the same code above again. We don't just
+  want to do this once, though, right? After all, this game could last `____`[k]
+  (poor player!) if the player doesn't match any pairs.
+</BlankComp>
+
+This means we need an infinite loop. Typically those are bad because it means your
+program is spinning out of control, but in this case, we are keeping tight control
+over it so we're ok. You can create an infinite loop in many ways; the key criteria
+is that the evaluation condition is never satisfied.
+
+Of course, we eventually need to terminate this loop if the user completes the game.
+To do this, we can add a simple `break;` statement when the winning conditions are met.
+We will do this in the later steps. For now, just exit out of the program when you test
+or write an arbitrary condition to `break` out of the infinite loop yourself.
+
+**Task**: Create two infinite loops, with different evaluation conditions. Comment
+one out and apply the other to the code you wrote in the previous task.
+
+## Task 8: Player turn counter
+
+Now that we have a functional game, we want to keep track of some metrics. Our first
+metric is the number of turns the player has taken. This is basically the player's score;
+the lower the more impressive. A turn is complete when we've taken two inputs from the user
+and checked against `gameBoard`.
+
+At any point in the game, the user should see the number of turns taken.
+It should look like this:
+
+```
+Turns taken: 8
+
+(0,0) (0,1) (0,2)
+(1,0) (1,1) (1,2)
+(2,0) (2,1) (2,2)
+(3,0) (3,1) (3,2)
+
+Enter a coordinate for the first card:
+```
+
+At the end of the game, output the following statement:
+
+```
+Congratulations, you've completed the game!
+You took x turns in total.
+```
+
+where `x` will tell the user how many turns they took.
+
+**Task**: Add an integer called `playerTurns` to count the number of turns the player
+has taken and the end-of-game outputdescribed above.
+
+## Task 9: Pairs matched and left to match
+
+To help the player easily gauge how far into the game they've reached, we need to
+tell them how many pairs they've matched and how many they have left to match.
+At any point in the game, the user should see these two counts. It should look like this:
+
+```
+Turns taken: 8. Pairs matched: 2. Pairs remaining: 4.
+
+(0,0) () (0,2)
+(1,0) (1,1) (1,2)
+() (2,1) ()
+(3,0) (3,1) ()
+
+Enter a coordinate for the first card:
+```
+
+<BlankComp qid="csq8" answers={{ d: "calculate" }} {...props}>
+  Let's use a simple variable to track the number of pairs matched. We'll update
+  it every time the player makes a match Note: we won't explicitly track the
+  pairs left because we can `____`[d] that from the pairs matched.
+</BlankComp>
+
+(Bonus: what is another way we can accomplish this task?)
+
+**Task**: Add an integer called `pairsMatched` to track the number of pairs matched
+by the user. Add text to show the number of pairs matched and left to match, as shown
+in the example above.
+
+## Task 10: Refactor
+
+Why mess with a working program? Sometimes we need to **refactor** it, or change the code
+without changing the functionality. This is an opportunity to organize the code in a better way,
+for yourself and future developers. In our case, the program is fairly simple but can benefit
+from abstracting some of the details into functions. Let's start with displaying the grid.
+
+Here's some initial code to get you started with this function:
+
+```c++
+// put this code outside the main() function
+void display(int (*arr)[GAME_ROWS][GAME_COLS]) {
+  // you can access the array like you normally
+  // would, e.g. arr[0][0]
+}
+```
+
+Later, when you call it, you'll need to add in an extra operator denoted with the `&` symbol:
+
+```c++
+int main() {
+  // somewhere in the code
+  display(&gameState);
+}
+```
+
+**Task**: Create a void function outside of `int main()` called `display` that
+takes in a parameter called `arr` that represents the game board and prints out
+the state of the game to the console. Then, have your program call it whenever
+it needs to display the game state. The game's functionality should not change.
+
+## Task 11: Pointers
+
+Did you notice the `*` in the `arr` parameter? That's not a typo; it's a C++ **pointer**.
+This is one of the coolest, most dangerous, and most unique ideas of C and C++.
+Let's tread carefully.
+
+Pointers "point" to your data by acting as little flags for a piece of data that you
+can get back to later. Think of them as tiny maps or breadcrumbs but for your program;
+when you have a pointer, you can "follow" it to get to the underlying piece of memory
+and read those values. Following a pointer is often called **dereferencing** it.
+
+That means in our code above, we weren't really copying the entire array into the `display`
+function when we passed it as a variable. We were actually copying the pointer value,
+which takes up considerably less memory. When we access a specific index in the `arr` variable
+inside `display`, we dereference the pointer and get to the array value underneath.
+
+This has huge implications. Pointers are one of the key reasons for C and C++'s
+legendary speed because they're used _everywhere_. Now, we can reach any object of any size
+just as quickly as we can reach as an int!
+
+<!--
+How does the magic work? Well, pointer _values_ are actually just memory addresses
+that look like `0x78f4eeaf3fa0` when print it out. The memory addresses tell
+C++ what part of memory we want to access. When C++ goes to that part of memory, it finds
+the value stored there and retrieves it. -->
+
+**Task**: Print out the pointer value . Remember, when you use
+
+Alas, this capability is a double-edged sword. While it unlocks high performance, this comes
+at the cost of potential instability. For the sake of speed (remember: a cornerstone of C and C++),
+C++ won't check pointers for validity before following them. If we're not careful, pointers
+could lead us to incorrect values or worse, null values. If you try to access a pointer to a null
+object, your program will experience **undefined behavior**. This means the C++ standard doesn't
+explicitly define what the program should do, so it's up to your compiler. A nice compiler
+will
+
+In our maps/breadcrumbs analogy, if we're not careful, pointers could lead us to a witch's cottage. 😬
+
+## Task 12: New primitives
+
+The code above is great, but while we're here, let's make a few easy changes to
+make our program a bit lighter on memory and sensible. For one thing, we don't
+reasonably expect the game to contain a huge number of player turns, pairs matched,
+or pairs left to match. Our card coordinates also shouldn't exceed a huge number.
+
+Well, the `int` primitive we've been using can store values between -2,147,483,648
+and 2,147,483,647. That's way more than we need! We can use the **short int**
+primitive, which will cut this range down to between -32,767 and 32,767.
+(Anyone who purposely mismatches cards for 32K turns deserves to get whatever score
+the want.) On most computer systems, short ints (or more colloquially, **shorts**)
+use less memory than ints because they represent a _shorter_ range. (Get it?)
+For those computers, we've saved a bit of memory. Nice!
+
+While we're at it, isn't it weird that we reserve so much space for negative values
+when this game really doesn't make much use of them? None of our shorts make
+sense as negatives, so why don't we turn them into **unsigned** shorts? This will
+convert our range to between 0 and 65,535.
+
+There is a caveat with using _unsigned_ values, whose full reasoning goes beyond
+the scope of this course. The main idea is that if you happen to get a negative value,
+like the following:
+
+```c++
+unsigned short int val = -1; // range: 0 to 65,535
+```
+
+C++ will **wrap around** and set `val` to 65,535. You can imagine this as a number
+circle, where 65,535 is right next to 0. If you go one step past 0 (i.e. -1), you
+will get to 65,535. Similarly, -2 results in 65,534 and so on.
+
+In light of this, you need to be very careful negative numbers can't "leak" into
+your program. In our case, it's possible that future programmers might decide to
+open up the x-y plane into negative numbers. Imagine how confused they'd be if
+they suddenly get giant positive values! For this reason, it's generally not
+recommended to use unsigned variables, even if they can make our program nicer.
+
+**Task**: Change your integers to be shorts. You can optionally set them to be unsigned
+depending on how risk-tolerant you are 😉

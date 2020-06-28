@@ -1,33 +1,32 @@
-import React, { Component } from "react"
+import React, { useContext } from "react"
 
 import Layout from "components/layout"
 import SEO from "components/seo"
 import IDEStyle from "components/mdx-styles/ide"
+import UserContext from "components/user-context"
 
 import { Link, navigate } from "gatsby"
 
 import LessonMD from "./sidebar.mdx"
 import Protected from "components/protected"
 
-class Level2 extends Component {
-  render() {
-    return (
-      <Layout styleOverride={{ maxWidth: 1400 }} mdxStyle={IDEStyle}>
-        <Protected>
-          <SEO title="Level 2" />
-          {this.lesson()}
-        </Protected>
-      </Layout>
-    )
+export const Level2Lesson = () => {
+  const user = useContext(UserContext)
+
+  if (!user) {
+    return null
   }
 
-  lesson() {
+  var email = user ? user.email.replace(".", "%2E") : ""
+  const basePath = "lessons/" + email + "/level0"
+
+  const lesson = () => {
     return (
       <div className="box">
         <div className="columns">
           <div className="column is-two-fifths">
             <div className="overflow">
-              <LessonMD></LessonMD>
+              <LessonMD baseRef={basePath}></LessonMD>
               <div className="has-text-centered">
                 <button
                   className="button is-success is-light"
@@ -54,6 +53,19 @@ class Level2 extends Component {
       </div>
     )
   }
+
+  return (
+    <Layout styleOverride={{ maxWidth: 1400 }} mdxStyle={IDEStyle}>
+      <SEO title="Level 2" />
+      {lesson()}
+    </Layout>
+  )
 }
 
-export default Level2
+export default function ProtectedLesson() {
+  return (
+    <Protected>
+      <Level2Lesson />
+    </Protected>
+  )
+}

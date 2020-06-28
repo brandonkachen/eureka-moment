@@ -9,7 +9,7 @@ import { Link, navigate } from "gatsby"
 import LessonMD from "./sidebar.mdx"
 import Protected from "components/protected"
 
-class Level3 extends Component {
+class Level3Lesson extends Component {
   render() {
     return (
       <Layout styleOverride={{ maxWidth: 1400 }} mdxStyle={IDEStyle}>
@@ -56,4 +56,4 @@ class Level3 extends Component {
   }
 }
 
-export default Level2
+export default Level3Lesson

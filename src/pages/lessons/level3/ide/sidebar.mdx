@@ -191,6 +191,49 @@ This is a great place for us to output the expired health potion's message
 that you printed in the previous task. Let's move it to the destructor and add
 a call to `delete` the object when the timer ends.
 
+### Intro to Memory allocation/deallocation
+
+As you're aware, any time you create a variable or a function, you need to store the data in
+computer memory. The process of storing into computer memory is called memory **allocation**.
+Of course, computers have finite memory, so at some point it needs to overwrite some
+parts of memory in order continue to work. The process of "releasing" memory back to the
+operating system is called memory **deallocation**.
+
+In C++, this process is almost always explicit, because it gives programmers maximal control
+over the memory usage of their programs. But so far, we haven't allocated or deallocated
+anything in our code, so what gives? Well, C++ hides some of the magic from us.
+Anytime you declare a variable, C++ knows to implicitly reserve some memory for it.
+The same is true for all other entities in C++, like functions and arrays.
+
+For example, when you write something like:
+
+```
+int p = 25
+```
+
+C++ actually runs the following:
+
+```
+int *p = new int(25);
+```
+
+There's our good friend the pointer again! When we said they're everywhere in C++,
+we really meant they were _everywhere_. This code initializes a pointer
+to the value 25 that has been type-casted as an int. Later when you use `p`, you're
+implicitly following the pointer to the underlying value, 25.
+
+Notice the use of the `new` keyword. This is how memory is allocated in C++.
+Any time you allocate memory, you as the programmer are responsible for deallocating it
+with the corresponding `delete` keyword. If you don't, the program won't let go of this
+piece of memory. If that happens, you get a **memory leak**, because your program will
+continue to sit on this memory and not release it back to the operating system.
+
+For a short program running on modern hardware, a memory leak is not a big deal. However,
+systems that run for days and weeks on end cannot afford memory leaks because they're likely
+to grow over time. If your program tries to allocate more memory than it is allowed,
+you'd better hope your OS forcibly terminates it. If not, your program may cause the entire
+computer to crash! Memory leaks are problematic
+
 ## Task 10: Public and Private Members
 
 You know, using the `HealthPotion` struct still requires a lot of knowledge about how it works.
