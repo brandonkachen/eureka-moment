@@ -337,79 +337,247 @@ Enter a coordinate for the first card:
 by the user. Add text to show the number of pairs matched and left to match, as shown
 in the example above.
 
-## Task 10: Refactor
+## Task 10: Refactor Prep
 
 Why mess with a working program? Sometimes we need to **refactor** it, or change the code
 without changing the functionality. This is an opportunity to organize the code in a better way,
 for yourself and future developers. In our case, the program is fairly simple but can benefit
-from abstracting some of the details into functions. Let's start with displaying the grid.
+from abstracting some of the details into functions. Let's first preserve our progress and
+set up a new environment for the refactor work.
 
-Here's some initial code to get you started with this function:
+**Task**: To keep your currently-functional code separate from our refactoring work,
+duplicate your `game.cpp` and rename it `refactored_game.cpp`. For all future tasks,
+use the newly created file. Additionally, edit the `main.sh` script to compile and run
+`refactored_game.cpp` rather than `game.cpp` by replacing all instances of the latter
+with the former.
+
+## Task 11: Refactor
+
+As we mentioned earlier, refactoring means abstracting parts of the program. What that really
+means is that we want to move pieces of code away from the main body of the program (in
+our case, the `int main()` function). To do this, we ask two important questions:
+
+1. Which parts of the code are naturally isolated from the rest, or should be?
+2. What does the rest of the program really need to know about a certain feature?
+
+Q1 helps us identify components and sub-components of code. This allows us to
+break our program into its most natural pieces.
+
+Q2 helps us think from the perspective of a manager of employees at a company:
+what is the least amount of detail I need in order to get the job done? A manager needs to
+know enough about what's going on to do their job properly, but not too much that they get
+buried in the nitty gritty.
+
+Applying these two questions to this program, we've come to a very clear candidate
+for refactoring: displaying the gameBoard. This functionality is pretty separate from
+the other aspects like editing the game state (Q1) and our game loop code would be cleaner
+if it could just call this function anytime it wants to display the current game
+view to the user, rather than worry about the steps required to display it (Q2).
+
+Let's refactor the display functionality! Here's some initial code to get you started.
+First, you'll need to create a separate function outside the `int main()` code:
 
 ```c++
 // put this code outside the main() function
-void display(int (*arr)[GAME_ROWS][GAME_COLS]) {
-  // you can access the array like you normally
-  // would, e.g. arr[0][0]
+void display(
+  int (*gb)[GAME_ROWS][GAME_COLS],
+  int (*gs)[GAME_ROWS][GAME_COLS]) {
+  // you can access the array `gb` here like you
+  // normally would, e.g. gb[0][0] or gs[2][1]
 }
 ```
 
-Later, when you call it, you'll need to add in an extra operator denoted with the `&` symbol:
+This function will handle showing the right view to the user. And this is how you call it:
 
 ```c++
 int main() {
-  // somewhere in the code
-  display(&gameState);
+  // somewhere in the program
+  display(&gameBoard, &gameState);
 }
 ```
+
+You may have noticed some strange extra characters like `*` or `&` in the code above; we'll
+explain what that all is in the next section. It's time to refactor!
 
 **Task**: Create a void function outside of `int main()` called `display` that
 takes in a parameter called `arr` that represents the game board and prints out
 the state of the game to the console. Then, have your program call it whenever
 it needs to display the game state. The game's functionality should not change.
 
-## Task 11: Pointers
+## Intro to Pointers
 
-Did you notice the `*` in the `arr` parameter? That's not a typo; it's a C++ **pointer**.
-This is one of the coolest, most dangerous, and most unique ideas of C and C++.
-Let's tread carefully.
+Remember the `*` in the `arr` parameter in the `display` function? That's not a typo;
+it's a C++ **pointer**. This is one of the coolest, most dangerous, and most unique
+ideas of C and C++. Let's tread carefully.
 
-Pointers "point" to your data by acting as little flags for a piece of data that you
-can get back to later. Think of them as tiny maps or breadcrumbs but for your program;
-when you have a pointer, you can "follow" it to get to the underlying piece of memory
-and read those values. Following a pointer is often called **dereferencing** it.
+At the most basic level, pointers are just memory addresses; they tell you about a location in
+computer memory, kind of like street addresses tell you about a location in the real world.
+Try printing out `gb` in your `display(...)` function. You should get something that looks
+like this: `0x78f4eeaf3fa0`. That's a memory address! This isn't terribly exciting by itself,
+and in day-to-day coding, you won't need to directly interact with these values yourself.
+
+Things get more interesting when you look at the underlying piece of memory. Like street
+addresses, memory addresses map to a location that contains some data. This is where pointers
+get their name: they "point" to your data in memory. Think of them as tiny maps or
+breadcrumbs for your program; when you have a pointer, you can "follow" it to get to the
+underlying piece of memory and read those values. This process of folliwng a pointer is
+called **dereferencing**.
 
 That means in our code above, we weren't really copying the entire array into the `display`
-function when we passed it as a variable. We were actually copying the pointer value,
-which takes up considerably less memory. When we access a specific index in the `arr` variable
+function when we passed it as a parameter. We were actually copying the pointer value,
+which is very small in comparison. When we access a specific index in the `arr` variable
 inside `display`, we dereference the pointer and get to the array value underneath.
 
-This has huge implications. Pointers are one of the key reasons for C and C++'s
-legendary speed because they're used _everywhere_. Now, we can reach any object of any size
-just as quickly as we can reach as an int!
+This has huge implications for performance. Pointers are one of the key reasons for C and C++'s
+legendary speed because they're used _everywhere_. Now, we can reach objects of any size
+just as quickly as we can reach an int!
 
-<!--
-How does the magic work? Well, pointer _values_ are actually just memory addresses
-that look like `0x78f4eeaf3fa0` when print it out. The memory addresses tell
-C++ what part of memory we want to access. When C++ goes to that part of memory, it finds
-the value stored there and retrieves it. -->
+Alas, this capability is a double-edged sword. While it unlocks high performance, this
+comes at the cost of potential instability. For the sake of speed (remember: a core
+competency of C and C++), C++ purposely won't check pointers for validity before
+following them. If we're not careful, pointers could lead us to incorrect values or worse,
+null values. If you try to access a pointer to a null object, your program will experience
+**undefined behavior**. This means the C++ standard doesn't explicitly define what the program
+should do, so it's up to your compiler. Compilers can do anything they want, like reading **garbage values**
+(a fancy way of saying useless data) or crash the program if they wanted to. The key is that,
+as the programmer, you don't know how your program will behave when compiled by an arbitrary compiler.
 
-**Task**: Print out the pointer value . Remember, when you use
+To extend our maps/breadcrumbs analogy, if we're not careful, pointers could lead us to the witch's cottage. 😬
 
-Alas, this capability is a double-edged sword. While it unlocks high performance, this comes
-at the cost of potential instability. For the sake of speed (remember: a cornerstone of C and C++),
-C++ won't check pointers for validity before following them. If we're not careful, pointers
-could lead us to incorrect values or worse, null values. If you try to access a pointer to a null
-object, your program will experience **undefined behavior**. This means the C++ standard doesn't
-explicitly define what the program should do, so it's up to your compiler. A nice compiler
-will
+## Task 12: Pointers in practice
 
-In our maps/breadcrumbs analogy, if we're not careful, pointers could lead us to a witch's cottage. 😬
+Now that we've got an initial theoretical understanding of pointers, let's see how they work
+in real C++ code. We will start with a dummy example before dissecting the the `display(...)`
+function, because 2D arrays are a bit more complex.
 
-## Task 12: New primitives
+### Basics
 
-The code above is great, but while we're here, let's make a few easy changes to
-make our program a bit lighter on memory and sensible. For one thing, we don't
+First thing's first: a pointer is represented with a pointer _type_ and a **star** (`*`)
+operator, like this:
+
+```c++
+// a pointer of type `int`,
+// pointing to nothing
+int* p = NULL;
+```
+
+Because pointers are memory addresses, when you set a pointer equal to something,
+you can't just set it to some variable or data value. Using our street address analogy from the
+previous task, that'd be like giving directions to someone by handing them pieces of the house they're
+trying to find! It just makes no sense.
+
+Instead, you need to get the memory address itself. You can do this with the handy **reference**
+operator: `&`. Here's an example:
+
+```c++
+int* p = NULL;
+
+int i = 0; // normal variable declaration
+p = &i; // we just want the memory address, not the value of i itself
+
+```
+
+When we set pointers, we need to be careful to ensure that their type match their value's type.
+For example, integer pointers should only point to integer values, float pointers to float values, etc:
+
+```c++
+int i = 0;
+int* ip = &i;
+
+float f = 0;
+float* fp = &f;
+```
+
+Similarly to primitive type conversion, if you have a mismatch, C++ will try to implicitly
+convert your pointer type to match. This usually works ok in practice, but it's better to
+control this as the programmer if possible.
+
+### Arrays
+
+Arrays in C++ are a bit of a special beast. Because they're used so often and can grow very large,
+C++ wants to make them as performant as possible. As a result, it treats arrays as pointers
+to the first item. That means:
+
+```c++
+int arr[] = { 10, 23, 1, 63 };
+
+std::cout << arr; // prints out a memory address
+
+// When we dereference the pointer,
+// we get the first element of the array
+std::cout << *arr; // prints out "10"
+```
+
+This is a pretty interesting way to interpret the concept of arrays. It means that when you
+access another array element:
+
+```c++
+int arr[] = { 10, 23, 1, 63 };
+std::cout << arr[2]; // prints out "1"
+```
+
+C++ is _actually_ performing the following steps:
+
+1. getting the memory address of the first element
+2. calculating how far to read past it to reach the correct index specified
+3. jumping to a memory address
+4. printing out the underlying integer value it finds there
+
+This is what the process looks like, as C++ code:
+
+```c++
+// 1.
+int* p = arr;
+
+// 2.
+int* q = p + 2; // code specified index 2
+
+// 3.
+int r = *q;
+
+// 4.
+std::cout << r;
+```
+
+Betcha won't ever look at arrays in the same way again!
+
+### 2D arrays
+
+Let's look at our `display(...)` function again. Here is the initial template code, as a refresher:
+
+```c++
+// put this code outside the main() function
+void display(
+  int (*gb)[GAME_ROWS][GAME_COLS],
+  int (*gs)[GAME_ROWS][GAME_COLS]) {
+  // you can access the array `gb` here like you
+  // normally would, e.g. gb[0][0] or gs[2][1]
+}
+
+int main() {
+  // somewhere in the program
+  display(&gameBoard, &gameState);
+}
+```
+
+Armed with our new knowledge, we see that our code calls the `display(...)` function
+and passes in a reference to the `gameState` array. The function immediately dereferences
+it to get `gb` and `gs`. Our previous examples were a lot simpler, what gives? Well,
+as we discussed at the beginning of this level, 2D arrays are arrays containing arrays.
+That means //TODO
+
+**Task**: Print out the pointer values for `gb` and `gs`. Add a comment that
+steps through the entire process that your program goes through when the following
+code runs inside the `display(...)` function:
+
+```c++
+std::cout << gb[0][0];
+```
+
+## Task 13: New primitives
+
+The code above looks great! While we're here, let's make a few easy changes to
+make our program a bit lighter on memory and more reasonable. For one thing, we don't
 reasonably expect the game to contain a huge number of player turns, pairs matched,
 or pairs left to match. Our card coordinates also shouldn't exceed a huge number.
 
