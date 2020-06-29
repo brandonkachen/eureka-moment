@@ -29,7 +29,7 @@ For the card values, we'll use A, J, Q, and K for ace, jack, queen, and king res
 1-10 for the rest. For the suit, we'll use D, C, H, S to represent
 diamond, club, heart, and spade respectively. Here are some example values:
 
-- `2C`: 1 of Clubs
+- `1C`: 1 of Clubs
 - `QH`: Queen of Hearts
 - `AS`: Ace of Spades.
 
@@ -380,8 +380,8 @@ First, you'll need to create a separate function outside the `int main()` code:
 ```c++
 // put this code outside the main() function
 void display(
-  int (*gb)[GAME_ROWS][GAME_COLS],
-  int (*gs)[GAME_ROWS][GAME_COLS]) {
+  int gb[GAME_ROWS][GAME_COLS],
+  int gs[GAME_ROWS][GAME_COLS]) {
   // you can access the array `gb` here like you
   // normally would, e.g. gb[0][0] or gs[2][1]
 }
@@ -392,45 +392,59 @@ This function will handle showing the right view to the user. And this is how yo
 ```c++
 int main() {
   // somewhere in the program
-  display(&gameBoard, &gameState);
+  display(gameBoard, gameState);
 }
 ```
-
-You may have noticed some strange extra characters like `*` or `&` in the code above; we'll
-explain what that all is in the next section. It's time to refactor!
 
 **Task**: Create a void function outside of `int main()` called `display` that
 takes in a parameter called `arr` that represents the game board and prints out
 the state of the game to the console. Then, have your program call it whenever
 it needs to display the game state. The game's functionality should not change.
 
-## Intro to Pointers
+## Task 12: Intro to Pointers
 
-Remember the `*` in the `arr` parameter in the `display` function? That's not a typo;
-it's a C++ **pointer**. This is one of the coolest, most dangerous, and most unique
-ideas of C and C++. Let's tread carefully.
+Say, have you ever printed out an array variable directly? If you run the following
+code inside the `display(...)` function:
 
-At the most basic level, pointers are just memory addresses; they tell you about a location in
-computer memory, kind of like street addresses tell you about a location in the real world.
-Try printing out `gb` in your `display(...)` function. You should get something that looks
-like this: `0x78f4eeaf3fa0`. That's a memory address! This isn't terribly exciting by itself,
-and in day-to-day coding, you won't need to directly interact with these values yourself.
+```c++
+std::cout << gb << std::endl;
+std::cout << gs << std::endl;
+```
 
-Things get more interesting when you look at the underlying piece of memory. Like street
-addresses, memory addresses map to a location that contains some data. This is where pointers
-get their name: they "point" to your data in memory. Think of them as tiny maps or
-breadcrumbs for your program; when you have a pointer, you can "follow" it to get to the
-underlying piece of memory and read those values. This process of folliwng a pointer is
-called **dereferencing**.
+you should see something like:
 
-That means in our code above, we weren't really copying the entire array into the `display`
-function when we passed it as a parameter. We were actually copying the pointer value,
-which is very small in comparison. When we access a specific index in the `arr` variable
-inside `display`, we dereference the pointer and get to the array value underneath.
+```
+0x28f4eeaf3fa0
+0x7ffed2f23fb0
+```
 
-This has huge implications for performance. Pointers are one of the key reasons for C and C++'s
-legendary speed because they're used _everywhere_. Now, we can reach objects of any size
-just as quickly as we can reach an int!
+Strange! What does this mean? We're glad you asked. (Well, technically, we
+asked on your behalf.)
+
+These are **memory addresses**, or a location in computer memory. They're kind
+of like street addresses that tell you about a location in the real world, only
+memory addresses tell you about locations in your computer memory. In our case,
+these values are the memory locations of the first element of each array. So that
+means `gb` is the address for the value `gb[0][0]`.
+
+Well that's weird, why would C++ do that? My my my, you've just opened Pandora's box.
+(And by you, we again mean us asking on your behalf.) To get to the heart of this question,
+we need to introduce the C++ **pointer**. This is one of the coolest, most dangerous,
+and most unique ideas of C and C++. Let's tread carefully.
+
+Pointers get their name from the fact that they "point" to your data in memory.
+Think of them as tiny maps or breadcrumbs for your program. In the real world, you
+can follow a map to find a house. When you have a pointer, you can "follow" it to get to
+the underlying piece of memory and read those values. This process is called **dereferencing**.
+
+That means in our code above, we weren't really copying the entire array into the
+`display` function when we passed it as a parameter. We were actually copying a
+_pointer_, which is very small in comparison. If we access `gb[0][0]`, C++ dereferences
+the pointer and gets the array value underneath.
+
+This has huge implications for performance. Pointers are one of the key reasons for
+C and C++'s legendary speed because they're used _everywhere_. Now, we can reach objects
+of any size just as quickly as we can reach an int!
 
 Alas, this capability is a double-edged sword. While it unlocks high performance, this
 comes at the cost of potential instability. For the sake of speed (remember: a core
@@ -438,11 +452,16 @@ competency of C and C++), C++ purposely won't check pointers for validity before
 following them. If we're not careful, pointers could lead us to incorrect values or worse,
 null values. If you try to access a pointer to a null object, your program will experience
 **undefined behavior**. This means the C++ standard doesn't explicitly define what the program
-should do, so it's up to your compiler. Compilers can do anything they want, like reading **garbage values**
-(a fancy way of saying useless data) or crash the program if they wanted to. The key is that,
-as the programmer, you don't know how your program will behave when compiled by an arbitrary compiler.
+should do, so it's up to your compiler. Compilers can do anything they want, like reading
+**garbage values** (a fancy way of saying useless data) or crash the program if they wanted to.
+The key is that, as the programmer, you don't know how your program will behave when compiled by
+an arbitrary compiler.
 
 To extend our maps/breadcrumbs analogy, if we're not careful, pointers could lead us to the witch's cottage. 😬
+
+**Task**: Print out the pointer values for `gb` and `gs`. You should see values like the ones above,
+but they likely won't be the exact same. That's because your computer system is using its memory
+differently from ours when we ran that code.
 
 ## Task 12: Pointers in practice
 
@@ -473,7 +492,7 @@ operator: `&`. Here's an example:
 int* p = NULL;
 
 int i = 0; // normal variable declaration
-p = &i; // we just want the memory address, not the value of i itself
+p = &i; // get i's memory address, not its value
 
 ```
 
@@ -527,16 +546,16 @@ This is what the process looks like, as C++ code:
 
 ```c++
 // 1.
-int* p = arr;
+int* p = arr; // get `arr`
 
 // 2.
-int* q = p + 2; // code specified index 2
+int* q = p + 2; // shift to the right array index
 
 // 3.
-int r = *q;
+int r = *q; // dereference to get the value
 
 // 4.
-std::cout << r;
+std::cout << r; // print it out
 ```
 
 Betcha won't ever look at arrays in the same way again!
@@ -548,30 +567,35 @@ Let's look at our `display(...)` function again. Here is the initial template co
 ```c++
 // put this code outside the main() function
 void display(
-  int (*gb)[GAME_ROWS][GAME_COLS],
-  int (*gs)[GAME_ROWS][GAME_COLS]) {
+  int gb[GAME_ROWS][GAME_COLS],
+  int gs[GAME_ROWS][GAME_COLS]) {
   // you can access the array `gb` here like you
   // normally would, e.g. gb[0][0] or gs[2][1]
 }
 
 int main() {
   // somewhere in the program
-  display(&gameBoard, &gameState);
+  display(gameBoard, gameState);
 }
 ```
 
-Armed with our new knowledge, we see that our code calls the `display(...)` function
-and passes in a reference to the `gameState` array. The function immediately dereferences
-it to get `gb` and `gs`. Our previous examples were a lot simpler, what gives? Well,
-as we discussed at the beginning of this level, 2D arrays are arrays containing arrays.
-That means //TODO
+Armed with our new knowledge, we know that the code above calls the `display(...)` function
+and passes in a pointer to the `gameBoard` and `gameState` arrays. As we discussed at the
+beginning of this level, 2D arrays are arrays containing an array.
 
-**Task**: Print out the pointer values for `gb` and `gs`. Add a comment that
-steps through the entire process that your program goes through when the following
-code runs inside the `display(...)` function:
+That means when we access an element like `gb[1][0]`, we follow the steps outlined above
+in the `Arrays` section but do it twice. On our first iteration, we get `gb[1]`, which is
+actually the memory address for the second array. Then, we treat this like a normal array and repeat
+our steps to get to the underlying value.
+
+Multi-dimensional arrays work in the same way, but obviously require as many iterations
+as there are dimensions.
+
+**Task**: Add a comment that steps through the entire process that your program
+goes through when the following code runs inside the `display(...)` function:
 
 ```c++
-std::cout << gb[0][0];
+std::cout << gb[1][0];
 ```
 
 ## Task 13: New primitives
