@@ -1,0 +1,317 @@
+## Task 1: Create an item
+
+Items have a few attributes:
+
+- name (string)
+- description (string)
+- effect (string)
+- rarity (int)
+
+Let's go ahead and create these attributes to describe one item.
+Its name will be "health_potion", description will be "heals the player 10 points",
+effect will be "+ 10 hp", and rarity will be "2".
+
+Fill out the blanks for Task 1 in `main.cpp`. We now have a health potion item!
+
+## Task 2: Create some more items
+
+Ok, great. Let's create 3 more health items. We'll prefix them with `item2` and `item3`.
+
+## Task 3: Adding a new attribute
+
+Ok, sorry you had to go through that. Kind of painful, isn't it?
+Well I've got some more bad news for you, the bossman wants us to
+add a new attribute to each item: "timer". This is an `int` that determines
+how many turns the player can hold this item for.
+Once elapsed, it will destroy the object.
+
+Go back to each item you've created in the previous tasks and
+add a "timer" attribute with a value of 3.
+
+## Task 4: A better way
+
+This... isn't a very scalable solution, is it? We've barely created 3 health potions
+and yet we've written nearly the same code 3 times! What's worse, adding a new
+attribute to them means we need to add a new line of code for each item.
+
+The worst part is that in this program, the number of lines of code
+will grow _linearly_ to the number of items we create. That will be a nightmare
+to maintain, and typos galore!
+
+No, there has to be a better way... introducing C++ structs! (Betcha didn't see that coming.)
+
+Structs allow us to repackage functionality that should belong to some objects (in this case,
+our items) and easily create multiple copies of them. Here's the basic syntax:
+
+```cpp
+Struct NameOfStruct {
+  public:
+    int attribute1 = 1;
+    std::string attribute2 = "test";
+    std::string attribute3 = "related to attribute 3";
+};
+```
+
+The above code defined a struct called `NameOfStruct`. It has three **members**:
+
+1. attribute1 of type `int`
+2. attribute2 of type `string`
+3. attribute3 of type `string`
+
+Members are variables and functions that {belong} to a class.
+
+Create a `struct` of type `HealthPotion`. Add the attributes described in Task 1 as members.
+
+## Task 5: Creating an instance
+
+Now, let's use this struct. We can call it with the same syntax as any of our fundamental types.
+Using the sample above, I can write:
+
+```cpp
+NameOfStruct obj;
+```
+
+Simple, nice! I can access its members like this:
+
+```cpp
+obj.attribute1; // calls this member, but does nothing with it
+
+std::cout << obj.attribute2 << std::endl; // prints: "test"
+```
+
+Note that we were only able to do this by
+
+Create a `HealthPotion` object, called hp1 and print out its "name" member.
+
+## Task 6: Creating 100 HealthPotions _easily_
+
+This is great! Now we can create a bunch of HealhPotion objects and store them
+in an array, just like we'd do for other objects. Now, if we wanted to
+create 1,000 health potions instead, it's as simple as changing one variable.
+Just like our fundamental types, we can simply declare an array of our struct type:
+
+```cpp
+NameOfStruct struct_array[10];
+
+// Notice the how similar this looks to the following:
+int int_array[10];
+```
+
+Create an array of 100 health potions. Then, change your code to create and hold 1000 health potions.
+
+## Task 7: Constructors
+
+What if some attributes are different between health potions? For example, some health
+potions should heal you more while others heal you less. Why can't we just change
+the value in the struct itself? (answer_req)
+
+At first glance, this looks impossible. Fortunately, the designers of C++ have a solution:
+**constructors**. This is a special function (or "method") that lives in structes and is responsible
+for setting it up. Here's the syntax:
+
+```cpp
+struct NameOfStruct {
+  int attribute1 = 1;
+  std::string attribute2 = "test";
+  std::string attribute3 = "related to attribute 3";
+
+  // Constructor
+  NameOfStruct(int att1) {
+    attribute1 = att1;
+  }
+};
+```
+
+Notice that its name is equivalent to the _struct_'s name. This is our telltale sign that
+the method is a constructor. It also takes in an argument, like any function.
+Then, it will set the `attribute1` member to the argument it was passed, `att1`.
+Also notice that the constructor was declared last. Why is it done that way? (answer_req)
+
+Now, when we create this object, we'll have to pass in an argument:
+
+```cpp
+NameOfStruct obj(10); // 10 is sent to `att1` argument
+std::cout << obj.attribute1 << std::endl; // prints: 10
+```
+
+Let's add a constructor for `HealthPotion` that lets you set the `effect`.
+Don't forget to update all your `HealthPotion` objects so they
+pass in an argument for the `effect` member.
+
+## Task 8: Initial timer functionality
+
+Let's implement the timer's functionality. To do so, we'll need to know how many
+turns have elapsed since the player has acquired the timer. In the repl, you'll
+see some unfinished code with a `turn` variable simulating turns passing by. This will
+tell us how many turns have passed.
+
+Add some code to decrement `hp`'s timer. When it hits 0, output "Health Potion has expired."
+
+## Task 9: Destructors
+
+Unfortunately, our `HealthPotion` object is still alive and kicking, even after
+it was expired. We need to delete it from the program's memory. C++ gives us this ability
+through an **operator**. Operators are keywords that are built into C++ that give us specific
+functionality. In this case, we can use the "delete" operator like this:
+
+```cpp
+delete obj;
+```
+
+When C++ runs this line of code, it actually calls `obj`'s **destructor**. This is another
+special method that exists in every class, like the constructor. It is responsible
+for handling deletion events you want your object to perform when it is deleted.
+Here's the syntax for the destructor:
+
+```cpp
+struct NameOfStruct {
+  int attribute1 = 1;
+  std::string attribute2 = "test";
+  std::string attribute3 = "related to attribute 3";
+
+  // Constructor
+  NameOfStruct(int att1) {
+    attribute1 = att1;
+  }
+
+  // Destructor
+  ~NameOfStruct() {
+    std::cout << "nooo i'm going awayyy" << std::endl;
+    std::cout << "i can still access my attributes; "
+              << "attribute1: " << attribute1;
+  }
+};
+```
+
+How is the destructor similar and different from the constructor? (answer_req)
+Notice that the destructor doesn't take in any arguments, as it only handles the
+object itself. It can still access all the members within itself.
+
+This is a great place for us to output the expired health potion's message
+that you printed in the previous task. Let's move it to the destructor and add
+a call to `delete` the object when the timer ends.
+
+### Intro to Memory allocation/deallocation
+
+As you're aware, any time you create a variable or a function, you need to store the data in
+computer memory. The process of storing into computer memory is called memory **allocation**.
+Of course, computers have finite memory, so at some point it needs to overwrite some
+parts of memory in order continue to work. The process of "releasing" memory back to the
+operating system is called memory **deallocation**.
+
+In C++, this process is almost always explicit, because it gives programmers maximal control
+over the memory usage of their programs. But so far, we haven't allocated or deallocated
+anything in our code, so what gives? Well, C++ hides some of the magic from us.
+Anytime you declare a variable, C++ knows to implicitly reserve some memory for it.
+The same is true for all other entities in C++, like functions and arrays.
+
+For example, when you write something like:
+
+```
+int p = 25
+```
+
+C++ actually runs the following:
+
+```
+int *p = new int(25);
+```
+
+There's our good friend the pointer again! When we said they're everywhere in C++,
+we really meant they were _everywhere_. This code initializes a pointer
+to the value 25 that has been type-casted as an int. Later when you use `p`, you're
+implicitly following the pointer to the underlying value, 25.
+
+Notice the use of the `new` keyword. This is how memory is allocated in C++.
+Any time you allocate memory, you as the programmer are responsible for deallocating it
+with the corresponding `delete` keyword. If you don't, the program won't let go of this
+piece of memory. If that happens, you get a **memory leak**, because your program will
+continue to sit on this memory and not release it back to the operating system.
+
+For a short program running on modern hardware, a memory leak is not a big deal. However,
+systems that run for days and weeks on end cannot afford memory leaks because they're likely
+to grow over time. If your program tries to allocate more memory than it is allowed,
+you'd better hope your OS forcibly terminates it. If not, your program may cause the entire
+computer to crash! Memory leaks are problematic
+
+## Task 10: Public and Private Members
+
+You know, using the `HealthPotion` struct still requires a lot of knowledge about how it works.
+For example, as a programmer, you have to manually decrement the timer every single turn. You also
+need to see how many turns are left and check that after it reaches 0, the timer is deleted.
+Wouldn't it be great to not worry about that? Is there a way to set up our `HealthPotion` struct
+so that when the player picks one up, it'll just automatically disappear after 3 turns?
+
+Fortunately, **private** members can help us accomplish this! By default, struct members are
+**public**. This means they can be accessed outside of the struct. In other words, they're
+publicly available to the rest of the program. This is why the `main()` function was able to get
+and set members in the previous tasks, like the timer value or the "effect" attribute.
+Private members are the opposite; they can _only_ be accessed by members in
+their own struct.
+
+How can this help us hide implementation details? (answer_req)
+
+---
+
+Let's add a new member, this time a function called "cleanup". Its job is to decrement
+the timer and see if 3 turns have elapsed. If so, it will destroy the object.
+Note: since we're now deleting the object _from within_ the struct code,
+we need to use the syntax `delete this;` instead of the object name.
+`this` is a C++ keyword that represents the object itself.
+
+Now, when we loop through the turns, the programmer can simply call the `cleanup` function
+every turn. The programmer doesn't need to know what `cleanup` does, just that in order
+to properly use this class, they must follow our rule. In fact, they don't need to know
+there's a timer at all. We can now make the timer a _private_ member, so other parts of the
+program don't see it at all. Here's an example of the syntax:
+
+```cpp
+struct NameOfStruct {
+  int attribute1 = 1;
+  std::string attribute2 = "test";
+  std::string attribute3 = "related to attribute 3";
+  std::string cleanup() {
+    return priv_att; // can still access private members.
+  }
+
+  private:
+    std::string priv_att = "this string is private";
+```
+
+In fact, just to be explicit, we can add the "public" keyword for the other members:
+
+```cpp
+struct NameOfStruct {
+  public:
+    int attribute1 = 1;
+    std::string attribute2 = "test";
+    std::string attribute3 = "related to attribute 3";
+    std::string cleanup() {
+      return priv_att; // can still access private members.
+    }
+
+  private:
+    std::string priv_att = "this string is private";
+```
+
+As your programs get more complex, private struct members may be useful to
+"hide" some of the functionality from the rest of your code.
+This will help simplify what other programmers need to know
+in order to use your structs.
+
+## Task 11: Putting it all Together
+
+Implement the following:
+
+1. Create a new `HealthPotion` array that can hold up to 10 at a time.
+2. Add 2 potions to it.
+3. Take one turn.
+4. Add another potion.
+5. Take another turn.
+6. Add 5 potions.
+7. Take another turn. The first two potions should have expired.
+8. Take another turn. The third potion should have expired.
+9. Take another turn. All the other potions should have expired.
+
+See how easy it is to keep track of all these objects and their attributes?
+That's the power of structs!

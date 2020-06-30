@@ -9,12 +9,12 @@ import { Link, navigate } from "gatsby"
 import LessonMD from "./sidebar.mdx"
 import Protected from "components/protected"
 
-class Level1Lesson extends Component {
+class Level3Lesson extends Component {
   render() {
     return (
       <Layout styleOverride={{ maxWidth: 1400 }} mdxStyle={IDEStyle}>
         <Protected>
-          <SEO title="Level 1" />
+          <SEO title="Level 3" />
           {this.lesson()}
         </Protected>
       </Layout>
@@ -32,7 +32,7 @@ class Level1Lesson extends Component {
                 <button
                   className="button is-success is-light"
                   onClick={() =>
-                    navigate("/lessons/level1", {
+                    navigate("/lessons/level3", {
                       state: { completed: true },
                     })
                   }
@@ -44,10 +44,10 @@ class Level1Lesson extends Component {
           </div>
           <div className="column">
             <iframe
-              title="repl level1"
+              title="repl level3"
               width="100%"
               height="100%"
-              src="https://repl.it/@brandonchen95/eureka-moment-level1?lite=true"
+              src="https://repl.it/@brandonchen95/eureka-moment-level3?lite=true"
             ></iframe>
           </div>
         </div>
@@ -56,4 +56,4 @@ class Level1Lesson extends Component {
   }
 }
 
-export default Level1Lesson
+export default Level3Lesson
