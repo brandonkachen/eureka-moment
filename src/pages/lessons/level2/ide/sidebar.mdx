@@ -103,6 +103,13 @@ that we can reference anywhere in our program. You can find more information
 and syntax in `level1`. We should add a global variable that stores the size
 our rows, and another for the size of each column.
 
+Beware: C++ may fail to compile if you just declare a variable and use it in an array,
+because it is worried you may change this variable later in the program. Since
+arrays cannot be re-sized after being created, C++ will get mad at you. We can fix
+this easily enough by appending the keyword `const` in front of the variable; this
+tells C++ we promise not to change it later (and you'd better believe it'll complain
+if we break that promise).
+
 ### Invalid game boards
 
 We should note that not all 2D arrays will result in valid game configurations
@@ -241,6 +248,16 @@ When the user enters this second coordinate, we need to edit the `gameState`
 board. First, check the `gameBoard` array for a match between these coordinates.
 If there is a match, edit your `gameState` array to set _both_ cards to state #3.
 Otherwise, set both cards back to state #2.
+
+If you're unfamiliar with how to clear the terminal screen (so we can redraw
+the board and move the game forward), here's a handy function for you:
+
+```c++
+std::system("clear");
+
+// we're on a clear screen now
+std::cout << "Empty Screen!";
+```
 
 **Task**: Implement the above example. Make sure to change the state of your
 `gameState` array so it displays the proper view to the user at any given time.

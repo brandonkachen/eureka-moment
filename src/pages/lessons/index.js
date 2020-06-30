@@ -19,21 +19,13 @@ const IndexPage = () => (
         <li>
           <Link to={ROUTES.LESSONS_LEVEL0}>Level 0</Link>
         </li>
+        <li>
+          <Link to={ROUTES.LESSONS_LEVEL1}>Level 1</Link>
+        </li>
+        <li>
+          <Link to={ROUTES.LESSONS_LEVEL2}>Level 2</Link>
+        </li>
       </ul>
-      <p>
-        <span class="emoji" role="img" aria-label="construction-sign">
-          🚧🚧🚧
-        </span>
-      </p>
-      <p>
-        This page will used to list the lessons users can access, but it is
-        under construction right now. Please check back later.{" "}
-      </p>
-      <p>
-        <span class="emoji" role="img" aria-label="construction-sign">
-          🚧🚧🚧
-        </span>
-      </p>{" "}
     </Protected>
   </Layout>
 )
