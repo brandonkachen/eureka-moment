@@ -25,6 +25,9 @@ const IndexPage = () => (
         <li>
           <Link to={ROUTES.LESSONS_LEVEL2}>Level 2</Link>
         </li>
+        <li>
+          <Link to={ROUTES.LESSONS_LEVEL3}>Level 3</Link>
+        </li>
       </ul>
     </Protected>
   </Layout>
