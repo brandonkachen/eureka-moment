@@ -18,7 +18,7 @@ export const Level2Lesson = () => {
   }
 
   var email = user ? user.email.replace(".", "%2E") : ""
-  const basePath = "lessons/" + email + "/level0"
+  const basePath = "lessons/" + email + "/level2"
 
   const lesson = () => {
     return (
@@ -32,7 +32,7 @@ export const Level2Lesson = () => {
                   className="button is-success is-light"
                   onClick={() =>
                     navigate("/lessons/level2", {
-                      state: { completed: true },
+                      state: { completed: true, baseRef: basePath },
                     })
                   }
                 >
