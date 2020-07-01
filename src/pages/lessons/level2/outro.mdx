@@ -2,11 +2,14 @@ import FreeRespComp from "components/free-response"
 
 # Summary
 
-This level introduced us to multi-dimensional arrays, controlled infinite loops,
-pointers, and new primitives. But the more important thing: we built a game from scratch!
-Not hard to see us rewriting this for an app, slapping a \$1.99 label on it,
-and making 💰💰💰 on the App Store! Just kidding, but congrats on building your
-first C++ game from scratch. 🎉
+This level introduced us to some advanced features of C++. We learned about:
+
+- multi-dimensional arrays,
+- controlled infinite loops,
+- pointers and references
+- uncommon primitive types.
+
+But the more important thing: we made the Concentration card game from scratch! 🎉
 
 # Review
 
@@ -16,7 +19,7 @@ Answer the following questions:
 
 <FreeRespComp qid="vaj0" {...props}></FreeRespComp>
 
-2. List all the high-level steps that C++ takes when you access an item from a 2D array.
+2. List all the high-level steps that C++ takes when you access an item in a 2D array.
    You can write them out using C++ code or just list the steps, but be specific.
 
 <FreeRespComp qid="wqu9" {...props}></FreeRespComp>
@@ -26,19 +29,21 @@ Answer the following questions:
 
 <FreeRespComp qid="xaf4" {...props}></FreeRespComp>
 
-# Challenge
+# Challenge Questions
 
-1. In this level, we used strings to represent our cards, e.g "Ace of Hearts", because we
-   only needed to compare them for equality. What if we changed the rules so a player can
-   take away a pair of cards _only if_ the first one flipped was less than the second one in value
-   (Ace, Jack, Queen, King = 1, 11, 12, 13 respectively)? In other words, if first_card ≥ second_card,
-   you can't take them out. How would this make our chosen format to represent the cards harder to
-   write code for? What can we do instead, to make our lives easier?
+1. In this level, we used strings to represent our cards (e.g "AH" for Ace of Hearts)
+   because we only needed to compare them for equality. What if we changed the rules
+   so a player can take away a pair of cards _only if_ the first one flipped was less
+   than the second one in value (Ace, Jack, Queen, King = 1, 11, 12, 13 respectively)?
+   In other words, if first_card ≥ second_card, you cannot take them out.
+   How would our card format make this functionality harder to implement?
+   What would be an alternative, more flexible card format?
 
 <FreeRespComp qid="xws8" {...props}></FreeRespComp>
 
-2. The following is an alternative version of the `display(...)` function. Note the explicit use of pointers and references.
-   If you replaced your code with this alternative, would your program compile and perform identically to your current version?
+2. The following code snippet is an alternative version of the `display(...)` function.
+   Note the explicit use of pointers and references. If you replaced your code with this
+   alternative, would your program compile and perform identically to your current version?
    Why or why not? Don't run this code, just reason through it and explain your thinking.
 
 ```c++
@@ -60,11 +65,12 @@ Answer the following questions:
 
 You don't need to implement these ideas, but if you have some spare time/energy, feel free
 to come back to this section and work on some of these ideas. Even just _thinking_ about how
-you might implement some of these features would help you grow your C++ skills!
+you might implement some of these features will help improve your C++ skills!
 
-1. A shuffle feature to make this game more replay-able.
-2. A leaderboard, based on the fewest number of moves for a grid size
-3. Multi-player support
+1. A "replay" feature to restart the game.
+2. A shuffle feature to make this game more fun to replay.
+3. A leaderboard, based on the fewest number of moves for a grid size
+4. Multi-player support
 
 ---
 

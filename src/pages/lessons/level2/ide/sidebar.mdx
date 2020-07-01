@@ -7,8 +7,7 @@ It has other names, like "Match Match" or "Memory". See
 [here](<https://en.wikipedia.org/wiki/Concentration_(card_game)>)
 for a quick explanation/refresher on how the game works, and
 [here](https://www.youtube.com/watch?v=492bM_dhdR4) for a video
-describing the same game. Note: for simplicity, our version will be
-single-player, where the player will try to beat a top score.
+describing the same game. Note: for simplicity, our version will be single-player.
 
 ## Task 1: Creating our deck
 
@@ -17,11 +16,12 @@ There are many ways to represent the different cards. Because the most complex o
 we're going to make with these cards is comparing them for equality, we will keep things
 simple and use strings to represent them.
 
+### How should we represent a deck of cards?
+
 <BlankComp qid="auv3" answers={{ e: "order", j: "array" }} {...props}>
-  We now need to decide how the deck should work. Decks allow us to `____`[e]
-  the cards, so one follows another. This allows us to flip through so we can
-  shuffle or deal out the cards. We'll use an `____`[j] to represent the deck in
-  our program.
+  Decks allow us to `____`[e] the cards, so one follows another. This allows us
+  to flip through so we can shuffle or deal out the cards. We'll use an
+  `____`[j] to represent the deck in our program.
 </BlankComp>
 
 To represent our cards, we will append the card value with the suit.
@@ -38,9 +38,9 @@ diamond, club, heart, and spade respectively. Here are some example values:
 ## Task 2: Set up the gameboard
 
 This game requires spreading out all the cards in a grid, so the player can see
-all of them at once. Our array that represents the deck isn't a great choice,
-becuase arrays are only good at storing **contiguous** data, or data that is ordered
-from beginning to end with no missing pieces anywhere.
+all of them at once. This grid will be our gameboard. Our array that represents
+the deck isn't a great choice, becuase arrays are only good at storing **contiguous** data,
+or data that is ordered from beginning to end with no missing pieces anywhere.
 
 This isn't ideal because we need multiple rows to represent the cards. We could keep
 track of the index and which row this would correspond with, but that is a bit complicated.
@@ -62,24 +62,28 @@ AD 3S QH
 3H 9S 6D
 ```
 
+You may pull random cards from your deck, or just input them manually.
+
 ## Task 3: Simplify the gameboard representation
 
 Our arrays are nice, but they can be a bit difficult to manage, especially
-if we want to allow the number of cards to be determined by the user at run-time.
-Wouldn't it be better if we just had one entity to interact with, like a "super"
+if we increase the gameboard to a large number. Imagine having to create and track
+10 or 15 arrays! If we did that, we'd probably have to hold each array in
+an array... wait a minute, is it possible to have a "super"
 array that manages all these arrays?
 
-Well fortuantely, we do have such a tool and it's called a **two-dimensional** array.
+Rhetorical, but yes, we do have such a tool and it's called a **two-dimensional** array.
 It is an array of arrays. That probably sounds a bit confusing, but
 you can think of them as a more elegant form of what we did in the previous task:
-set up a bunch of arrays and access them. The only difference here is that we store our
-arrays inside of a single array, rather than as separate variables. This implies
-that our result is a grid, which is exactly what we want in this game.
+set up a bunch of arrays and access them directly. The only difference here is that
+we store our arrays inside of a single array, rather than as separate variables.
+This implies that our result is a grid, which is exactly what we want in this game.
 
 The syntax for a 2D (integer) array is:
 
-```
-int two_d[10][20]; // 10 individual arrays, each size 20 ints.
+```c++
+// 10 individual arrays, each size 20 ints.
+int two_d[10][20];
 ```
 
 Printing this is a little more challenging than in the previous task, as the
@@ -93,14 +97,9 @@ and print its values. Your output should remain identical to that of the previou
 
 ### Global variables
 
-In the future, we may allow the user to set the size of the game board when they
-start the game. We won't do that task right now because it'll be a fair amount
-of work and doesn't advance us forward. For now, we're happy to manually set it
-and re-compile the program.
-
-But we make our lives easier by setting the game board size in global variables
-that we can reference anywhere in our program. You can find more information
-and syntax in `level1`. We should add a global variable that stores the size
+Let's make our lives easier by setting the game board size in global variables
+that we can reference anywhere in our program. You can find more information on global
+variables and syntax in `level1`. We should add a global variable that stores the size
 our rows, and another for the size of each column.
 
 Beware: C++ may fail to compile if you just declare a variable and use it in an array,
@@ -120,12 +119,13 @@ our program should terminate immediately with the following message:
 Game was not configured in a valid state.
 ```
 
-How can we check the array to ensure the `gameBoard` configuration is valid?
+We need to check to ensure the `gameBoard` configuration is valid, or the game will
+never end! How can we figure this out before starting the game?
 
 ### Sidenote
 
 While we're here talking about 2D arrays, we should note that we aren't limited to just
-two dimensions. Three dimensional arrays are common as well, which are represented as cubes
+two dimensions. Three dimensional arrays are common as well, which can be thought of as cubes
 or rectangular cuboids. There aren't many practical uses to more than 2 or 3 dimensions,
 and the computer memory required increases exponentially as you add more dimensions. We
 use the term **multi-dimensional arrays** to encapsulate all these types of arrays.
@@ -170,7 +170,7 @@ JH
 where the numbers inside represent the location on the board, like a coordinate plane.
 Since the gameboard can be quite large (infinitely large, since it's all virtual!),
 we need to make it super easy for the user to point out one card from another
-Initially, a 3x3 game will look like this:
+Initially, a 4x3 game will look like this:
 
 ```
 (0,0) (0,1) (0,2)
@@ -190,7 +190,7 @@ and y grows downward.
 
 This occurs when the user selects a matching pair. At that point, we want to remove
 the card from gameplay but show the user that it was removed. At the end of a successful
-3x3 game, the result will be:
+4x3 game, the result will be:
 
 ```
 () () ()
@@ -201,12 +201,12 @@ the card from gameplay but show the user that it was removed. At the end of a su
 
 How do we control when a card goes into each state? To make our lives easier, let's create
 a separate 2D array that shows the state of the current _game_. In other words, this new
-array won't hold any information on the card values themselves, but rather keep track of
-what to display to the user at any given time based on the game staet.
+array won't hold any information on the card values themselves, but instead keep track of
+what to display to the user at any given time, based on the game state.
 
 **Task**: Implement a 2D array of type int called `gameState` that assigns a state to each card.
 The valid values are 1, 2, or 3, depending on the corresponding state explained above.
-Then to test your array, loop through `gameState` and print out what the user should see.
+Then test your array by looping through `gameState` and print out what the user should see.
 
 ## Task 6: User Input
 
@@ -224,16 +224,29 @@ For example, in a 3x3 game, we output the following at the beginning:
 (2,0) (2,1) (2,2)
 (3,0) (3,1) (3,2)
 
-Enter a coordinate for the first card:
+Enter the x coordinate for the first card guess:
 ```
 
-The user must then respond with a coordinate like this (with parentheses):
+The user must then respond with the x-coordinate (just an int):
 
 ```
-(0,2)
+0
 ```
 
-Next, we'll output:
+We'll output:
+
+```
+(0,0) (0,1) (0,2)
+(1,0) (1,1) (1,2)
+(2,0) (2,1) (2,2)
+(3,0) (3,1) (3,2)
+
+Enter the y coordinate for the first card guess:
+```
+
+The user will again respond with an integer describing the y coordinate.
+At this point, we'll edit the `gameState` array to set the coordinate selected by the user
+to #1, or "showing". Then, we'll output:
 
 ```
 (0,0) (0,1) 4S
@@ -241,16 +254,27 @@ Next, we'll output:
 (2,0) (2,1) (2,2)
 (3,0) (3,1) (3,2)
 
-Enter a coordinate for the second card:
+Enter the x coordinate for the second card guess:
 ```
 
-When the user enters this second coordinate, we need to edit the `gameState`
-board. First, check the `gameBoard` array for a match between these coordinates.
-If there is a match, edit your `gameState` array to set _both_ cards to state #3.
+We will do this once more for the y coordinate:
+
+```
+(0,0) (0,1) 4S
+(1,0) (1,1) (1,2)
+(2,0) (2,1) (2,2)
+(3,0) (3,1) (3,2)
+
+Enter the y coordinate for the second card guess:
+```
+
+When the user enters the y coordinate, we need to edit the `gameState`
+board again. First, we check the `gameBoard` array for a match between these coordinates.
+If there is a match, edit the `gameState` array to set _both_ cards to state #3.
 Otherwise, set both cards back to state #2.
 
-If you're unfamiliar with how to clear the terminal screen (so we can redraw
-the board and move the game forward), here's a handy function for you:
+Here's a handy function you can use to clear the terminal screen (so we can redraw
+the board and move the game forward):
 
 ```c++
 std::system("clear");
@@ -275,7 +299,7 @@ dependent on the previous two arrays.
 
 <BlankComp qid="bri9" answers={{ e: "run", k: "forever" }} {...props}>
   Seems like we just need to `____`[e] the same code above again. We don't just
-  want to do this once, though, right? After all, this game could last `____`[k]
+  want to do it once, though, right? After all, this game could last `____`[k]
   (poor player!) if the player doesn't match any pairs.
 </BlankComp>
 
@@ -284,10 +308,15 @@ program is spinning out of control, but in this case, we are keeping tight contr
 over it so we're ok. You can create an infinite loop in many ways; the key criteria
 is that the evaluation condition is never satisfied.
 
+One of the ways we're controlling execution of this loop is by using `std::cin` to
+wait for the player's input before continuing to execute. This will help us pause
+the program and catch any errors that may occur during our testing.
+
 Of course, we eventually need to terminate this loop if the user completes the game.
-To do this, we can add a simple `break;` statement when the winning conditions are met.
-We will do this in the later steps. For now, just exit out of the program when you test
-or write an arbitrary condition to `break` out of the infinite loop yourself.
+To do this, we can add a simple `break;` statement when the winning conditions are met,
+to get out of the loop. We will do this in the later steps. For now, just exit out of
+the program when you test or write an arbitrary condition to `break` out of the infinite
+loop yourself.
 
 **Task**: Create two infinite loops, with different evaluation conditions. Comment
 one out and apply the other to the code you wrote in the previous task.
@@ -310,7 +339,7 @@ Turns taken: 8
 (2,0) (2,1) (2,2)
 (3,0) (3,1) (3,2)
 
-Enter a coordinate for the first card:
+Enter the x coordinate for the first card guess:
 ```
 
 At the end of the game, output the following statement:
@@ -323,7 +352,7 @@ You took x turns in total.
 where `x` will tell the user how many turns they took.
 
 **Task**: Add an integer called `playerTurns` to count the number of turns the player
-has taken and the end-of-game outputdescribed above.
+has taken. Display the end-of-game message as described above when the player wins.
 
 ## Task 9: Pairs matched and left to match
 
@@ -335,11 +364,11 @@ At any point in the game, the user should see these two counts. It should look l
 Turns taken: 8. Pairs matched: 2. Pairs remaining: 4.
 
 (0,0) () (0,2)
-(1,0) (1,1) (1,2)
+(1,0) (1,1) AS
 () (2,1) ()
 (3,0) (3,1) ()
 
-Enter a coordinate for the first card:
+Enter the x coordinate for the second card guess:
 ```
 
 <BlankComp qid="csq8" answers={{ d: "calculate" }} {...props}>
@@ -348,19 +377,24 @@ Enter a coordinate for the first card:
   pairs left because we can `____`[d] that from the pairs matched.
 </BlankComp>
 
-(Bonus: what is another way we can accomplish this task?)
+This is just one of many ways we can perform this task. What might be another way?
 
 **Task**: Add an integer called `pairsMatched` to track the number of pairs matched
 by the user. Add text to show the number of pairs matched and left to match, as shown
 in the example above.
 
+Congrats, you now have a basic, functional game of Concentration! This is a good point
+to take a break before continuing on.
+
 ## Task 10: Refactor Prep
 
-Why mess with a working program? Sometimes we need to **refactor** it, or change the code
-without changing the functionality. This is an opportunity to organize the code in a better way,
-for yourself and future developers. In our case, the program is fairly simple but can benefit
-from abstracting some of the details into functions. Let's first preserve our progress and
-set up a new environment for the refactor work.
+So.. we're done right? Not quite, we should put a little effort into **refactoring**
+it, or changing the code without changing the functionality.
+
+This is an opportunity to organize the code in a better way, for yourself and future
+developers. In our case, the program is fairly simple but can benefit from abstracting
+some of the details into functions. Let's first preserve our progress and set up a
+new environment for the refactor work.
 
 **Task**: To keep your currently-functional code separate from our refactoring work,
 duplicate your `game.cpp` and rename it `refactored_game.cpp`. For all future tasks,
@@ -377,21 +411,21 @@ our case, the `int main()` function). To do this, we ask two important questions
 1. Which parts of the code are naturally isolated from the rest, or should be?
 2. What does the rest of the program really need to know about a certain feature?
 
-Q1 helps us identify components and sub-components of code. This allows us to
+#1 helps us identify components and sub-components of code. This allows us to
 break our program into its most natural pieces.
 
-Q2 helps us think from the perspective of a manager of employees at a company:
+#2 helps us think from the perspective of a manager of employees at a company:
 what is the least amount of detail I need in order to get the job done? A manager needs to
 know enough about what's going on to do their job properly, but not too much that they get
-buried in the nitty gritty.
+buried in the nitty gritty. We can think of `int main()` as the manager of the game.
 
-Applying these two questions to this program, we've come to a very clear candidate
-for refactoring: displaying the gameBoard. This functionality is pretty separate from
-the other aspects like editing the game state (Q1) and our game loop code would be cleaner
-if it could just call this function anytime it wants to display the current game
-view to the user, rather than worry about the steps required to display it (Q2).
+Applying these two questions to this program, we've come to a clear candidate for refactoring:
+displaying the `gameBoard` to the user. This functionality is pretty separate from the
+other aspects like editing the game state (#1). Plus, our game loop code would be cleaner
+if it could just call this function anytime it wants to display the current game view to the
+user, rather than worry about the steps required to display it (#2).
 
-Let's refactor the display functionality! Here's some initial code to get you started.
+Let's refactor the display logic! Here's some initial code to get you started.
 First, you'll need to create a separate function outside the `int main()` code:
 
 ```c++
@@ -413,15 +447,15 @@ int main() {
 }
 ```
 
-**Task**: Create a void function outside of `int main()` called `display` that
-takes in a parameter called `arr` that represents the game board and prints out
-the state of the game to the console. Then, have your program call it whenever
-it needs to display the game state. The game's functionality should not change.
+**Task**: Create a void function outside of `int main()` called `display` that takes in two
+parameters (`gb` and `gs`) that represent the game board and state, and prints out
+the state of the game to the console. Then, have your program call it whenever it needs
+to display the game state. The game should look and play exactly the same as before.
 
 ## Task 12: Intro to Pointers
 
-Say, have you ever printed out an array variable directly? If you run the following
-code inside the `display(...)` function:
+Say, have you ever printed out an array variable directly at one point or another?
+If you run the following code inside the `display(...)` function:
 
 ```c++
 std::cout << gb << std::endl;
@@ -442,32 +476,42 @@ These are **memory addresses**, or a location in computer memory. They're kind
 of like street addresses that tell you about a location in the real world, only
 memory addresses tell you about locations in your computer memory. In our case,
 these values are the memory locations of the first element of each array. So that
-means `gb` is the address for the value `gb[0][0]`.
+means `gb` is the address for the value `gb[0][0]` (and `gb[0]` because it's a 2D array).
 
 Well that's weird, why would C++ do that? My my my, you've just opened Pandora's box.
 (And by you, we again mean us asking on your behalf.) To get to the heart of this question,
-we need to introduce the C++ **pointer**. This is one of the coolest, most dangerous,
-and most unique ideas of C and C++. Let's tread carefully.
+we need to introduce you to the concept of the C++ **pointer**. This is one of the coolest,
+most dangerous, and most unique ideas of C and C++. Let's tread carefully.
 
-Pointers get their name from the fact that they "point" to your data in memory.
-Think of them as tiny maps or breadcrumbs for your program. In the real world, you
-can follow a map to find a house. When you have a pointer, you can "follow" it to get to
-the underlying piece of memory and read those values. This process is called **dereferencing**.
+<BlankComp qid="dwo9" answers={{ f: "follow" }} {...props}>
+  Pointers get their name from the fact that they "point" to some data in
+  computer memory. Think of them as tiny maps or breadcrumbs for your program.
+  In the real world, you can follow a map to find a house. When you have a
+  pointer, you can "`____`[f]" it to get to the underlying piece of memory and
+  read those values. This process is called <b>dereferencing</b>.
+</BlankComp>
+
+### The Positives
 
 That means in our code above, we weren't really copying the entire array into the
 `display` function when we passed it as a parameter. We were actually copying a
-_pointer_, which is very small in comparison. If we access `gb[0][0]`, C++ dereferences
-the pointer and gets the array value underneath.
+_pointer_, which is very small in size, compared to an array. If we access `gb[0][0]`,
+C++ dereferences the pointer and gets the array value underneath.
 
-This has huge implications for performance. Pointers are one of the key reasons for
-C and C++'s legendary speed because they're used _everywhere_. Now, we can reach objects
-of any size just as quickly as we can reach an int!
+Because we aren't copying giant objects, we can be much more efficient with our
+processor power. This has huge implications for performance. Pointers are one of the key
+reasons for C and C++'s legendary speed because they're used _everywhere_. Now, we can access
+objects of any size just as quickly as we can access an int!
+
+### The Negatives
 
 Alas, this capability is a double-edged sword. While it unlocks high performance, this
 comes at the cost of potential instability. For the sake of speed (remember: a core
-competency of C and C++), C++ purposely won't check pointers for validity before
+focus in C and C++), C++ purposely won't check pointers for validity before
 following them. If we're not careful, pointers could lead us to incorrect values or worse,
-null values. If you try to access a pointer to a null object, your program will experience
+null values.
+
+If you try to access a pointer to a null object, your program will experience
 **undefined behavior**. This means the C++ standard doesn't explicitly define what the program
 should do, so it's up to your compiler. Compilers can do anything they want, like reading
 **garbage values** (a fancy way of saying useless data) or crash the program if they wanted to.
@@ -480,11 +524,11 @@ To extend our maps/breadcrumbs analogy, if we're not careful, pointers could lea
 but they likely won't be the exact same. That's because your computer system is using its memory
 differently from ours when we ran that code.
 
-## Task 12: Pointers in practice
+## Task 12: Pointers in code
 
 Now that we've got an initial theoretical understanding of pointers, let's see how they work
-in real C++ code. We will start with a dummy example before dissecting the the `display(...)`
-function, because 2D arrays are a bit more complex.
+in real C++ code. We will start with a dummy example first. Then once our feet are wet, we'll dissect
+2D arrays and see how this applies to our game.
 
 ### Basics
 
@@ -492,9 +536,12 @@ First thing's first: a pointer is represented with a pointer _type_ and a **star
 operator, like this:
 
 ```c++
-// a pointer of type `int`,
-// pointing to nothing
+// a pointer of type `int`, pointing to nothing
 int* p = NULL;
+
+// Note: C++ doesn't care where the * goes,
+// the following is just as valid
+int *q = NULL;
 ```
 
 Because pointers are memory addresses, when you set a pointer equal to something,
@@ -502,7 +549,7 @@ you can't just set it to some variable or data value. Using our street address a
 previous task, that'd be like giving directions to someone by handing them pieces of the house they're
 trying to find! It just makes no sense.
 
-Instead, you need to get the memory address itself. You can do this with the handy **reference**
+Instead, you need to get the memory address _itself_. You can do this with the handy **reference**
 operator: `&`. Here's an example:
 
 ```c++
@@ -510,7 +557,6 @@ int* p = NULL;
 
 int i = 0; // normal variable declaration
 p = &i; // get i's memory address, not its value
-
 ```
 
 When we set pointers, we need to be careful to ensure that their type match their value's type.
@@ -566,7 +612,7 @@ This is what the process looks like, as C++ code:
 int* p = arr; // get `arr`
 
 // 2.
-int* q = p + 2; // shift to the right array index
+int* q = p + 2; // move to the array index 2
 
 // 3.
 int r = *q; // dereference to get the value
@@ -596,20 +642,21 @@ int main() {
 }
 ```
 
-Armed with our new knowledge, we know that the code above calls the `display(...)` function
+Armed with our new knowledge, we know that `int main()` calls the `display(...)` function
 and passes in a pointer to the `gameBoard` and `gameState` arrays. As we discussed at the
-beginning of this level, 2D arrays are arrays containing an array.
+beginning of this level, 2D arrays are arrays that each contain an array.
 
-That means when we access an element like `gb[1][0]`, we follow the steps outlined above
-in the `Arrays` section but do it twice. On our first iteration, we get `gb[1]`, which is
-actually the memory address for the second array. Then, we treat this like a normal array and repeat
-our steps to get to the underlying value.
+That means when we access an element like `gb[1][0]` in `display(...)`, we follow the steps
+outlined above in the `Arrays` section but do it twice. On our first iteration, we get `gb[1]`,
+which is actually the memory address for the second array. Then, we treat this like a normal
+array and repeat the same steps to get to the underlying value.
 
-Multi-dimensional arrays work in the same way, but obviously require as many iterations
+Arrays of all dimensions work in the same way, but obviously require as many iterations
 as there are dimensions.
 
-**Task**: Add a comment that steps through the entire process that your program
-goes through when the following code runs inside the `display(...)` function:
+**Task**: Add a comment in `refactored_game.cpp` that steps through the whole process
+that your program goes through when the following code runs inside the `display(...)`
+function:
 
 ```c++
 std::cout << gb[1][0];
@@ -617,38 +664,38 @@ std::cout << gb[1][0];
 
 ## Task 13: New primitives
 
-The code above looks great! While we're here, let's make a few easy changes to
-make our program a bit lighter on memory and more reasonable. For one thing, we don't
-reasonably expect the game to contain a huge number of player turns, pairs matched,
-or pairs left to match. Our card coordinates also shouldn't exceed a huge number.
+The code looks much cleaner now! While we're here, let's make a few easy changes so our program
+is a bit lighter on memory and more reasonable. For one thing, we don't reasonably expect
+the game to contain a huge number of player turns, pairs matched, or pairs left to match.
+Our card coordinates also shouldn't exceed a huge number.
 
 Well, the `int` primitive we've been using can store values between -2,147,483,648
 and 2,147,483,647. That's way more than we need! We can use the **short int**
 primitive, which will cut this range down to between -32,767 and 32,767.
 (Anyone who purposely mismatches cards for 32K turns deserves to get whatever score
-the want.) On most computer systems, short ints (or more colloquially, **shorts**)
-use less memory than ints because they represent a _shorter_ range. (Get it?)
-For those computers, we've saved a bit of memory. Nice!
+the want.) On most computer systems, short ints (or **shorts** for short, pun intended)
+use less memory than ints because they represent a smaller range. We've saved a bit of memory. Nice!
 
-While we're at it, isn't it weird that we reserve so much space for negative values
-when this game really doesn't make much use of them? None of our shorts make
+While we're on the subject, isn't it weird that we reserve so much space for negative values
+when this game doesn't make any use of them? None of our numerical values make
 sense as negatives, so why don't we turn them into **unsigned** shorts? This will
-convert our range to between 0 and 65,535.
+convert our range to between 0 and 65,535, effectively shifting the number line of the
+short primitive.
 
-There is a caveat with using _unsigned_ values, whose full reasoning goes beyond
-the scope of this course. The main idea is that if you happen to get a negative value,
-like the following:
+This will work great for us, but there is a caveat with using _unsigned_ values. The full
+reasoning goes beyond the scope of this course but the main idea is that if you happen to
+get a negative value, like the following:
 
 ```c++
 unsigned short int val = -1; // range: 0 to 65,535
 ```
 
 C++ will **wrap around** and set `val` to 65,535. You can imagine this as a number
-circle, where 65,535 is right next to 0. If you go one step past 0 (i.e. -1), you
+_circle_, with 65,535 is right next to 0. If you go one step past 0 (i.e. -1), you
 will get to 65,535. Similarly, -2 results in 65,534 and so on.
 
-In light of this, you need to be very careful negative numbers can't "leak" into
-your program. In our case, it's possible that future programmers might decide to
+In light of this, you need to be very careful to ensure that negative numbers don't
+sneak into your program. In our case, it's possible that future programmers might decide to
 open up the x-y plane into negative numbers. Imagine how confused they'd be if
 they suddenly get giant positive values! For this reason, it's generally not
 recommended to use unsigned variables, even if they can make our program nicer.

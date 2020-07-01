@@ -13,6 +13,7 @@ interface IProps {
   location: {
     state: {
       completed?: boolean
+      baseRef?: string
     }
   }
 }
@@ -25,7 +26,7 @@ class Level2 extends Component<IProps, IState> {
 
     const mdxToShow =
       location.state && location.state.completed ? (
-        <OutroMD></OutroMD>
+        <OutroMD baseRef={location.state.baseRef}></OutroMD>
       ) : (
         <IntroMD></IntroMD>
       )
@@ -39,7 +40,7 @@ class Level2 extends Component<IProps, IState> {
               className="button is-info is-light"
               onClick={() => navigate("/lessons/level2/ide")}
             >
-              Start Lesson
+              Lesson
             </button>
           </div>
         </Protected>
