@@ -2,13 +2,21 @@
   Eureka Moment
 </h1>
 
-Website: <a href="https://eureka-moment.web.app/">Eureka Moment</a>. Written in React using GatsbyJS and Bulma CSS, hosted on Firebase. Use the following username & password to preview the site:
+Website: <a href="https://eureka-moment.web.app/">Eureka Moment</a>. Written in React using GatsbyJS and Bulma CSS, hosted on Firebase.
+
+This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another, naturally surfacing a new topic after the student discovered a need for it. 
+
+For example, lesson 3 teaches students how to build a multi-dimensional array. As the student becomes familiar with this concept, they discover what pointers are and how they enable multi-dimensional arrays to work. I had a mentee (primary user) who was unable to continue beyond the third lesson, but this project taught me a lot about the work that goes into making a textbook.
+
+## Poking Around
+
+If you want to check out the live site, go to <a href="https://eureka-moment.web.app/account">the login page</a> and log in with the following credentials:
 ```
-username: 
-password: 
+username: test@test.test
+password: testing123
 ```
 
-This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another, naturally surfacing a new topic after the student discovered a need for it. For example, lesson 3 teaches students how to build a multi-dimensional array. As the student becomes familiar with this concept, they discover what pointers are and how they enable multi-dimensional arrays to work. I had a mentee (primary user) who was unable to continue beyond the third lesson, but this project taught me a lot about the work that goes into making a textbook.
+Then visit <a href="https://eureka-moment.web.app/lessons">https://eureka-moment.web.app/lessons</a> to try it out!
 
 ## Requirements
 
@@ -40,10 +48,6 @@ This was a short experiment in building an online C++ "textbook". The idea was f
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
 
     Open the `eureka-moment` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
-    
-## ⚙️ How It Works
-
-TODO
 
 ## 💫 Deploy
 
