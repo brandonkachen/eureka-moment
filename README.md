@@ -38,9 +38,10 @@ Then visit <a href="https://eureka-moment.web.app/lessons" target="_blank">the l
 
     ```shell
     cd eureka-moment/
+    npm install
     gatsby develop
     ```
-
+    
 1.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
@@ -48,6 +49,17 @@ Then visit <a href="https://eureka-moment.web.app/lessons" target="_blank">the l
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
 
     Open the `eureka-moment` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+    
+1.  **Set up Firebase**
+    
+    Set up a Firebase app to handle your db. You can find instructions [here](https://firebase.google.com/docs/web/setup). Skip the step for initializing Firebase (Step 3 at the time of this writing), since that's already done by the codebase. For your app's config: 
+    
+    ```shell
+    cp .env.sample .env.production  # can also do .env.development
+    vi .env.production  # or your favorite code editor
+    ```
+    
+    Then manually update the values in your newly created file. 
 
 ## 💫 Deploy
 
