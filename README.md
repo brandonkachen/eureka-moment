@@ -2,7 +2,7 @@
   Eureka Moment
 </h1>
 
-Website: <a href="https://eureka-moment.web.app/" target="_blank">Eureka Moment</a>. Written in React using GatsbyJS and Bulma CSS, hosted on Firebase.
+Website: [Eureka Moment](https://eureka-moment.web.app/). Written in React using GatsbyJS and Bulma CSS, hosted on Firebase.
 
 This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another, naturally surfacing a new topic after the student discovered a need for it. 
 
@@ -10,13 +10,13 @@ For example, lesson 3 teaches students how to build a multi-dimensional array. A
 
 ## Poking Around
 
-If you want to check out the live site, go to <a href="https://eureka-moment.web.app/account" target="_blank">the login page</a> and log in with the following credentials:
+If you want to check out the live site, go to the [login page](https://eureka-moment.web.app/account) and log in with the following credentials:
 ```
 username: test@test.test
 password: testing123
 ```
 
-Then visit <a href="https://eureka-moment.web.app/lessons" target="_blank">the lessons page</a> to try it out!
+Then visit the [lessons page](https://eureka-moment.web.app/lessons) to try it out!
 
 ## Requirements
 
@@ -60,7 +60,3 @@ Then visit <a href="https://eureka-moment.web.app/lessons" target="_blank">the l
     ```
     
     Then manually update the values in your newly created file. 
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
