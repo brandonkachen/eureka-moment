@@ -4,7 +4,7 @@
 
 Website: [Eureka Moment](https://eureka-moment.web.app/). Written in React using GatsbyJS and Bulma CSS, hosted on Firebase.
 
-This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another and naturally surfaced new topics when the student discovered a need for them. For example, lesson 3 teaches students how to build a multi-dimensional array. As the student becomes familiar with this concept, they discover what pointers are and how they enable multi-dimensional arrays to work. 
+This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another and naturally surfaced new topics when the student discovered a need for them. For example, Lesson 3 teaches students how to build a multi-dimensional array. As the student becomes familiar with this concept, they discover what pointers are and how they enable multi-dimensional arrays to work. 
 
 My mentee (the site's primary user) had to terminate the experiment after the third lesson for reasons unrelated to the project, but building it has taught me a lot about the work and planning that goes into making a textbook.
 
@@ -52,7 +52,7 @@ Then visit the [lessons page](https://eureka-moment.web.app/lessons) to try it o
     
 1.  **Set up Firebase**
     
-    Set up a Firebase app to handle your db. You can find instructions [here](https://firebase.google.com/docs/web/setup) but skip the step for initializing Firebase (Step 3 at the time of this writing) because that's already handled by the codebase. For your app's config do the following: 
+    Set up a Firebase app to handle your db. You can find instructions [here](https://firebase.google.com/docs/web/setup), but skip the step for initializing Firebase (Step 3 at the time of this writing) because that's already handled by the codebase. For your app's config do the following: 
     
     ```shell
     cp .env.sample .env.production  # can also do .env.development
