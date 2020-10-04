@@ -4,9 +4,9 @@
 
 Website: [Eureka Moment](https://eureka-moment.web.app/). Written in React using GatsbyJS and Bulma CSS, hosted on Firebase.
 
-This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another, naturally surfacing a new topic after the student discovered a need for it. 
+This was a short experiment in building an online C++ "textbook". The idea was for students to learn C++ by writing small apps in the language, tackling new concepts as they progressed. I developed lessons that built upon one another and naturally surfaced new topics when the student discovered a need for them. For example, lesson 3 teaches students how to build a multi-dimensional array. As the student becomes familiar with this concept, they discover what pointers are and how they enable multi-dimensional arrays to work. 
 
-For example, lesson 3 teaches students how to build a multi-dimensional array. As the student becomes familiar with this concept, they discover what pointers are and how they enable multi-dimensional arrays to work. My mentee (the site's primary user) had to terminate the experiment after the third lesson for unrelated reasons, but the project taught me a lot about the work and planning that goes into making a textbook.
+My mentee (the site's primary user) had to terminate the experiment after the third lesson for reasons unrelated to the project, but building it has taught me a lot about the work and planning that goes into making a textbook.
 
 ## Poking Around
 
