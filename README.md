@@ -34,7 +34,7 @@ Then visit the [lessons page](https://eureka-moment.web.app/lessons) to try it o
 
 1.  **Start developing.**
 
-    Navigate into your new site’s directory and start it up.
+    Navigate into your new site’s directory and start it up:
 
     ```shell
     cd eureka-moment/
@@ -52,7 +52,7 @@ Then visit the [lessons page](https://eureka-moment.web.app/lessons) to try it o
     
 1.  **Set up Firebase**
     
-    Set up a Firebase app to handle your db. You can find instructions [here](https://firebase.google.com/docs/web/setup). Skip the step for initializing Firebase (Step 3 at the time of this writing), since that's already done by the codebase. For your app's config: 
+    Set up a Firebase app to handle your db. You can find instructions [here](https://firebase.google.com/docs/web/setup) but skip the step for initializing Firebase (Step 3 at the time of this writing) because that's already handled by the codebase. For your app's config do the following: 
     
     ```shell
     cp .env.sample .env.production  # can also do .env.development
